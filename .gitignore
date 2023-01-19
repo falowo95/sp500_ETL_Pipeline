@@ -1,0 +1,5 @@
+*.ipynb
+venv
+logs
+__pycache__
+tmp
