@@ -5,3 +5,6 @@ tmp
 __pycache__
 airflow-data
 .vscode
+creds
+s3
+.gitignore
