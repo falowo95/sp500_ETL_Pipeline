@@ -24,12 +24,13 @@ default_args = {
 
 
 @dag(
-    "sp500_etl_pipeline_v_9",
+    "sp500_etl_pipeline",
     schedule_interval="@daily",
     default_args=default_args,
     catchup=False,
 )
 def taskflow():
+
     @task
     def get_stock_data():
         return extract_sp500_data()
@@ -37,8 +38,14 @@ def taskflow():
     @task
     def transformation(df):
         return transform_stock_data(df)
+    
+    def load():
+        return load_data_into_db
 
-    transformation(get_stock_data())
+    def retrieve():
+        return retrieve_data_from_db
+
+    load(transformation(get_stock_data()))
 
 
 dag = taskflow()

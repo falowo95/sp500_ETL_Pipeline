@@ -44,14 +44,22 @@ x-airflow-common:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
     AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW_CONN_AWS_DEFAULT: 'aws://?profile=airflow-xcoms&s3_config_file=/opt/airflow/creds/s3&s3_config_format=aws'
+    PYTHONPATH: '/opt/airflow'
+
+    AIRFLOW__CORE__XCOM_BACKEND: 'includes.s3_xcom_backend.S3XComBackend'
 
     AIRFLOW__CORE__FERNET_KEY: ''
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
+    
   volumes:
+    - ./airflow-data/creds:/opt/airflow/creds
     - ./dags:/opt/airflow/dags
-    - ./logs:/opt/airflow/logs
-    - ./plugins:/opt/airflow/plugins
+    - ./airflow-data/logs:/opt/airflow/logs
+    - ./airflow-data/plugins:/opt/airflow/plugins
+    - ./airflow-data/includes:/opt/airflow/includes
+    
   user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
   depends_on:
     postgres:
