@@ -8,20 +8,23 @@ from datetime import datetime
 
 
 import pandas_datareader as pdr
-
+start = '2023-01-23'
+#setting today date as End Date
+end = datetime.today().strftime('%Y-%m-%d')
 
 def extract_sp500_data() -> pd.DataFrame:
     sp500_tickers = pd.read_html(
         "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
     )[0]["Symbol"].tolist()
+    tickers = ['AAPL']
 
     api_key = "b8048079af04b7e50218c15f24286df5b4c51164"
     data = []
     failed_tickers = []
-
-    for ticker in sp500_tickers:
+    for ticker in tickers:
+    # for ticker in sp500_tickers:
         try:
-            df = pdr.DataReader(ticker, "tiingo", api_key=api_key)
+            df = pdr.DataReader(ticker, "tiingo", api_key=api_key,start= start, end=end)
             data.append(df)
         except Exception as e:
             print(f"Error while extracting data for {ticker}: {e}")
@@ -31,13 +34,13 @@ def extract_sp500_data() -> pd.DataFrame:
     df = pd.concat(data)
 
     df.reset_index(drop=False, inplace=True)
-    df = df.to_json(orient="columns")
+    # df = df.to_json(orient="columns")
     print("extraction function complete")
     return df
 
 
 def transform_stock_data(df):
-    df = pd.read_json(df, orient="columns")
+    # df = pd.read_json(df, orient="columns")
     min_periods = 75
     TRADING_DAYS = 252
     try:
@@ -66,7 +69,7 @@ def transform_stock_data(df):
             * np.sqrt(TRADING_DAYS)
         )
         df.reset_index(drop=False, inplace=True)
-        df = df.to_json()
+        # df = df.to_json()
         print("transformation function complete")
         return df
     except:
