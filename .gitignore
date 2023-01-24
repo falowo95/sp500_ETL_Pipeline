@@ -3,3 +3,4 @@ venv
 logs
 tmp
 __pycache__
+airflow-data
