@@ -7,4 +7,3 @@ airflow-data
 .vscode
 creds
 s3
-.gitignore
