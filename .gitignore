@@ -1,8 +1,7 @@
 *.ipynb
 venv
-logs
-creds
 tmp
+airflow-data/**
 __pycache__
 *creds
 *s3
