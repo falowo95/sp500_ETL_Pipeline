@@ -4,3 +4,4 @@ logs
 tmp
 __pycache__
 airflow-data
+.vscode
