@@ -69,7 +69,7 @@ def transform_stock_data(df):
             * np.sqrt(TRADING_DAYS)
         )
         df.reset_index(drop=False, inplace=True)
-        # df = df.to_json()
+        
         print("transformation function complete")
         return df
     except:
