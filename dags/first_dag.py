@@ -39,8 +39,8 @@ def taskflow():
     def transformation(df):
         return transform_stock_data(df)
     
-    def load():
-        return load_data_into_db
+    def load(df):
+        return load_data_into_db(df)
 
     def retrieve():
         return retrieve_data_from_db
