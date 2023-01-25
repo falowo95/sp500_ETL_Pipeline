@@ -1,5 +1,5 @@
-*.ipynb
-airflow-data/
 venv
+airflow-data/
 __pycache__
 tmp
+*.ipynb
