@@ -3,9 +3,9 @@ from typing import Dict
 import pandas as pd
 
 import numpy as np
-import sqlite3
+
 from datetime import datetime
-import os
+
 import boto3
 import io
 import logging
@@ -43,7 +43,7 @@ def extract_sp500_data() -> pd.DataFrame:
     return df
 
 
-def transform_stock_data(df):
+def transform_stock_data(df: pd.DataFrame) -> pd.DataFrame:
     # df = pd.read_json(df, orient="columns")
     min_periods = 75
     TRADING_DAYS = 252
@@ -80,7 +80,13 @@ def transform_stock_data(df):
         print("error within transformation step")
 
 
-def load_data_to_s3(data, bucket_name, file_name, access_key, secret_key):
+def load_data_to_s3(
+    data: pd.DataFrame,
+    bucket_name: str,
+    file_name: str,
+    access_key: str,
+    secret_key: str,
+):
     data = data.to_json()
     try:
         s3 = boto3.client(
@@ -97,7 +103,7 @@ def load_data_to_s3(data, bucket_name, file_name, access_key, secret_key):
         raise
 
 
-def bucket_exists(s3, bucket_name):
+def bucket_exists(s3, bucket_name: str) -> bool:
     response = s3.list_buckets()
     for bucket in response["Buckets"]:
         if bucket["Name"] == bucket_name:
@@ -105,5 +111,5 @@ def bucket_exists(s3, bucket_name):
     return False
 
 
-def create_bucket(s3, bucket_name):
+def create_bucket(s3, bucket_name: str):
     s3.create_bucket(Bucket=bucket_name)
