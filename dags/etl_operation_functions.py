@@ -5,7 +5,10 @@ import pandas as pd
 import numpy as np
 import sqlite3
 from datetime import datetime
-
+import os
+import boto3
+import io
+import logging
 
 import pandas_datareader as pdr
 start = '2023-01-23'
@@ -76,25 +79,26 @@ def transform_stock_data(df):
         print("error within transformation step")
 
 
-def load_data_into_db(df: pd.DataFrame, db_file):
+def load_data_to_s3(data, bucket_name, file_name, access_key, secret_key):
+    data = data.to_json()
     try:
-        conn = sqlite3.connect(db_file)
-        df.to_sql("sp500_data", conn, if_exists="replace")
-        print("Data stored successfully in the database.")
+        s3 = boto3.client("s3", aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+        if not bucket_exists(s3, bucket_name):
+            create_bucket(s3, bucket_name)
+        encoded_data = data.encode('utf-8')
+        file_stream = io.BytesIO(encoded_data)
+        s3.upload_fileobj(file_stream, bucket_name, file_name)
+        logging.info(f"Data stored successfully in S3 bucket: {bucket_name}")
     except Exception as e:
-        print(f"Error while storing data in the database: {e}")
+        logging.error(f"Error while storing data in S3 bucket: {e}")
         raise
-    finally:
-        conn.close()
 
+def bucket_exists(s3, bucket_name):
+    response = s3.list_buckets()
+    for bucket in response["Buckets"]:
+        if bucket["Name"] == bucket_name:
+            return True
+    return False
 
-def retrieve_data_from_db(db_file):
-    try:
-        conn = sqlite3.connect(db_file)
-        df = pd.read_sql_query("SELECT * from sp500_data", conn)
-        return df
-    except Exception as e:
-        print(f"Error while retrieving data from the database: {e}")
-        raise
-    finally:
-        conn.close()
+def create_bucket(s3, bucket_name):
+    s3.create_bucket(Bucket=bucket_name)

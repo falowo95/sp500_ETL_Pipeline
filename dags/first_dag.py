@@ -3,12 +3,10 @@ from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
 from airflow.decorators import dag, task
 from datetime import datetime, timedelta
-from etl_operation_functions import (
-    transform_stock_data,
-    load_data_into_db,
-    extract_sp500_data,
-    retrieve_data_from_db,
-)
+from etl_operation_functions import *
+import os
+# access_key = os.getenv('aws_access_key_id')
+# secret_key = os.environ.get('aws_secret_access_key')
 
 
 default_args = {
@@ -39,11 +37,10 @@ def taskflow():
     def transformation(df):
         return transform_stock_data(df)
     
+    @task
     def load(df):
-        return load_data_into_db(df)
+        return load_data_to_s3(df,"sp500-bucket-xcoms","trans_sp500_data",access_key=os.getenv('aws_access_key_id'),secret_key=os.environ.get('aws_secret_access_key'))
 
-    def retrieve():
-        return retrieve_data_from_db
 
     load(transformation(get_stock_data()))
 
