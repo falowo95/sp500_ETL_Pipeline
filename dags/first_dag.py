@@ -5,6 +5,7 @@ from airflow.decorators import dag, task
 from datetime import datetime, timedelta
 from etl_operation_functions import *
 import os
+
 # access_key = os.getenv('aws_access_key_id')
 # secret_key = os.environ.get('aws_secret_access_key')
 
@@ -28,7 +29,6 @@ default_args = {
     catchup=False,
 )
 def taskflow():
-
     @task
     def get_stock_data():
         return extract_sp500_data()
@@ -36,11 +36,16 @@ def taskflow():
     @task
     def transformation(df):
         return transform_stock_data(df)
-    
+
     @task
     def load(df):
-        return load_data_to_s3(df,"sp500-bucket-xcoms","trans_sp500_data",access_key=os.getenv('aws_access_key_id'),secret_key=os.environ.get('aws_secret_access_key'))
-
+        return load_data_to_s3(
+            df,
+            "sp500-bucket-xcoms",
+            "trans_sp500_data",
+            access_key=os.getenv("AWS_ACCESS_KEY_ID"),
+            secret_key=os.environ.get("AWS_SECRET_ACCESS_KEY"),
+        )
 
     load(transformation(get_stock_data()))
 

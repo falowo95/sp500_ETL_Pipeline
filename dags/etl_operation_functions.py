@@ -11,9 +11,11 @@ import io
 import logging
 
 import pandas_datareader as pdr
-start = '2023-01-23'
-#setting today date as End Date
-end = datetime.today().strftime('%Y-%m-%d')
+
+start = "2023-01-23"
+# setting today date as End Date
+end = datetime.today().strftime("%Y-%m-%d")
+
 
 def extract_sp500_data() -> pd.DataFrame:
     sp500_tickers = pd.read_html(
@@ -23,10 +25,10 @@ def extract_sp500_data() -> pd.DataFrame:
     api_key = "b8048079af04b7e50218c15f24286df5b4c51164"
     data = []
     failed_tickers = []
-    
+
     for ticker in sp500_tickers:
         try:
-            df = pdr.DataReader(ticker, "tiingo", api_key=api_key,start= start, end=end)
+            df = pdr.DataReader(ticker, "tiingo", api_key=api_key, start=start, end=end)
             data.append(df)
         except Exception as e:
             print(f"Error while extracting data for {ticker}: {e}")
@@ -71,7 +73,7 @@ def transform_stock_data(df):
             * np.sqrt(TRADING_DAYS)
         )
         df.reset_index(drop=False, inplace=True)
-        
+
         print("transformation function complete")
         return df
     except:
@@ -81,10 +83,12 @@ def transform_stock_data(df):
 def load_data_to_s3(data, bucket_name, file_name, access_key, secret_key):
     data = data.to_json()
     try:
-        s3 = boto3.client("s3", aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+        s3 = boto3.client(
+            "s3", aws_access_key_id=access_key, aws_secret_access_key=secret_key
+        )
         if not bucket_exists(s3, bucket_name):
             create_bucket(s3, bucket_name)
-        encoded_data = data.encode('utf-8')
+        encoded_data = data.encode("utf-8")
         file_stream = io.BytesIO(encoded_data)
         s3.upload_fileobj(file_stream, bucket_name, file_name)
         logging.info(f"Data stored successfully in S3 bucket: {bucket_name}")
@@ -92,12 +96,14 @@ def load_data_to_s3(data, bucket_name, file_name, access_key, secret_key):
         logging.error(f"Error while storing data in S3 bucket: {e}")
         raise
 
+
 def bucket_exists(s3, bucket_name):
     response = s3.list_buckets()
     for bucket in response["Buckets"]:
         if bucket["Name"] == bucket_name:
             return True
     return False
+
 
 def create_bucket(s3, bucket_name):
     s3.create_bucket(Bucket=bucket_name)
