@@ -46,6 +46,7 @@ x-airflow-common:
     AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     AIRFLOW_CONN_AWS_DEFAULT: 'aws://?profile=airflow-xcoms&s3_config_file=/opt/airflow/creds/s3&s3_config_format=aws'
     PYTHONPATH: '/opt/airflow'
+ 
 
     AIRFLOW__CORE__XCOM_BACKEND: 'includes.s3_xcom_backend.S3XComBackend'
 
@@ -53,6 +54,7 @@ x-airflow-common:
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
     
+ 
   volumes:
     - ./airflow-data/creds:/opt/airflow/creds
     - ./dags:/opt/airflow/dags
