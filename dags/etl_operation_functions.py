@@ -19,13 +19,12 @@ def extract_sp500_data() -> pd.DataFrame:
     sp500_tickers = pd.read_html(
         "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
     )[0]["Symbol"].tolist()
-    tickers = ['AAPL']
 
     api_key = "b8048079af04b7e50218c15f24286df5b4c51164"
     data = []
     failed_tickers = []
-    for ticker in tickers:
-    # for ticker in sp500_tickers:
+    
+    for ticker in sp500_tickers:
         try:
             df = pdr.DataReader(ticker, "tiingo", api_key=api_key,start= start, end=end)
             data.append(df)
