@@ -13,7 +13,6 @@ class S3XComBackend(BaseXCom):
     @staticmethod
     def serialize_value(value: Any):
         if isinstance(value, pd.DataFrame):
-
             hook = S3Hook()
             key = "data_" + str(uuid.uuid4())
             filename = f"{key}.csv"
