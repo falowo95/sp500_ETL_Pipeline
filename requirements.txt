@@ -1,2 +1,5 @@
 pandas
-airflow
+numpy
+pandas_datareader
+boto3
+apache-airflow
