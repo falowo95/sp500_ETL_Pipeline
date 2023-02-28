@@ -1,2 +1,7 @@
 # sp500_ETL_Pipeline
-run  mkdir ./dags ./logs ./plugins ./tmp within file directory
+create python virtual environment 
+
+install necessary depemdemcies
+pip install -r requirements.txt
+
+docker-compose up -d
