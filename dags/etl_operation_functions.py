@@ -1,22 +1,51 @@
-from datetime import datetime
-import logging
-import io
-import os
 
-from typing import Dict,Union
 import numpy as np
 import pandas as pd
 import pandas_datareader as pdr
-import boto3
+import logging
+import io
+import os
+import csv
 
 
-# Set start date and today's date as end date
-start_date = "2023-01-23"
-end_date = datetime.today().strftime("%Y-%m-%d")
+from pathlib import Path
+from typing import Dict,Union
+from google.oauth2 import service_account
+from google.cloud import storage, bigquery
+from datetime import datetime
 
-def extract_sp500_data() -> pd.DataFrame:
+
+
+def to_local(df: pd.DataFrame, file_name: str) -> Path:
     """
-    Extracts data for all S&P 500 stocks from Tiingo using pandas-datareader
+    Saves a pandas DataFrame to a local CSV file with the given filename, and returns the path to the saved file.
+    
+    Args:
+        df: A pandas DataFrame to be saved to a CSV file.
+        file_name: A string representing the desired name of the output CSV file.
+        
+    Returns:
+        A Path object representing the path to the saved CSV file.
+    """
+    # Create a Path object representing the desired file path.
+    path = Path(f"{file_name}.csv")
+
+    # Use pandas DataFrame.to_csv() method to save the DataFrame to a CSV file at the given path.
+    df.to_csv(path)
+
+    # Return the Path object representing the saved file path.
+    return path
+
+def extract_sp500_data_to_csv(file_name: str) -> Path:
+    """
+    Extracts data for all S&P 500 stocks from Tiingo using pandas-datareader,
+    and saves the data to a local CSV file with the given filename.
+    
+    Args:
+        file_name: A string representing the desired name of the output CSV file.
+        
+    Returns:
+        A Path object representing the path to the saved CSV file.
     """
     # Get the list of S&P 500 stock tickers from Wikipedia
     sp500_tickers = pd.read_html(
@@ -24,8 +53,7 @@ def extract_sp500_data() -> pd.DataFrame:
     )[0]["Symbol"].tolist()
 
     # Set up API key for Tiingo
-    
-    api_key = os.getenv("TIINGO_API_KEY")
+    api_key = "b8048079af04b7e50218c15f24286df5b4c51164"
 
     # Create empty lists for successful and failed tickers
     successful_tickers = []
@@ -35,8 +63,9 @@ def extract_sp500_data() -> pd.DataFrame:
     for ticker in sp500_tickers:
         try:
             # Retrieve data for the current ticker using Tiingo
-            df = pdr.DataReader(ticker, "tiingo", api_key=api_key, start=start_date, end=end_date)
-            successful_tickers.append(ticker)
+            df = pdr.DataReader(ticker, "tiingo", api_key=api_key, end=datetime.today().strftime("%Y-%m-%d"))
+            df.reset_index(drop=False, inplace=True)
+            successful_tickers.append(df)
         except Exception as e:
             # If there is an error, print a message and add the ticker to the failed list
             print(f"Error while extracting data for {ticker}: {e}")
@@ -49,10 +78,19 @@ def extract_sp500_data() -> pd.DataFrame:
     # Concatenate the data for all successful tickers into a single DataFrame
     df = pd.concat(successful_tickers)
 
-    # Reset the index of the DataFrame and return it
-    df.reset_index(drop=False, inplace=True)
-    print("extraction function complete")
-    return df
+    # Convert the timestamp column to datetime objects
+    df.date = pd.to_datetime(df.date)
+
+    # Extract the date component of the datetime objects
+    df.date = df.date.dt.date
+
+    # Save the DataFrame to a local CSV file using the to_local function
+    return to_local(df, file_name)
+
+
+
+
+
 
 
 

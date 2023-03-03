@@ -5,3 +5,7 @@ boto3
 apache-airflow
 sqlalchemy 
 psycopg2
+google-auth
+google-cloud-storage
+google-cloud-bigquery
+pyspark
