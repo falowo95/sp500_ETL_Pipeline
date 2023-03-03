@@ -8,6 +8,17 @@ import os
 from airflow.decorators import dag, task
 from airflow.operators.python_operator import PythonOperator
 
+import google.auth
+from google.oauth2 import service_account
+
+def get_gcp_authentication():
+    SCOPES = ['https://www.googleapis.com/auth/sqlservice.admin']
+    #switch out  your service account file
+    SERVICE_ACCOUNT_FILE = '/creds/dataengineering-378316-2bcbcf067f34.json'
+    credentials = service_account.Credentials.from_service_account_file(
+            SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    return credentials
+
 # Importing custom-defined functions
 from etl_operation_functions import (
     extract_sp500_data,

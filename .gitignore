@@ -4,3 +4,4 @@ tmp
 *.ipynb
 creds
 logs
+*.csv
