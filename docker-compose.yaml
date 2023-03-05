@@ -46,7 +46,6 @@ x-airflow-common:
     AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     AIRFLOW_CONN_AWS_DEFAULT: 'aws://?profile=airflow-xcoms&s3_config_file=/opt/airflow/creds/s3&s3_config_format=aws'
     PYTHONPATH: '/opt/airflow'
-    GOOGLE_APPLICATION_CREDENTIALS: /opt/creds/
  
 
     AIRFLOW__CORE__XCOM_BACKEND: 'includes.s3_xcom_backend.S3XComBackend'
@@ -55,7 +54,6 @@ x-airflow-common:
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
     
-    
  
   volumes:
     - ./airflow-data/creds:/opt/airflow/creds
@@ -63,16 +61,31 @@ x-airflow-common:
     - ./airflow-data/logs:/opt/airflow/logs
     - ./airflow-data/plugins:/opt/airflow/plugins
     - ./airflow-data/includes:/opt/airflow/includes
-    - ./dags/first_dag.py:/opt/first_dag.py
-    - ./dags/etl_operation_functions.py:/opt/etl_operation_functions.py
-    - ./requirements.txt:/opt/requirements.txt  
+
   user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
-  
+  depends_on:
+    postgres:
+      condition: service_healthy
 
 services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      retries: 5
+    restart: always
+
+
   airflow-webserver:
     <<: *airflow-common
-    command: bash -c "pip install pandas-datareader && airflow webserver" 
+    command: bash -c "pip install airflow webserver" 
     ports:
       - 8080:8080
     healthcheck:
