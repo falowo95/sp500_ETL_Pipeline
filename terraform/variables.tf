@@ -20,11 +20,16 @@ variable "storage_class" {
 variable "BQ_DATASET" {
   description = "BigQuery Dataset that raw data (from GCS) will be written to"
   type = string
-  default = "trips_data_all" #change this to a dataset name you want
+  default = "sp_500_data" #change this to a dataset name you want
 }
 
 variable "TABLE_NAME" {
     description = "BigQuery Table"
     type = string 
-    default = "ny_trips"
+    default = "sp_500_data_table"
+}
+
+variable "credentials_file" {
+    description = "Path to your credentials file"
+    default = "dataengineering-378316-2bcbcf067f34.json"
 }
