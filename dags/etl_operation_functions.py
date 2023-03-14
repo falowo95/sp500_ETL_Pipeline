@@ -6,7 +6,6 @@ from google.cloud import storage, bigquery
 from datetime import datetime
 from typing import Union
 
-from pyspark.sql.functions import col, log, sqrt
 from pyspark.sql.window import Window
 import pandas_datareader as pdr
 import logging
@@ -22,6 +21,7 @@ def get_gcp_authentication():
         "GCP_SERVICE_ACCOUNT_FILE"
     )  # set enviromental variable to the file
     credentials = service_account.Credentials.from_service_account_file(key_path)
+    print(f"credentials found at ::: {credentials}")
     return credentials
 
 
@@ -47,7 +47,7 @@ def to_local(df: pd.DataFrame, file_name: str) -> Path:
     return path
 
 
-def extract_sp500_data_to_csv() -> pd.DataFrame:
+def extract_sp500_data() -> pd.DataFrame:
 
     """
     Extracts data for all S&P 500 stocks from Tiingo using pandas-datareader
@@ -63,14 +63,17 @@ def extract_sp500_data_to_csv() -> pd.DataFrame:
     # Set up API key for Tiingo
 
     api_key = os.getenv("TIINGO_API_KEY")
+    
+
 
     # Create empty lists for successful and failed tickers
     successful_tickers = []
     failed_tickers = []
 
     # Loop over all S&P 500 tickers and attempt to retrieve data for each one
-
-    for ticker in sp500_tickers:
+    tickers = ['AAPL']
+    # for ticker in sp500_tickers:
+    for ticker in tickers:
         try:
             # Retrieve data for the current ticker using Tiingo
             df = pdr.DataReader(ticker, "tiingo", api_key=api_key, end=end_date)
@@ -97,7 +100,7 @@ def extract_sp500_data_to_csv() -> pd.DataFrame:
     return df
 
 
-def transform_stock_data(df: pd.DataFrame, file_name: str) -> Union[None, pd.DataFrame]:
+def transform_stock_data(df: pd.DataFrame)-> pd.DataFrame:
     """
     Applies a series of transformations on the input DataFrame.
 
@@ -111,10 +114,9 @@ def transform_stock_data(df: pd.DataFrame, file_name: str) -> Union[None, pd.Dat
     DataFrame
         The transformed DataFrame.
     """
-    df.reset_index(drop=True, inplace=True)
+    df = df.reset_index(drop=True, inplace=True)
     spark = (
         SparkSession.builder.appName("PandasToRDD")
-        .config("spark.sql.debug.maxToStringFields", 100)
         .getOrCreate()
     )
     df_spark = spark.createDataFrame(df)
@@ -129,7 +131,7 @@ def transform_stock_data(df: pd.DataFrame, file_name: str) -> Union[None, pd.Dat
             return None
 
         # Convert date column to timestamp format and set it as index
-        df_spark = df_spark.withColumn("date", to_timestamp(col("date")))
+        df_spark = df_spark.withColumn("date", col("date"))
         df_spark = df_spark.orderBy("date").repartition(10)
         df_spark.createOrReplaceTempView("stock_data")
 
@@ -196,8 +198,10 @@ def transform_stock_data(df: pd.DataFrame, file_name: str) -> Union[None, pd.Dat
         )
         # Return the transformed DataFrame
         df_pandas = df_spark.toPandas()
-        df_pandas.reset_index(drop=True, inplace=True)
-        return to_local(df_pandas, file_name)
+        
+        # return to_local(df_pandas, file_name)
+        print(df_pandas.columns)
+        return df_pandas
 
     except Exception as e:
         # Log the error message
@@ -205,11 +209,12 @@ def transform_stock_data(df: pd.DataFrame, file_name: str) -> Union[None, pd.Dat
         return None
 
 
-def upload_to_gcs(path: Path, file_name, bucket_name):
-
+def upload_to_gcs(path:Path,file_name,bucket_name):
+    
     storage.blob._MAX_MULTIPART_SIZE = 5 * 1024 * 1024  # 5 MB
     storage.blob._DEFAULT_CHUNKSIZE = 5 * 1024 * 1024  # 5 MB
-
+    
+    
     # Initialize a client object with the service account credentials
     credentials = get_gcp_authentication()
     client = storage.Client(credentials=credentials)
@@ -222,7 +227,7 @@ def upload_to_gcs(path: Path, file_name, bucket_name):
     with open(path) as f:
         blob.upload_from_file(f)
 
-    print("File was successfully uploaded to the bucket.")
+    print('File was successfully uploaded to the bucket.')
 
 
 def ingest_from_gcs_to_bquery(dataset_name, table_name, csv_uri):

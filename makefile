@@ -19,8 +19,10 @@ infra-down:
 infra-config:
 	terraform -chdir=./terraform output
 
+ssh-google_vm:
+	gcloud compute ssh --zone "europe-west1-b" "de-zoomcamp"  --project "dataengineering-378316"
+
+ssh-de-zoomcamp:
+	ssh de-zoomcamp
 ###################################################################################################################### 
 # Set up local infrastructure
-
-
-#######################################################################################################################

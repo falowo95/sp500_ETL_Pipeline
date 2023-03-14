@@ -39,28 +39,35 @@
 version: '3'
 x-airflow-common:
   &airflow-common
-  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.0.1}
+  image: ${AIRFLOW_IMAGE_NAME:-sp500:latest}
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    # For backward compatibility, with Airflow <2.3
     AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-    AIRFLOW_CONN_AWS_DEFAULT: 'aws://?profile=airflow-xcoms&s3_config_file=/opt/airflow/creds/s3&s3_config_format=aws'
-    PYTHONPATH: '/opt/airflow'
- 
-
-    AIRFLOW__CORE__XCOM_BACKEND: 'includes.s3_xcom_backend.S3XComBackend'
-
-    AIRFLOW__CORE__FERNET_KEY: ''
-    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+    AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+    AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
     AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
-    
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+    AIRFLOW__CORE__FERNET_KEY: ''
+    AIRFLOW__CORE__XCOM_BACKEND: includes.s3_xcom_backend.S3XComBackend
+
+    AIRFLOW_CONN_AWS_DEFAULT: aws://?profile=airflow-xcoms&s3_config_file=/opt/airflow/creds/s3&s3_config_format=aws
+    AIRFLOW__API__AUTH_BACKENDS: airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session
+
+    PYTHONPATH: /opt/airflow
+
+    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
  
   volumes:
     - ./airflow-data/creds:/opt/airflow/creds
+    - ./airflow-data/includes:/opt/airflow/includes
     - ./dags:/opt/airflow/dags
     - ./airflow-data/logs:/opt/airflow/logs
     - ./airflow-data/plugins:/opt/airflow/plugins
-    - ./airflow-data/includes:/opt/airflow/includes
+    - ./airflow-data/airflow.cfg:/opt/airflow/airflow.cfg
+ 
 
   user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
   depends_on:
@@ -68,6 +75,7 @@ x-airflow-common:
       condition: service_healthy
 
 services:
+
   postgres:
     image: postgres:13
     environment:
@@ -85,7 +93,7 @@ services:
 
   airflow-webserver:
     <<: *airflow-common
-    command: bash -c "pip install airflow webserver" 
+    command:  webserver 
     ports:
       - 8080:8080
     healthcheck:
@@ -95,9 +103,10 @@ services:
       retries: 5
     restart: always
 
+
   airflow-scheduler:
     <<: *airflow-common
-    command:  bash -c "pip install pandas-datareader && airflow scheduler"
+    command: scheduler
     restart: always
 
 
