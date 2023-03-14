@@ -1,12 +1,9 @@
+import pandas as pd
 
 from pathlib import Path
-
+from typing import List
 from datetime import datetime
-
-from pyspark.sql.functions import * 
-import pandas as pd
 from dataclasses import dataclass
-import os
 
 from datetime import timedelta
 
@@ -14,30 +11,27 @@ from datetime import timedelta
 from airflow.decorators import dag, task
 
 
-
-
-
 # Importing custom-defined functions
 from etl_operation_functions import (
-
-    extract_sp500_data_to_csv,
+    extract_sp500_data,
     transform_stock_data,
     upload_to_gcs,
-    ingest_from_gcs_to_bquery
+    ingest_from_gcs_to_bquery,
 )
 
 
+GOOGLE_APPLICATION_CREDENTIALS = (
+    "creds/dataengineering-378316-2bcbcf067f34.json"  # enviromental variable
+)
 
 
-GOOGLE_APPLICATION_CREDENTIALS = 'creds/dataengineering-378316-2bcbcf067f34.json'#enviromental variable
-
-
-bucket_name = 'dtc_data_lake_dataengineering-378316'
-dataset_name= "sp_500_data"
-file_name = f'{dataset_name}'
+bucket_name = "dtc_data_lake_dataengineering-378316"
+dataset_name = "sp_500_data"
+file_name = f"{dataset_name}"
 table_name = f"{dataset_name}_table"
-csv_uri = f"gs://dtc_data_lake_dataengineering-378316/{dataset_name}.csv"
+csv_uri = f"gs://dtc_data_lake_dataengineering-378316/{dataset_name}"
 tingo_api_key = "b8048079af04b7e50218c15f24286df5b4c51164"
+
 
 @dataclass
 class ETLConfig:
@@ -57,7 +51,7 @@ default_config = ETLConfig(
     start_date=datetime.now(),
     email=[""],
     email_on_failure=False,
-    email_on_retry=True,
+    email_on_retry=False,
     depends_on_past=False,
     retries=2,
     retry_delay=timedelta(minutes=1),
@@ -66,7 +60,7 @@ default_config = ETLConfig(
 
 # Defining the DAG using the `dag` decorator
 @dag(
-    dag_id="SP_500_DATA_PIPELINE",  # Unique identifier for the DAG
+    dag_id="SP_500_DATA_PIPELINE_v2",  # Unique identifier for the DAG
     schedule_interval="@daily",  # How often to run the DAG
     default_args=default_config.__dict__,  # Default arguments for the DAG
     catchup=False,  # Whether or not to catch up on missed runs
@@ -78,35 +72,36 @@ def taskflow():
         """
         Task to extract data from the S&P 500.
         """
-        return extract_sp500_data_to_csv()
+        return extract_sp500_data()
 
     # Define the second task
     @task
-    def transformation(df: pd.DataFrame,file_name) -> pd.DataFrame:
+    def transformation(df: pd.DataFrame) -> pd.DataFrame:
         """
         Task to transform data from the S&P 500.
         """
-        return transform_stock_data(df,file_name)
+        return transform_stock_data(df)
 
     # Define the third task
     @task
-    def load_to_gcs(path:Path) -> None:
+    def load_to_gcs(df:pd.DataFrame,bucket_name) -> None:
         """
         Task to load transformed data into S3.
         """
-        upload_to_gcs(
-            path,
-            file_name,
-            bucket_name
-)
+        upload_to_gcs(df,file_name, bucket_name)
 
     # Define the fourth task
     @task
-    def bigquery_ingestion(dataset_name,table_name,csv_uri):
-        return ingest_from_gcs_to_bquery(dataset_name,table_name,csv_uri)
+    def bigquery_ingestion(dataset_name, table_name, csv_uri):
+        return ingest_from_gcs_to_bquery(dataset_name, table_name, csv_uri)
 
     # Set up the dependencies between the tasks
-    load_to_gcs(transformation(extract_stock_data(),file_name),bucket_name) >> bigquery_ingestion(dataset_name,table_name,csv_uri)
+    extracted_data = extract_stock_data()
+    transfromed_data = transformation(extracted_data)
+    
+    load_to_gcs(transfromed_data, bucket_name)
+
+    
 
 
 # Instantiate the DAG
