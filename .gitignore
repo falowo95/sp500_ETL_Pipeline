@@ -6,3 +6,4 @@ tmp
 logs
 *.csv
 *.json
+*.cfg
