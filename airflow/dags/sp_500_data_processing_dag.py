@@ -22,10 +22,10 @@ from helper_functions import (
 
 project_id = os.environ.get("GCP_PROJECT_ID")
 bucket_name  = os.environ.get("GCP_GCS_BUCKET")
-bucket_name = "dtc_data_lake_dataengineering-378316"
-dataset_name = "sp_500_data"
-table_name = f"{dataset_name}_table"
 file_name = "sp_500_data"
+dataset_name = f"{file_name}"
+table_name = f"{dataset_name}_table"
+
 source_file_path_local = f"{file_name}.csv"
 destination_blob_path = f"input-data/{file_name}.csv"
 gcs_input_data_path = (
