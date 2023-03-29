@@ -1,26 +1,24 @@
 # Airflow DAGs
 
-Airflow will be runned in docker-compose network. 
+To run Airflow, you'll need to set up a Docker Compose network. The necessary files and specifications are included in this repository:
 
-- `Dockerfile`, `docker-compose.yaml` and `requirements.txt` have everything and project spec to run Airflow in Docker containers. 
+- `Dockerfile`, `docker-compose.yaml` and `requirements.txt` files contain everything you need to run Airflow in Docker containers.
 
-- `.env` text file with GCP and Airflow creds. Should be updated with user's GCP credentials before building images for Docker.
+- `.env` You'll need to update the `.env`file with your GCP and Airflow credentials before building Docker images.
 
-- **dag** dir contains code for DAGs and needed scripts: 
-    - **sp_500_data_processing_dag.py**. contains dag definition for stock data processing with dag_id "SP_500_DATA_PIPELINE_v1".
-    - **helper_functions.py**. contains helper functions for stock data procesing operations. 
-    - **stock_data_transform.py**. Contains spark transformation function.
-
+- **dag**  directory contains the code for the DAGs and necessary scripts:
+    - **sp_500_data_processing_dag.py**.  defines the DAG for processing stock data with a `dag_id` "SP_500_DATA_PIPELINE_v1".
+    - **helper_functions.py** contains helper functions for stock data processing operations.
+    - **stock_data_transform.py** contains the Spark transformation function.
 
 #### How to run
-1. Copy `airflow` dir from repo.
-2. Make dirs for logs and plugins in `/airflow`:
+1. Copy the`airflow` directory from this repository to your local machine.
+2. Create directories for logs, plugins, and credentials in the  `/airflow` directory::
 ```
 mkdir -p ./logs ./plugins ./creds
 cd creds
-create file s3 and follow below 
-
-define aws credentials inside s3 file 
+In the creds directory, create a file named s3 and add your AWS credentials in the following format:
+```
 [airflow-xcoms]
 aws_access_key_id = 
 aws_secret_access_key = 
@@ -29,16 +27,17 @@ aws_secret_access_key =
 - `GCP_PROJECT_ID`
 - `GCP_GCS_BUCKET`
 
-4. Build images for Docker.
+4. Build Docker images:
+
 ```
 make build 
 ```
-5. Run Docker containers.
+5. Start Docker containers:
 ```
 make up
 ```
-6. terminate containers
+6. To stop running containers:
 ```
 make down
 ```
-7. Now Airflow running on 8080 port, so can forward it and open in browser at localhost:8080.
+7. Once Airflow is running, you can access it on port 8080. You can forward this port and open it in your browser at localhost:8080.
