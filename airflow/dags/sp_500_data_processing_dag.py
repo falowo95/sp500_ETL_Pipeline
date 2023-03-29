@@ -21,7 +21,7 @@ from helper_functions import (
 )
 
 project_id = os.environ.get("GCP_PROJECT_ID")
-bucket_name  = os.environ.get("GCP_GCS_BUCKET")
+bucket_name = os.environ.get("GCP_GCS_BUCKET")
 file_name = "sp_500_data"
 dataset_name = f"{file_name}"
 table_name = f"{dataset_name}_table"

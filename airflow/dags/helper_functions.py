@@ -10,7 +10,6 @@ from google.oauth2 import service_account
 from google.cloud import storage, bigquery
 
 
-
 def get_gcp_authentication():
 
     key_path = os.getenv(
@@ -47,7 +46,6 @@ def extract_sp500_data_to_csv(file_name) -> pd.DataFrame:
 
     # tingo_api_key = os.getenv("TIINGO_API_KEY")
     tingo_api_key = "b8048079af04b7e50218c15f24286df5b4c51164"
-   
 
     # Create empty lists for successful and failed tickers
     successful_tickers = []
@@ -58,9 +56,7 @@ def extract_sp500_data_to_csv(file_name) -> pd.DataFrame:
     for ticker in sp500_tickers:
         try:
             # Retrieve data for the current ticker using Tiingo
-            df = pdr.DataReader(
-                ticker, "tiingo", api_key=tingo_api_key, end=end_date
-            )
+            df = pdr.DataReader(ticker, "tiingo", api_key=tingo_api_key, end=end_date)
             df.reset_index(drop=False, inplace=True)
             successful_tickers.append(df)
         except Exception as e:
@@ -88,7 +84,7 @@ def extract_sp500_data_to_csv(file_name) -> pd.DataFrame:
 
 def upload_data_to_gcs_from_local(
     bucket_name, source_file_path_local, destination_blob_path
-)-> None:
+) -> None:
     """
     Uploads a file to Google Cloud Storage.
 
