@@ -12,7 +12,7 @@ Cloud infra wich consists of data lake and BQ dataset:
 
 variable "project" {
   description = "Your GCP Project ID"
-  default = "iron-figure-338711" # Here should be your GCP Project ID
+  default = "dataengineering-378316" # Here should be your GCP Project ID
   type = string
 }
 
