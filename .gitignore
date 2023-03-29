@@ -7,3 +7,8 @@ logs
 *.csv
 *.json
 *.cfg
+s3
+*.jar
+.ipynb_checkpoints
+.vscode
+google_cred
