@@ -7,8 +7,6 @@ from airflow import DAG
 from datetime import timedelta
 
 # Importing specific Airflow libraries
-
-
 from airflow.operators.python import PythonOperator
 
 from stock_data_transform import transform_stock_data

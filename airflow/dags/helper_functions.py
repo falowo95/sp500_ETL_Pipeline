@@ -44,8 +44,8 @@ def extract_sp500_data_to_csv(file_name) -> pd.DataFrame:
 
     # Set up API key for Tiingo
 
-    # tingo_api_key = os.getenv("TIINGO_API_KEY")
-    tingo_api_key = "b8048079af04b7e50218c15f24286df5b4c51164"
+    tingo_api_key = os.getenv("TIINGO_API_KEY")
+    # tingo_api_key = "b8048079af04b7e50218c15f24286df5b4c51164"
 
     # Create empty lists for successful and failed tickers
     successful_tickers = []
