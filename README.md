@@ -22,7 +22,7 @@ Except the VM Instance, all project infra setups with terraform:
 - BigQuery for transformed data tablels as source for dashboard.
 
 ## Data pipelines
-The dataset data download, process and upload to cloud storage via Airflow DAGs:
+The data is downloaded from the tiingo api and then transformed and uploaded to cloud storage via Airflow DAGs:
 1. **sp 500 data processing DAG** 
   - The dag handles the extraction of sp 500 stock daa from the tiingo api.
   - The upload to gcs task uploads the extracted data to GCS.
