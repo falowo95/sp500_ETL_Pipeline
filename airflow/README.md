@@ -28,6 +28,7 @@ aws_secret_access_key =
 - `GCP_GCS_BUCKET`
 
 4. Build Docker images:
+For this i have made use of a make file to streamline your operations
 
 ```
 make build 

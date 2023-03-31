@@ -1,5 +1,5 @@
 # Project about 
-This project is aimed at processing sp500 stock data.
+This project is aimed at processing sp500 stock data to support decision making.
 The transformation steps taken enrich the dataset to facilitate the use of financial indicators to support business decision making by utilizing the dashboard developed in data studio.
 
 ## Dataset
@@ -40,3 +40,6 @@ The dataset data download, process and upload to cloud storage via Airflow DAGs:
 1. Create cloud infrasctructure via Terraform. Look at instructions at [terraform dir](https://github.com/falowo95/sp500_ETL_Pipeline/tree/main/terraform).
 2. Run Airflow in docker and trigger DAGs. Look at instructions at [airflow dir](https://github.com/falowo95/sp500_ETL_Pipeline/tree/main/airflow).
 3. Connect Google Data Studio dashboard to project BigQuery as a source.
+
+
+
