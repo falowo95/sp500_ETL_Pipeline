@@ -1,12 +1,9 @@
-from pyspark.sql.functions import *
-from pyspark.sql import SparkSession
-import logging
 
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import SparkSession, Window
+from pyspark.sql.functions import col, lag, avg, exp, sum, log, stddev_pop, year, month, date_format, to_timestamp, sqrt, lit
 import os
-from pyspark.sql.window import Window
-from pyspark.conf import SparkConf
-from pyspark.context import SparkContext
-
+import logging
 
 def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str):
     conf = (
