@@ -35,7 +35,8 @@ def get_gcp_authentication():
     key_path = os.getenv(
         "GOOGLE_APPLICATION_CREDENTIALS"
     )  # set environmental variable to the file
-    credentials = service_account.Credentials.from_service_account_file(key_path)
+    credentials = service_account.Credentials.from_service_account_file(
+        key_path)
     return credentials
 
 
@@ -95,7 +96,8 @@ def extract_sp500_data_to_csv(file_name: str) -> None:
 
     # If any tickers failed, print a message listing them
     if failed_tickers:
-        print(f"Failed to retrieve data for the following tickers: {failed_tickers}")
+        print(
+            f"Failed to retrieve data for the following tickers: {failed_tickers}")
 
     # Concatenate the data for all successful tickers into a single DataFrame
     df = pd.concat(successful_tickers)
@@ -207,4 +209,5 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
 
     # Print the number of rows loaded
     destination_table = client.get_table(table_ref)  # Make an API request.
-    print(f"Loaded {destination_table.num_rows} rows into {dataset_name}.{table_name}")
+    print(
+        f"Loaded {destination_table.num_rows} rows into {dataset_name}.{table_name}")
