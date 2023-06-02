@@ -33,7 +33,6 @@ from pyspark.sql.functions import (
 )
 
 
-
 def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) -> None:
     """
     Transforms stock data using PySpark and writes the transformed data to a CSV file in Google Cloud Storage.
