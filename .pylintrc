@@ -1,34 +1,20 @@
-[FORMAT]
-
-# Maximum line length
+[pycodestyle]
 max-line-length = 120
 
-[MESSAGES CONTROL]
-
-# Disable missing module docstring warning
+[pylint.messages_control]
 disable = missing-module-docstring
 
-[TYPECHECK]
-
-# Disable import error checks
+[pylint.typecheck]
 disable = import-error
 
-[DESIGN]
-
-# Argument name style
+[pylint.design]
 argument-naming-style = snake_case
 
-[NAMING]
-
-# Variable name style
+[pylint.naming]
 variable-rgx = [a-z_][a-z0-9_]{2,30}$
 
-[BASIC]
+[pylint.basic]
+good-names = df
 
-# Catching too general exceptions
-good-exceptions = Exception
-
-[LOGGING]
-
-# Use lazy % formatting in logging functions
-logging-format-style = percent
+[pylint.logging]
+logging-format-style = new
