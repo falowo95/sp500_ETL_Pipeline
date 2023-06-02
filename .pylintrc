@@ -31,4 +31,4 @@ good-exceptions = Exception
 [LOGGING]
 
 # Use lazy % formatting in logging functions
-logging-format-style = percent
+logging-format-style = old
