@@ -5,9 +5,6 @@ from airflow.dags.helper_functions import (
 )
 
 
-
-
-
 def test_to_local() -> None:
     """
     Test function for to_local.
@@ -49,4 +46,3 @@ def test_extract_sp500_data_to_csv() -> None:
 
     # Check that the DataFrame has at least one row and one column
     assert data_frame.shape[0] > 0 and data_frame.shape[1] > 0
-

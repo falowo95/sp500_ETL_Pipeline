@@ -1,3 +1,5 @@
+import logging
+import os
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession, Window
 from pyspark.sql.functions import (
@@ -15,11 +17,19 @@ from pyspark.sql.functions import (
     sqrt,
     lit,
 )
-import os
-import logging
 
 
-def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str):
+def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) -> None:
+    """
+    Transforms stock data using PySpark and writes the transformed data to a CSV file in Google Cloud Storage.
+
+    Args:
+        gcs_input_data_path (str): The Google Cloud Storage path of the input data file.
+        gcs_output_data_path (str): The Google Cloud Storage path where the transformed data will be written.
+
+    Returns:
+        None
+    """
     conf = (
         SparkConf()
         .setMaster("local[*]")
@@ -64,7 +74,7 @@ def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str):
         # Check if the input DataFrame is empty
         if df_spark.count() == 0:
             print("Dataframe is empty, nothing to transform")
-            return None
+            return
 
         # Convert date column to timestamp format and set it as index
         df_spark = df_spark.withColumn(
@@ -142,11 +152,11 @@ def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str):
             gcs_output_data_path
         )
 
-        print(f"writing transformed data to gcs at  : {gcs_output_data_path }")
+        print(f"writing transformed data to gcs at  : {gcs_output_data_path}")
     except Exception as e:
         # Log the error message
         logging.error("An error occurred during transformation: " + str(e))
-        return None
+        return
 
     finally:
         # Stop the Spark session
