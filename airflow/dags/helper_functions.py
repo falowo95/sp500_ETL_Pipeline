@@ -1,6 +1,5 @@
 from pathlib import Path
 import os
-from datetime import datetime
 
 import pandas as pd
 import pandas_datareader as pdr
@@ -10,10 +9,24 @@ from google.oauth2 import service_account
 from google.cloud import storage, bigquery
 
 
+"""
+This module provides functions for extracting stock data for all S&P 500 stocks from Tiingo using pandas-datareader,
+saving the data to a local CSV file, uploading the file to Google Cloud Storage (GCS), and ingesting the data from GCS into BigQuery.
+
+Functions:
+- get_gcp_authentication(): Retrieves Google Cloud Platform (GCP) authentication credentials from a service account key file.
+- to_local(df: pd.DataFrame, file_name: str) -> Path: Saves a DataFrame to a local CSV file.
+- extract_sp500_data_to_csv(file_name: str) -> None: Extracts data for all S&P 500 stocks from Tiingo and saves it to a local CSV file.
+- upload_data_to_gcs_from_local(bucket_name: str, source_file_path_local: str, destination_blob_path: str) -> None:
+  Uploads a file to Google Cloud Storage.
+- ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) -> None:
+  Ingests the data from Google Cloud Storage into BigQuery.
+"""
 
 def get_gcp_authentication():
     """
-    Retrieves Google Cloud Platform (GCP) authentication credentials from a service account key file.
+    Retrieves Google Cloud Platform (GCP) authentication credentials
+    from a service account key file.
 
     Returns:
         credentials (google.auth.credentials.Credentials): GCP authentication credentials.
@@ -104,7 +117,8 @@ def upload_data_to_gcs_from_local(
     Args:
         bucket_name (str): The name of the bucket where the file will be uploaded.
         source_file_path_local (str): The local path of the file to be uploaded.
-        destination_blob_path (str): The destination path of the file within the bucket, including the file name.
+        destination_blob_path (str): The destination path of the file within the bucket
+        , including the file name.
     """
     credentials = get_gcp_authentication()
     storage_client = storage.Client(credentials=credentials)
@@ -136,18 +150,18 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
     try:
         dataset = client.get_dataset(dataset_ref)
         print(
-            "Using existing dataset: {}.{}".format(client.project, dataset.dataset_id)
+            f"Using existing dataset: {client.project}.{dataset.dataset_id}"
         )
     except Exception as e:
         dataset = bigquery.Dataset(dataset_ref)
         dataset = client.create_dataset(dataset)
-        print("Created dataset {}.{}".format(client.project, dataset.dataset_id))
+        print(f"Created dataset {client.project}.{dataset.dataset_id}")
 
     # Create the BigQuery table if it doesn't exist
     table_ref = dataset_ref.table(table_name)
     try:
         table = client.get_table(table_ref)
-        print("Using existing table: {}.{}".format(dataset_name, table_name))
+        print(f"Using existing table: {dataset_name}.{table_name}")
     except Exception as e:
         schema = [
             bigquery.SchemaField("symbol", "STRING"),
@@ -179,7 +193,7 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
         ]
         table = bigquery.Table(table_ref, schema=schema)
         table = client.create_table(table)  # Make an API request.
-        print("Created table {}.{}".format(dataset_name, table_name))
+        print(f"Created table {dataset_name}.{table_name}")
 
     # Load the data into BigQuery
     job_config = bigquery.LoadJobConfig(
@@ -195,7 +209,5 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
     # Print the number of rows loaded
     destination_table = client.get_table(table_ref)  # Make an API request.
     print(
-        "Loaded {} rows into {}.{}".format(
-            destination_table.num_rows, dataset_name, table_name
-        )
+        f"Loaded {destination_table.num_rows} rows into {dataset_name}.{table_name}"
     )
