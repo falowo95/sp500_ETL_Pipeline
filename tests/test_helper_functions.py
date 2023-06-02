@@ -1,14 +1,10 @@
 from airflow.dags.helper_functions import (
-    get_gcp_authentication,
     to_local,
     extract_sp500_data_to_csv,
-    upload_data_to_gcs_from_local,
-    ingest_from_gcs_to_bquery,
 )
 
 
 import pandas as pd
-from pathlib import Path
 
 
 def test_to_local():
