@@ -79,8 +79,7 @@ def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) ->
     spark.conf.set("mapreduce.fileoutputcommitter.marksuccessfuljobs", "false")
 
     # Read data from Google Cloud Storage
-    df_spark = spark.read.csv(
-        gcs_input_data_path, header=True, inferSchema=True)
+    df_spark = spark.read.csv(gcs_input_data_path, header=True, inferSchema=True)
     # Constants
     min_periods = 75
     trading_days = 252
@@ -105,10 +104,8 @@ def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) ->
 
         # Calculate daily percentage change, rolling averages, standard deviation and Bollinger bands
         window1 = Window.partitionBy("symbol").orderBy("date")
-        window2 = Window.partitionBy("symbol").orderBy(
-            "date").rowsBetween(-19, 0)
-        window3 = Window.partitionBy("symbol").orderBy(
-            "date").rowsBetween(-199, 0)
+        window2 = Window.partitionBy("symbol").orderBy("date").rowsBetween(-19, 0)
+        window3 = Window.partitionBy("symbol").orderBy("date").rowsBetween(-199, 0)
         window4 = (
             Window.partitionBy("symbol")
             .orderBy("date")
@@ -120,8 +117,7 @@ def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) ->
             .rowsBetween(-(trading_days - 1), 0)
         )
         df_spark = df_spark.withColumn(
-            "daily_pct_change", col("adjClose") /
-            lag("adjClose", 1).over(window1) - 1
+            "daily_pct_change", col("adjClose") / lag("adjClose", 1).over(window1) - 1
         )
         df_spark = df_spark.withColumn(
             "twenty_day_moving", avg(col("adjClose")).over(window2)
@@ -129,8 +125,7 @@ def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) ->
         df_spark = df_spark.withColumn(
             "two_hundred_day_moving", avg(col("adjClose")).over(window3)
         )
-        df_spark = df_spark.withColumn(
-            "std", stddev_pop(col("adjClose")).over(window2))
+        df_spark = df_spark.withColumn("std", stddev_pop(col("adjClose")).over(window2))
         df_spark = df_spark.withColumn(
             "bollinger_up", col("twenty_day_moving") + col("std") * 2
         )
