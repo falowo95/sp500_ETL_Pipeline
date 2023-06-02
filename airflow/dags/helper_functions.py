@@ -20,14 +20,26 @@ def get_gcp_authentication():
 
 
 def to_local(df: pd.DataFrame, file_name: str) -> Path:
+    """
+    Saves a DataFrame to a local CSV file.
 
-    path = Path(f"{file_name}.csv", index=True)  # can update this with a file directory
+    Args:
+        df (pd.DataFrame): The DataFrame to be saved.
+        file_name (str): The name of the output file.
 
+    Returns:
+        Path: The path object representing the saved file.
+    """
+    # Set the path to the file
+    path = Path(f"{file_name}.csv", index = True)
+
+    # Save the DataFrame to the CSV file
     df.to_csv(path, index=False)
 
-    print(f"file has been saved at :{path}")
-    return path
+    # Print the path to the saved file
+    print(f"File has been saved at: {path}")
 
+    return path
 
 def extract_sp500_data_to_csv(file_name) -> pd.DataFrame:
 
