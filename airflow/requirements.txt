@@ -4,10 +4,10 @@ numpy
 pandas_datareader
 apache-airflow
 
-apache-airflow==2.2.3
-apache-airflow-providers-google==6.2.0
-pyarrow==5.0.0
-pyspark==3.2.1
+apache-airflow
+apache-airflow-providers-google
+pyarrow
+pyspark
 google-auth
 google-cloud-storage
 google-cloud-bigquery
