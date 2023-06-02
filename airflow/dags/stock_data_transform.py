@@ -18,6 +18,20 @@ from pyspark.sql.functions import (
     lit,
 )
 
+"""
+This module provides a function to transform stock data using PySpark and write the transformed data to a CSV file in Google Cloud Storage.
+
+Functions:
+- transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) -> None:
+  Transforms stock data using PySpark and writes the transformed data to a CSV file in Google Cloud Storage.
+
+Required Packages:
+- logging
+- os
+- pyspark
+- pyspark.sql.SparkSession
+- pyspark.sql.functions: col, lag, avg, exp, sum, log, stddev_pop, year, month, date_format, to_timestamp, sqrt, lit
+"""
 
 def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) -> None:
     """
@@ -67,8 +81,8 @@ def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) ->
     # Read data from Google Cloud Storage
     df_spark = spark.read.csv(gcs_input_data_path, header=True, inferSchema=True)
     # Constants
-    MIN_PERIODS = 75
-    TRADING_DAYS = 252
+    min_periods = 75
+    trading_days = 252
 
     try:
         # Check if the input DataFrame is empty
@@ -95,12 +109,12 @@ def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) ->
         window4 = (
             Window.partitionBy("symbol")
             .orderBy("date")
-            .rowsBetween(-(MIN_PERIODS - 1), 0)
+            .rowsBetween(-(min_periods - 1), 0)
         )
         window5 = (
             Window.partitionBy("symbol")
             .orderBy("date")
-            .rowsBetween(-(TRADING_DAYS - 1), 0)
+            .rowsBetween(-(trading_days - 1), 0)
         )
         df_spark = df_spark.withColumn(
             "daily_pct_change", col("adjClose") / lag("adjClose", 1).over(window1) - 1
@@ -135,7 +149,7 @@ def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) ->
         )
         df_spark = df_spark.withColumn(
             "volatility",
-            stddev_pop(col("adjClose")).over(window4) * sqrt(lit(MIN_PERIODS)),
+            stddev_pop(col("adjClose")).over(window4) * sqrt(lit(min_periods)),
         )
         df_spark = df_spark.withColumn(
             "returns", log(col("adjClose") / lag("adjClose", 1).over(window1))
@@ -143,7 +157,7 @@ def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) ->
         df_spark = df_spark.withColumn(
             "sharpe_ratio",
             stddev_pop(col("returns")).over(window5)
-            * sqrt(lit(TRADING_DAYS))
+            * sqrt(lit(trading_days))
             / avg(col("returns")).over(window5),
         )
 
