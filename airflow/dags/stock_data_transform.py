@@ -33,6 +33,7 @@ Required Packages:
 - pyspark.sql.functions: col, lag, avg, exp, sum, log, stddev_pop, year, month, date_format, to_timestamp, sqrt, lit
 """
 
+
 def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) -> None:
     """
     Transforms stock data using PySpark and writes the transformed data to a CSV file in Google Cloud Storage.
