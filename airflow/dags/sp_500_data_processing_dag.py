@@ -1,3 +1,8 @@
+"""
+SP 500 Data Processing DAG
+
+This module defines the DAG for the SP 500 data processing pipeline.
+"""
 import os
 from typing import List
 from datetime import datetime, timedelta
