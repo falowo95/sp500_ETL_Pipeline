@@ -1,3 +1,17 @@
+"""
+This module provides functions for extracting stock data for all S&P 500 stocks from Tiingo using pandas-datareader,
+saving the data to a local CSV file, uploading the file to Google Cloud Storage (GCS), and ingesting the data from GCS into BigQuery.
+
+Functions:
+- get_gcp_authentication(): Retrieves Google Cloud Platform (GCP) authentication credentials from a service account key file.
+- to_local(data_frame: pd.DataFrame, file_name: str) -> Path: Saves a DataFrame to a local CSV file.
+- extract_sp500_data_to_csv(file_name: str) -> None: Extracts data for all S&P 500 stocks from Tiingo and saves it to a local CSV file.
+- upload_data_to_gcs_from_local(bucket_name: str, source_file_path_local: str, destination_blob_path: str) -> None:
+  Uploads a file to Google Cloud Storage.
+- ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) -> None:
+  Ingests the data from Google Cloud Storage into BigQuery.
+"""
+
 from pathlib import Path
 import os
 
@@ -7,21 +21,6 @@ import pandas_datareader as pdr
 
 from google.oauth2 import service_account
 from google.cloud import storage, bigquery
-
-
-"""
-This module provides functions for extracting stock data for all S&P 500 stocks from Tiingo using pandas-datareader,
-saving the data to a local CSV file, uploading the file to Google Cloud Storage (GCS), and ingesting the data from GCS into BigQuery.
-
-Functions:
-- get_gcp_authentication(): Retrieves Google Cloud Platform (GCP) authentication credentials from a service account key file.
-- to_local(df: pd.DataFrame, file_name: str) -> Path: Saves a DataFrame to a local CSV file.
-- extract_sp500_data_to_csv(file_name: str) -> None: Extracts data for all S&P 500 stocks from Tiingo and saves it to a local CSV file.
-- upload_data_to_gcs_from_local(bucket_name: str, source_file_path_local: str, destination_blob_path: str) -> None:
-  Uploads a file to Google Cloud Storage.
-- ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) -> None:
-  Ingests the data from Google Cloud Storage into BigQuery.
-"""
 
 
 def get_gcp_authentication():
@@ -35,17 +34,16 @@ def get_gcp_authentication():
     key_path = os.getenv(
         "GOOGLE_APPLICATION_CREDENTIALS"
     )  # set environmental variable to the file
-    credentials = service_account.Credentials.from_service_account_file(
-        key_path)
+    credentials = service_account.Credentials.from_service_account_file(key_path)
     return credentials
 
 
-def to_local(df: pd.DataFrame, file_name: str) -> Path:
+def to_local(data_frame: pd.DataFrame, file_name: str) -> Path:
     """
     Saves a DataFrame to a local CSV file.
 
     Args:
-        df (pd.DataFrame): The DataFrame to be saved.
+        data_frame (pd.DataFrame): The DataFrame to be saved.
         file_name (str): The name of the output file.
 
     Returns:
@@ -55,7 +53,7 @@ def to_local(df: pd.DataFrame, file_name: str) -> Path:
     path = Path(f"{file_name}.csv", index=True)
 
     # Save the DataFrame to the CSV file
-    df.to_csv(path, index=False)
+    data_frame.to_csv(path, index=False)
 
     # Print the path to the saved file
     print(f"File has been saved at: {path}")
@@ -86,9 +84,9 @@ def extract_sp500_data_to_csv(file_name: str) -> None:
     for ticker in sp500_tickers:
         try:
             # Retrieve data for the current ticker using Tiingo
-            df = pdr.DataReader(ticker, "tiingo", api_key=tiingo_api_key)
-            df.reset_index(drop=False, inplace=True)
-            successful_tickers.append(df)
+            data_frame = pdr.DataReader(ticker, "tiingo", api_key=tiingo_api_key)
+            data_frame.reset_index(drop=False, inplace=True)
+            successful_tickers.append(data_frame)
         except Exception as e:
             # If there is an error, print a message and add the ticker to the failed list
             print(f"Error while extracting data for {ticker}: {e}")
@@ -96,18 +94,17 @@ def extract_sp500_data_to_csv(file_name: str) -> None:
 
     # If any tickers failed, print a message listing them
     if failed_tickers:
-        print(
-            f"Failed to retrieve data for the following tickers: {failed_tickers}")
+        print(f"Failed to retrieve data for the following tickers: {failed_tickers}")
 
     # Concatenate the data for all successful tickers into a single DataFrame
-    df = pd.concat(successful_tickers)
+    data_frame = pd.concat(successful_tickers)
 
     # Convert the timestamp column to datetime objects
-    df["date"] = pd.to_datetime(df["date"]).dt.date
+    data_frame["date"] = pd.to_datetime(data_frame["date"]).dt.date
 
     print("Ingestion from API completed")
 
-    save_to = to_local(df, file_name)
+    save_to = to_local(data_frame, file_name)
     print(save_to)
 
 
@@ -209,5 +206,4 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
 
     # Print the number of rows loaded
     destination_table = client.get_table(table_ref)  # Make an API request.
-    print(
-        f"Loaded {destination_table.num_rows} rows into {dataset_name}.{table_name}")
+    print(f"Loaded {destination_table.num_rows} rows into {dataset_name}.{table_name}")
