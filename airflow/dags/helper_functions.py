@@ -1,11 +1,11 @@
 from pathlib import Path
 import os
+from datetime import datetime
+
 import pandas as pd
 import pandas_datareader as pdr
 
 
-from datetime import datetime
-from pathlib import Path
 from google.oauth2 import service_account
 from google.cloud import storage, bigquery
 
@@ -31,7 +31,7 @@ def to_local(df: pd.DataFrame, file_name: str) -> Path:
         Path: The path object representing the saved file.
     """
     # Set the path to the file
-    path = Path(f"{file_name}.csv", index = True)
+    path = Path(f"{file_name}.csv", index=True)
 
     # Save the DataFrame to the CSV file
     df.to_csv(path, index=False)
@@ -40,6 +40,7 @@ def to_local(df: pd.DataFrame, file_name: str) -> Path:
     print(f"File has been saved at: {path}")
 
     return path
+
 
 def extract_sp500_data_to_csv(file_name) -> pd.DataFrame:
 
