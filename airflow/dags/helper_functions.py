@@ -10,9 +10,6 @@ from google.oauth2 import service_account
 from google.cloud import storage, bigquery
 
 
-import os
-from google.oauth2 import service_account
-
 
 def get_gcp_authentication():
     """
