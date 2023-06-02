@@ -1,0 +1,34 @@
+[FORMAT]
+
+# Maximum line length
+max-line-length = 120
+
+[MESSAGES CONTROL]
+
+# Disable missing module docstring warning
+disable = missing-module-docstring
+
+[TYPECHECK]
+
+# Disable import error checks
+disable = import-error
+
+[DESIGN]
+
+# Argument name style
+argument-naming-style = snake_case
+
+[NAMING]
+
+# Variable name style
+variable-rgx = [a-z_][a-z0-9_]{2,30}$
+
+[BASIC]
+
+# Catching too general exceptions
+good-exceptions = Exception
+
+[LOGGING]
+
+# Use lazy % formatting in logging functions
+logging-format-style = percent
