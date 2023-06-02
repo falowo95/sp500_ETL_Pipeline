@@ -1,3 +1,17 @@
+"""
+This module provides a function to transform stock data using PySpark and write the transformed data to a CSV file in Google Cloud Storage.
+
+Functions:
+- transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) -> None:
+  Transforms stock data using PySpark and writes the transformed data to a CSV file in Google Cloud Storage.
+
+Required Packages:
+- logging
+- os
+- pyspark
+- pyspark.sql.SparkSession
+- pyspark.sql.functions: col, lag, avg, exp, sum, log, stddev_pop, year, month, date_format, to_timestamp, sqrt, lit
+"""
 import logging
 import os
 from pyspark import SparkConf, SparkContext
@@ -18,20 +32,6 @@ from pyspark.sql.functions import (
     lit,
 )
 
-"""
-This module provides a function to transform stock data using PySpark and write the transformed data to a CSV file in Google Cloud Storage.
-
-Functions:
-- transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) -> None:
-  Transforms stock data using PySpark and writes the transformed data to a CSV file in Google Cloud Storage.
-
-Required Packages:
-- logging
-- os
-- pyspark
-- pyspark.sql.SparkSession
-- pyspark.sql.functions: col, lag, avg, exp, sum, log, stddev_pop, year, month, date_format, to_timestamp, sqrt, lit
-"""
 
 
 def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) -> None:
