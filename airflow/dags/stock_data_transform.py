@@ -56,24 +56,26 @@ def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) ->
         )
     )
 
-    sc = SparkContext(conf=conf)
+    spark_context = SparkContext(conf=conf)
 
-    sc._jsc.hadoopConfiguration().set(
+    spark_context._jsc.hadoopConfiguration().set(
         "fs.AbstractFileSystem.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS"
     )
-    sc._jsc.hadoopConfiguration().set(
+    spark_context._jsc.hadoopConfiguration().set(
         "fs.gs.impl", "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem"
     )
-    sc._jsc.hadoopConfiguration().set(
+    spark_context._jsc.hadoopConfiguration().set(
         "fs.gs.auth.service.account.json.keyfile",
         os.getenv("GOOGLE_APPLICATION_CREDENTIALS"),
     )
-    sc._jsc.hadoopConfiguration().set("fs.gs.auth.service.account.enable", "true")
+    spark_context._jsc.hadoopConfiguration().set(
+        "fs.gs.auth.service.account.enable", "true"
+    )
 
     spark = (
         SparkSession.builder.master("local[*]")
         .appName("StockDataTransformation")
-        .config(conf=sc.getConf())
+        .config(conf=spark_context.getConf())
         .getOrCreate()
     )
     spark.conf.set("mapreduce.fileoutputcommitter.marksuccessfuljobs", "false")
