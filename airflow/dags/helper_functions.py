@@ -10,11 +10,20 @@ from google.oauth2 import service_account
 from google.cloud import storage, bigquery
 
 
-def get_gcp_authentication():
+import os
+from google.oauth2 import service_account
 
+
+def get_gcp_authentication():
+    """
+    Retrieves Google Cloud Platform (GCP) authentication credentials from a service account key file.
+
+    Returns:
+        credentials (google.auth.credentials.Credentials): GCP authentication credentials.
+    """
     key_path = os.getenv(
         "GOOGLE_APPLICATION_CREDENTIALS"
-    )  # set enviromental variable to the file
+    )  # set environmental variable to the file
     credentials = service_account.Credentials.from_service_account_file(key_path)
     return credentials
 
@@ -42,34 +51,30 @@ def to_local(df: pd.DataFrame, file_name: str) -> Path:
     return path
 
 
-def extract_sp500_data_to_csv(file_name) -> pd.DataFrame:
-
+def extract_sp500_data_to_csv(file_name: str) -> None:
     """
-    Extracts data for all S&P 500 stocks from Tiingo using pandas-datareader
+    Extracts data for all S&P 500 stocks from Tiingo using pandas-datareader.
+
+    Args:
+        file_name (str): The name of the output file.
     """
     # Get the list of S&P 500 stock tickers from Wikipedia
-
-    end_date = datetime.today().strftime("%Y-%m-%d")
-
     sp500_tickers = pd.read_html(
         "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
     )[0]["Symbol"].tolist()
 
     # Set up API key for Tiingo
-
-    tingo_api_key = os.getenv("TIINGO_API_KEY")
-    # tingo_api_key = "b8048079af04b7e50218c15f24286df5b4c51164"
+    tiingo_api_key = os.getenv("TIINGO_API_KEY")
 
     # Create empty lists for successful and failed tickers
     successful_tickers = []
     failed_tickers = []
 
     # Loop over all S&P 500 tickers and attempt to retrieve data for each one
-
     for ticker in sp500_tickers:
         try:
             # Retrieve data for the current ticker using Tiingo
-            df = pdr.DataReader(ticker, "tiingo", api_key=tingo_api_key, end=end_date)
+            df = pdr.DataReader(ticker, "tiingo", api_key=tiingo_api_key)
             df.reset_index(drop=False, inplace=True)
             successful_tickers.append(df)
         except Exception as e:
@@ -85,32 +90,25 @@ def extract_sp500_data_to_csv(file_name) -> pd.DataFrame:
     df = pd.concat(successful_tickers)
 
     # Convert the timestamp column to datetime objects
-    df.date = pd.to_datetime(df.date)
-    # Extract the date component of the datetime objects
-    df.date = df.date.dt.date
+    df["date"] = pd.to_datetime(df["date"]).dt.date
 
-    print("ingestion from api completed")
+    print("Ingestion from API completed")
 
     save_to = to_local(df, file_name)
     print(save_to)
 
 
 def upload_data_to_gcs_from_local(
-    bucket_name, source_file_path_local, destination_blob_path
+    bucket_name: str, source_file_path_local: str, destination_blob_path: str
 ) -> None:
     """
     Uploads a file to Google Cloud Storage.
 
-    Parameters
-    ----------
-    bucket_name : str
-        The name of the bucket where the file will be uploaded.
-    source_file_path_local : str
-        The local path of the file to be uploaded.
-    destination_blob_path : str
-        The destination path of the file within the bucket, including the file name.
+    Args:
+        bucket_name (str): The name of the bucket where the file will be uploaded.
+        source_file_path_local (str): The local path of the file to be uploaded.
+        destination_blob_path (str): The destination path of the file within the bucket, including the file name.
     """
-
     credentials = get_gcp_authentication()
     storage_client = storage.Client(credentials=credentials)
     bucket = storage_client.get_bucket(bucket_name)
@@ -119,14 +117,13 @@ def upload_data_to_gcs_from_local(
     blob.upload_from_filename(source_file_path_local)
 
     print(
-        f"File {source_file_path_local} locally and  uploaded to {destination_blob_path} in bucket {bucket_name}."
+        f"File {source_file_path_local} locally uploaded to {destination_blob_path} in bucket {bucket_name}."
     )
 
 
-def ingest_from_gcs_to_bquery(dataset_name, table_name, csv_uri) -> None:
-    """Ingest the data from Google Cloud Storage into BigQuery.
-
-    This function will load the data into BigQuery.
+def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) -> None:
+    """
+    Ingest the data from Google Cloud Storage into BigQuery.
 
     Args:
         dataset_name (str): The name of the BigQuery dataset.
@@ -139,20 +136,22 @@ def ingest_from_gcs_to_bquery(dataset_name, table_name, csv_uri) -> None:
 
     # Create the BigQuery dataset if it doesn't exist
     dataset_ref = client.dataset(dataset_name)
-    dataset = bigquery.Dataset(dataset_ref)
     try:
-        dataset = client.create_dataset(dataset)  # Make an API request.
-        print("Created dataset {}.{}".format(client.project, dataset.dataset_id))
+        dataset = client.get_dataset(dataset_ref)
+        print(
+            "Using existing dataset: {}.{}".format(client.project, dataset.dataset_id)
+        )
     except Exception as e:
-        print("Error creating dataset: {}".format(e))
+        dataset = bigquery.Dataset(dataset_ref)
+        dataset = client.create_dataset(dataset)
+        print("Created dataset {}.{}".format(client.project, dataset.dataset_id))
 
     # Create the BigQuery table if it doesn't exist
     table_ref = dataset_ref.table(table_name)
     try:
-        client.get_table(table_ref)
-        print("Table {}.{} already exists.".format(dataset_name, table_name))
+        table = client.get_table(table_ref)
+        print("Using existing table: {}.{}".format(dataset_name, table_name))
     except Exception as e:
-        print("Creating table {}.{}".format(dataset_name, table_name))
         schema = [
             bigquery.SchemaField("symbol", "STRING"),
             bigquery.SchemaField("date", "DATETIME"),
