@@ -23,6 +23,7 @@ Functions:
   Ingests the data from Google Cloud Storage into BigQuery.
 """
 
+
 def get_gcp_authentication():
     """
     Retrieves Google Cloud Platform (GCP) authentication credentials
@@ -149,9 +150,7 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
     dataset_ref = client.dataset(dataset_name)
     try:
         dataset = client.get_dataset(dataset_ref)
-        print(
-            f"Using existing dataset: {client.project}.{dataset.dataset_id}"
-        )
+        print(f"Using existing dataset: {client.project}.{dataset.dataset_id}")
     except Exception as e:
         dataset = bigquery.Dataset(dataset_ref)
         dataset = client.create_dataset(dataset)
@@ -208,6 +207,4 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
 
     # Print the number of rows loaded
     destination_table = client.get_table(table_ref)  # Make an API request.
-    print(
-        f"Loaded {destination_table.num_rows} rows into {dataset_name}.{table_name}"
-    )
+    print(f"Loaded {destination_table.num_rows} rows into {dataset_name}.{table_name}")
