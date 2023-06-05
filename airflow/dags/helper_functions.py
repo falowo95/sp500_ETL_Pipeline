@@ -61,20 +61,22 @@ def to_local(data_frame: pd.DataFrame, file_name: str) -> Path:
     return path
 
 
-def extract_sp500_data_to_csv(file_name: str) -> None:
+def extract_sp500_data_to_csv(
+    file_name: str, tiingo_api_key: str, start_date: str, end_date: str
+) -> None:
     """
     Extracts data for all S&P 500 stocks from Tiingo using pandas-datareader.
 
     Args:
         file_name (str): The name of the output file.
+        tiingo_api_key (str): The API key for Tiingo.
+        start_date (str): The start date for data extraction (YYYY-MM-DD).
+        end_date (str): The end date for data extraction (YYYY-MM-DD).
     """
     # Get the list of S&P 500 stock tickers from Wikipedia
     sp500_tickers = pd.read_html(
         "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
     )[0]["Symbol"].tolist()
-
-    # Set up API key for Tiingo
-    tiingo_api_key = os.getenv("TIINGO_API_KEY")
 
     # Create empty lists for successful and failed tickers
     successful_tickers = []
@@ -84,7 +86,9 @@ def extract_sp500_data_to_csv(file_name: str) -> None:
     for ticker in sp500_tickers:
         try:
             # Retrieve data for the current ticker using Tiingo
-            data_frame = pdr.DataReader(ticker, "tiingo", api_key=tiingo_api_key)
+            data_frame = pdr.get_data_tiingo(
+                ticker, start=start_date, end=end_date, api_key=tiingo_api_key
+            )
             data_frame.reset_index(drop=False, inplace=True)
             successful_tickers.append(data_frame)
         except Exception as e:

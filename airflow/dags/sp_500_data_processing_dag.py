@@ -42,11 +42,14 @@ def define_dag() -> DAG:
     Returns:
         DAG: The defined DAG object.
     """
+    tiingo_api_key = os.getenv("TIINGO_API_KEY")
     project_id = os.environ.get("GCP_PROJECT_ID")
     bucket_name = os.environ.get("GCP_GCS_BUCKET")
     file_name = "sp_500_data"
     dataset_name = f"{file_name}"
     table_name = f"{dataset_name}_table"
+    start_date = "2015-01-01"
+    end_date = "2021-01-01"
 
     source_file_path_local = f"{file_name}.csv"
     destination_blob_path = f"input-data/{file_name}.csv"
@@ -77,7 +80,12 @@ def define_dag() -> DAG:
         extract_data_task = PythonOperator(
             task_id="extract_data_task",
             python_callable=extract_sp500_data_to_csv,
-            op_kwargs={"file_name": file_name},
+            op_kwargs={
+                "file_name": file_name,
+                "tiingo_api_key": tiingo_api_key,
+                "start_date": start_date,
+                "end_date": end_date,
+            },
         )
 
         upload_to_gcs_task = PythonOperator(
