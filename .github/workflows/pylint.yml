@@ -24,19 +24,19 @@ jobs:
         pip install -r requirements.txt
         pip install pylint
         pip install pytest    
-        pip py4j
-        pip pandas
-        pip numpy
-        pip pandas_datareader
-        pip apache-airflow
-        pip apache-airflow
-        pip apache-airflow-providers-google
-        pip pyarrow
-        pip pyspark
-        pip google-auth
-        pip google-cloud-storage
-        pip google-cloud-bigquery
-        pip google-cloud-dataproc
+        pip install py4j
+        pip install pandas
+        pip install numpy
+        pip install pandas_datareader
+        pip install apache-airflow
+        pip install apache-airflow
+        pip install apache-airflow-providers-google
+        pip install pyarrow
+        pip install pyspark
+        pip install google-auth
+        pip install google-cloud-storage
+        pip install google-cloud-bigquery
+        pip install google-cloud-dataproc
         pip list  # Optional: Verify installed packages
     - name: Run tests
       run: |
