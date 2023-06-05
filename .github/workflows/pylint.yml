@@ -19,6 +19,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylint
         pip list  # Optional: Verify installed packages
+    - name: Run tests
+      run: |
+        pytest
     - name: Analysing the code with pylint
       run: |
         pylint $(git ls-files '*.py') tests/**/*.py
