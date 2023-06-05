@@ -82,8 +82,6 @@ def extract_sp500_data_to_csv(
     successful_tickers = []
     failed_tickers = []
 
-    logger = logging.getLogger(__name__)  # Create a logger instance
-
     # Loop over all S&P 500 tickers and attempt to retrieve data for each one
     for ticker in sp500_tickers:
         try:
@@ -95,13 +93,13 @@ def extract_sp500_data_to_csv(
             successful_tickers.append(data_frame)
         except Exception as specific_exception:
             # If there is an error, log the message and add the ticker to the failed list
-            logger.error(
+            logging.error(
                 f"Error while extracting data for {ticker}: {specific_exception}"
             )
             failed_tickers.append(ticker)
     # If any tickers failed, print a message listing them
     if failed_tickers:
-        logger.info(
+        logging.info(
             f"Failed to retrieve data for the following tickers: {failed_tickers}"
         )
 
@@ -111,10 +109,10 @@ def extract_sp500_data_to_csv(
     # Convert the timestamp column to datetime objects
     data_frame["date"] = pd.to_datetime(data_frame["date"]).dt.date
 
-    logger.info("Ingestion from API completed")
+    logging.info("Ingestion from API completed")
 
     save_to = to_local(data_frame, file_name)
-    logger.info(save_to)
+    logging.info(save_to)
 
 
 def upload_data_to_gcs_from_local(
@@ -158,10 +156,11 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
     dataset_ref = client.dataset(dataset_name)
     try:
         dataset = client.get_dataset(dataset_ref)
-        print(f"Using existing dataset: {client.project}.{dataset.dataset_id}")
+        logging.info(f"Using existing dataset: {client.project}.{dataset.dataset_id}")
     except Exception as specific_exception:
         dataset = bigquery.Dataset(dataset_ref)
         dataset = client.create_dataset(dataset)
+        logging.error(f"Error while creating dataset: {specific_exception}")
         logging.info(f"Created dataset {client.project}.{dataset.dataset_id}")
 
     # Create the BigQuery table if it doesn't exist
@@ -205,7 +204,6 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
             logging.info(f"Created table {dataset_name}.{table_name}")
         except Exception as specific_exception:
             logging.error(f"Error while creating table: {specific_exception}")
-            logging.info(f"Using existing table: {dataset_name}.{table_name}")
 
     # Load the data into BigQuery
     job_config = bigquery.LoadJobConfig(
