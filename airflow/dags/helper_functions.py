@@ -159,17 +159,17 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
     try:
         dataset = client.get_dataset(dataset_ref)
         print(f"Using existing dataset: {client.project}.{dataset.dataset_id}")
-    except Exception as e:
+    except Exception as specific_exception:
         dataset = bigquery.Dataset(dataset_ref)
         dataset = client.create_dataset(dataset)
-        print(f"Created dataset {client.project}.{dataset.dataset_id}")
+        logging.info(f"Created dataset {client.project}.{dataset.dataset_id}")
 
     # Create the BigQuery table if it doesn't exist
     table_ref = dataset_ref.table(table_name)
     try:
         table = client.get_table(table_ref)
-        print(f"Using existing table: {dataset_name}.{table_name}")
-    except Exception as e:
+        logging.info(f"Using existing table: {dataset_name}.{table_name}")
+    except Exception as specific_exception:
         schema = [
             bigquery.SchemaField("symbol", "STRING"),
             bigquery.SchemaField("date", "DATETIME"),
@@ -199,8 +199,13 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
             bigquery.SchemaField("sharpe_ratio", "FLOAT"),
         ]
         table = bigquery.Table(table_ref, schema=schema)
-        table = client.create_table(table)  # Make an API request.
-        print(f"Created table {dataset_name}.{table_name}")
+        try:
+            table = client.create_table(table)  # Make an API request.
+            logging.error(f"Error while creating table: {specific_exception}")
+            logging.info(f"Created table {dataset_name}.{table_name}")
+        except Exception as specific_exception:
+            logging.error(f"Error while creating table: {specific_exception}")
+            logging.info(f"Using existing table: {dataset_name}.{table_name}")
 
     # Load the data into BigQuery
     job_config = bigquery.LoadJobConfig(
@@ -211,8 +216,10 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
     load_job = client.load_table_from_uri(
         csv_uri, table_ref, job_config=job_config
     )  # Make an API request.
-    load_job.result()  # Wait for the job to complete.
-
-    # Print the number of rows loaded
-    destination_table = client.get_table(table_ref)  # Make an API request.
-    print(f"Loaded {destination_table.num_rows} rows into {dataset_name}.{table_name}")
+    try:
+        load_job.result()  # Wait for the job to complete.
+        logging.info(
+            f"Loaded {load_job.output_rows} rows into {dataset_name}.{table_name}"
+        )
+    except Exception as specific_exception:
+        logging.error(f"Error while loading data into BigQuery: {specific_exception}")

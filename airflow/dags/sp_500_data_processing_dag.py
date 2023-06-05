@@ -12,10 +12,9 @@ from helper_functions import (
     upload_data_to_gcs_from_local,
     ingest_from_gcs_to_bquery,
 )
+from stock_data_transform import transform_stock_data
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-
-from stock_data_transform import transform_stock_data
 
 
 @dataclass
