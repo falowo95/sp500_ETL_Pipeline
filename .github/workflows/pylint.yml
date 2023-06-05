@@ -18,6 +18,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pylint
+        pip install pytest
         pip list  # Optional: Verify installed packages
     - name: Run tests
       run: |
