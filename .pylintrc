@@ -23,4 +23,4 @@ logging-format-style = new
 invalid-name=_
 
 [pylint]
-disable = W0718,W1203,W0621,R0902,R0914,W0104,W0622,C0103
+disable = W0718,W1203,W0621,R0902,R0914,W0104,W0622,C0103,W1201,W0212
