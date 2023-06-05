@@ -169,9 +169,11 @@ def transform_stock_data(gcs_input_data_path: str, gcs_output_data_path: str) ->
         )
 
         print(f"writing transformed data to gcs at  : {gcs_output_data_path}")
-    except Exception as e:
+    except Exception as specific_exception:
         # Log the error message
-        logging.error("An error occurred during transformation: " + str(e))
+        logging.error(
+            "An error occurred during transformation: " + str(specific_exception)
+        )
         return
 
     finally:
