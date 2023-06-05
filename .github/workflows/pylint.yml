@@ -19,7 +19,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylint
         pip install pytest
-        pip install -r /workflows/requirements.txt
+        pip install -r requirements.txt
         pip list  # Optional: Verify installed packages
     - name: Run tests
       run: |
