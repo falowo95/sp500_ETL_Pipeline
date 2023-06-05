@@ -17,7 +17,7 @@ import os
 
 import pandas as pd
 import pandas_datareader as pdr
-
+import logging
 
 from google.oauth2 import service_account
 from google.cloud import storage, bigquery
@@ -82,6 +82,8 @@ def extract_sp500_data_to_csv(
     successful_tickers = []
     failed_tickers = []
 
+    logger = logging.getLogger(__name__)  # Create a logger instance
+
     # Loop over all S&P 500 tickers and attempt to retrieve data for each one
     for ticker in sp500_tickers:
         try:
@@ -91,14 +93,17 @@ def extract_sp500_data_to_csv(
             )
             data_frame.reset_index(drop=False, inplace=True)
             successful_tickers.append(data_frame)
-        except Exception as e:
-            # If there is an error, print a message and add the ticker to the failed list
-            print(f"Error while extracting data for {ticker}: {e}")
+        except Exception as specific_exception:
+            # If there is an error, log the message and add the ticker to the failed list
+            logger.error(
+                f"Error while extracting data for {ticker}: {specific_exception}"
+            )
             failed_tickers.append(ticker)
-
     # If any tickers failed, print a message listing them
     if failed_tickers:
-        print(f"Failed to retrieve data for the following tickers: {failed_tickers}")
+        logger.info(
+            f"Failed to retrieve data for the following tickers: {failed_tickers}"
+        )
 
     # Concatenate the data for all successful tickers into a single DataFrame
     data_frame = pd.concat(successful_tickers)
@@ -106,10 +111,10 @@ def extract_sp500_data_to_csv(
     # Convert the timestamp column to datetime objects
     data_frame["date"] = pd.to_datetime(data_frame["date"]).dt.date
 
-    print("Ingestion from API completed")
+    logger.info("Ingestion from API completed")
 
     save_to = to_local(data_frame, file_name)
-    print(save_to)
+    logger.info(save_to)
 
 
 def upload_data_to_gcs_from_local(
