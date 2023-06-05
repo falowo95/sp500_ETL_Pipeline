@@ -14,10 +14,10 @@ Functions:
 
 from pathlib import Path
 import os
-
+import logging
 import pandas as pd
 import pandas_datareader as pdr
-import logging
+
 
 from google.oauth2 import service_account
 from google.cloud import storage, bigquery
