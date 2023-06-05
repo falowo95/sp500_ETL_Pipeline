@@ -38,7 +38,6 @@ jobs:
         pip google-cloud-bigquery
         pip google-cloud-dataproc
         pip list  # Optional: Verify installed packages
-      working-directory: requirements.txt
     - name: Run tests
       run: |
         pytest
