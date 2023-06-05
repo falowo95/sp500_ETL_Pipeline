@@ -22,5 +22,5 @@ logging-format-style = new
 [pylint.C0103]
 invalid-name=_
 
-[pylint.messages_control]
+[pylint]
 disable = W0718,W1203,W0621,R0902,R0914,W0104,W0622,C0103
