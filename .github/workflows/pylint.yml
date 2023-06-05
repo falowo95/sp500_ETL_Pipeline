@@ -25,7 +25,7 @@ jobs:
         pip install pylint
         pip install pytest    
         pip list  # Optional: Verify installed packages
-      working-directory: ./.github/workflows/requirements.txt
+      working-directory: .github/workflows/requirements.txt
     - name: Run tests
       run: |
         pytest
