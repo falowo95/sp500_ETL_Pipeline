@@ -22,11 +22,5 @@ logging-format-style = new
 [pylint.C0103]
 invalid-name=_
 
-disable=W0718 # Catching too general exception Exception
-disable=W1203 # Use % formatting in logging functions and pass the % parameters as arguments
-disable=W0621 # Redefining name %r from outer scope (line %s)
-disable=R0902 # Too many instance attributes (%s/%s)
-disable=R0914 # Too many local variables (%s/%s)
-disable=W0104 # Statement seems to have no effect
-disable=W0622 # Redefining built-in %r
-disable=C0103
+[pylint.messages_control]
+disable = W0718,W1203,W0621,R0902,R0914,W0104,W0622,C0103
