@@ -31,6 +31,7 @@ jobs:
         pip install apache-airflow
         pip install apache-airflow
         pip install apache-airflow-providers-google
+        pip install apache-airflow-providers-amazon
         pip install pyarrow
         pip install pyspark
         pip install google-auth
@@ -43,4 +44,4 @@ jobs:
         pytest
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py') tests/**/*.py
+        pylint $(git ls-files '*.py')
