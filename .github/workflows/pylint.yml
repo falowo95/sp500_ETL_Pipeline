@@ -19,7 +19,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylint
         pip install pytest
-        pip install pandas
+        pip install -r sp500_ETL_Pipeline/.github/workflows/requirements.txt
         pip list  # Optional: Verify installed packages
     - name: Run tests
       run: |
