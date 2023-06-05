@@ -7,16 +7,15 @@ import os
 from typing import List
 from datetime import datetime, timedelta
 from dataclasses import dataclass
-
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-
-from stock_data_transform import transform_stock_data
 from helper_functions import (
     extract_sp500_data_to_csv,
     upload_data_to_gcs_from_local,
     ingest_from_gcs_to_bquery,
 )
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+
+from stock_data_transform import transform_stock_data
 
 
 @dataclass
@@ -43,7 +42,7 @@ def define_dag() -> DAG:
         DAG: The defined DAG object.
     """
     tiingo_api_key = os.getenv("TIINGO_API_KEY")
-    project_id = os.environ.get("GCP_PROJECT_ID")
+    # project_id = os.environ.get("GCP_PROJECT_ID")
     bucket_name = os.environ.get("GCP_GCS_BUCKET")
     file_name = "sp_500_data"
     dataset_name = f"{file_name}"
@@ -127,4 +126,4 @@ def define_dag() -> DAG:
     return dag
 
 
-dag: DAG = define_dag()
+DAG = define_dag()
