@@ -1,0 +1,16 @@
+
+version: 2
+
+models:
+  - name: sp500_dbt_model
+    description: "A starter dbt model"
+  - name: moving_avergaes
+    description: "A starter dbt model"
+sources:
+  - name: sp500_dbt_source
+    database: dataengineering-378316
+    schema: sp_500_data
+    tables: 
+     - name: sp_500_data_table
+     - name: sp500_dbt_model
+     - name: moving_avergaes
