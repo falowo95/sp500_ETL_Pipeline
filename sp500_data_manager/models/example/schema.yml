@@ -1,0 +1,21 @@
+
+version: 2
+
+models:
+  - name: sp500_dbt_model
+    description: "A starter dbt model"
+  - name: moving_avergaes
+    description: "Moving averages of the sp500 data for wach ticker"
+
+
+sources:
+  - name: sp500_dbt_source
+    database: dataengineering-378316
+    schema: sp_500_data
+    tables: 
+     - name: sp_500_data_table
+       description: "Moving averages of the sp500 data for wach ticker"
+     - name: sp500_dbt_model
+       description: "Moving averages of the sp500 data for wach ticker"
+     - name: moving_avergaes
+       description: "Moving averages of the sp500 data for wach ticker"
