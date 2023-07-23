@@ -13,7 +13,7 @@ source .bashrc #To run up Anaconda base
 - ***Docker + Docker-compose***
 To install Docker and Docker-compose, follow these steps:
 ```bash
-sudo apt-get install docker.io # Start with Docker installation
+sudo apt-get install docker.io # Start with Docker installation. 
 
 sudo groupadd docker
 sudo gpasswd -a $USER docker

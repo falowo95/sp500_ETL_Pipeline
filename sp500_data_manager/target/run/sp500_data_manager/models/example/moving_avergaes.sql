@@ -12,6 +12,7 @@
 
 
   SELECT
+<<<<<<< HEAD
     sp500_dbt_source.date,
     sp500_dbt_source.symbol AS ticker,
     sp500_dbt_source.twenty_day_moving AS twenty_ma,
@@ -29,5 +30,13 @@ create or replace table sp500_dbt_source.dim_bollinger as (
   FROM
     `dataengineering-378316`.`sp_500_data`.`sp_500_data_table`
 )
+=======
+    date,
+    symbol AS ticker,
+    twenty_day_moving AS twenty_ma,
+    two_hundred_day_moving AS two_hundred_ma
+  FROM
+    `dataengineering-378316`.`sp_500_data`.`sp_500_data_table`
+>>>>>>> main
     );
   
