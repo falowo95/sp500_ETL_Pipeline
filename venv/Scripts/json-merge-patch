@@ -1,0 +1,7 @@
+#!C:\Users\falow\sp500_ETL_Pipeline\venv\Scripts\python.exe
+import json_merge_patch.cli
+json_merge_patch.cli.main()
+
+
+
+
