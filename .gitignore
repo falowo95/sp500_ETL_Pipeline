@@ -12,3 +12,4 @@ s3
 .ipynb_checkpoints
 .vscode
 google_cred
+venv
