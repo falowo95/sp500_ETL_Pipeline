@@ -1,0 +1,104 @@
+Metadata-Version: 2.1
+Name: grpcio-gcp
+Version: 0.2.2
+Summary: gRPC extensions for Google Cloud Platform
+Home-page: https://grpc.io
+Author: The gRPC-GCP Authors
+Author-email: grpc-io@googlegroups.com
+License: Apache License 2.0
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: OSI Approved :: Apache Software License
+Requires-Dist: grpcio (>=1.12.0)
+
+gRPC-GCP Python
+===============
+
+Package for gRPC-GCP Python.
+
+Installation
+------------
+
+gRPC-GCP Python is available wherever gRPC is available.
+
+From PyPI
+~~~~~~~~~
+
+If you are installing locally...
+
+::
+
+  $ pip install grpcio-gcp
+
+Else system wide (on Ubuntu)...
+
+::
+
+  $ sudo pip install grpcio-gcp
+
+Usage
+-----
+
+Create a config file (e.g. ``spanner.grpc.config``) defining API configuration,
+with ChannelPoolConfig and MethodConfig.
+
+::
+
+  channel_pool: {
+    max_size: 10
+    max_concurrent_streams_low_watermark: 1
+  }
+  method: {
+    name: "/google.spanner.v1.Spanner/CreateSession"
+    affinity: {
+      command: BIND
+      affinity_key: "name"
+    }
+  }
+  method: {
+    name: "/google.spanner.v1.Spanner/GetSession"
+    affinity: {
+      command: BOUND
+      affinity_key: "name"
+    }
+  }
+  method: {
+    name: "/google.spanner.v1.Spanner/DeleteSession"
+    affinity: {
+      command: UNBIND
+      affinity_key: "name"
+    }
+  }
+
+Load configuration file to ApiConfig object.
+
+.. code-block:: python
+
+  import google.protobuf.text_format
+
+  config = grpc_gcp.api_config_from_text_pb(
+      pkg_resources.resource_string(__name__, 'spanner.grpc.config'))
+
+Create channel pool using grpc_gcp.
+
+.. code-block:: python
+
+  import grpc_gcp
+  import grpc
+
+  credentials = grpc.ssl_channel_credentials()
+  # Add api config key-value pair to options
+  options = [(grpc_gcp.API_CONFIG_CHANNEL_ARG, config)]
+  channel_pool = grpc_gcp.secure_channel(target, credentials, options)
+
+The generated channel pool is inherited from the original grpc.Channel,
+with underlying support for multiple grpc channels.
+
+
