@@ -1,3 +1,0 @@
-google
-google.cloud
-google.cloud.devtools

@@ -3,6 +3,7 @@ SP 500 Data Processing DAG
 
 This module defines the DAG for the SP 500 data processing pipeline.
 """
+
 import os
 from typing import List
 from datetime import datetime, timedelta
@@ -15,47 +16,18 @@ from helper_functions import (
 from stock_data_transform import transform_stock_data
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.models import DAG as DAGType
+from config import ETLConfig
 
 
-@dataclass
-class ETLConfig:
-    """
-    Configuration class for ETL process.
-    """
-
-    owner: str
-    start_date: datetime
-    email: List[str]
-    email_on_failure: bool
-    email_on_retry: bool
-    depends_on_past: bool
-    retries: int
-    retry_delay: timedelta
-
-
-def define_dag() -> DAG:
+def define_dag() -> DAGType:
     """
     Define the DAG for the SP 500 data pipeline.
 
     Returns:
         DAG: The defined DAG object.
     """
-    tiingo_api_key = os.getenv("TIINGO_API_KEY")
-    # project_id = os.environ.get("GCP_PROJECT_ID")
-    bucket_name = os.environ.get("GCP_GCS_BUCKET")
-    file_name = "sp_500_data"
-    dataset_name = f"{file_name}"
-    table_name = f"{dataset_name}_table"
-    start_date = "2015-01-01"
-    end_date = "2021-01-01"
-
-    source_file_path_local = f"{file_name}.csv"
-    destination_blob_path = f"input-data/{file_name}.csv"
-    gcs_input_data_path = (
-        "gs://dtc_data_lake_dataengineering-378316/input-data/sp_500_data.csv"
-    )
-    gcs_output_data_path = "gs://dtc_data_lake_dataengineering-378316/transformed-data/"
-    csv_uri = "gs://dtc_data_lake_dataengineering-378316/transformed-data/*.csv"
+    config = ETLConfig()
 
     default_config = ETLConfig(
         owner="me",
@@ -79,10 +51,10 @@ def define_dag() -> DAG:
             task_id="extract_data_task",
             python_callable=extract_sp500_data_to_csv,
             op_kwargs={
-                "file_name": file_name,
-                "tiingo_api_key": tiingo_api_key,
-                "start_date": start_date,
-                "end_date": end_date,
+                "file_name": config.file_name,
+                "tiingo_api_key": config.tiingo_api_key,
+                "start_date": config.start_date,
+                "end_date": config.end_date,
             },
         )
 
@@ -90,9 +62,9 @@ def define_dag() -> DAG:
             task_id="ingest_to_gcs",
             python_callable=upload_data_to_gcs_from_local,
             op_kwargs={
-                "bucket_name": bucket_name,
-                "source_file_path_local": source_file_path_local,
-                "destination_blob_path": destination_blob_path,
+                "bucket_name": config.bucket_name,
+                "source_file_path_local": config.source_file_path_local,
+                "destination_blob_path": config.destination_blob_path,
             },
         )
 
@@ -100,8 +72,8 @@ def define_dag() -> DAG:
             task_id="transform_data_task",
             python_callable=transform_stock_data,
             op_kwargs={
-                "gcs_input_data_path": gcs_input_data_path,
-                "gcs_output_data_path": gcs_output_data_path,
+                "gcs_input_data_path": config.gcs_input_data_path,
+                "gcs_output_data_path": config.gcs_output_data_path,
             },
         )
 
@@ -109,9 +81,9 @@ def define_dag() -> DAG:
             task_id="ingest_data_into_bigquery",
             python_callable=ingest_from_gcs_to_bquery,
             op_kwargs={
-                "dataset_name": dataset_name,
-                "table_name": table_name,
-                "csv_uri": csv_uri,
+                "dataset_name": config.dataset_name,
+                "table_name": config.table_name,
+                "csv_uri": config.csv_uri,
             },
         )
 
