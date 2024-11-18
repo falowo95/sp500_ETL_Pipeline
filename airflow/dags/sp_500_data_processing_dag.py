@@ -4,7 +4,11 @@ SP 500 Data Processing DAG
 This module defines the DAG for the SP 500 data processing pipeline.
 """
 
+import sys
 import os
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from typing import List
 from datetime import datetime, timedelta
 from dataclasses import dataclass
@@ -16,11 +20,10 @@ from helper_functions import (
 from stock_data_transform import transform_stock_data
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.models import DAG as DAGType
-from config import ETLConfig
+from config.etl_config import ETLConfig
 
 
-def define_dag() -> DAGType:
+def define_dag() -> DAG:
     """
     Define the DAG for the SP 500 data pipeline.
 
@@ -53,8 +56,8 @@ def define_dag() -> DAGType:
             op_kwargs={
                 "file_name": config.file_name,
                 "tiingo_api_key": config.tiingo_api_key,
-                "start_date": config.start_date,
-                "end_date": config.end_date,
+                "start_date": config.data_start_date,
+                "end_date": config.data_end_date,
             },
         )
 

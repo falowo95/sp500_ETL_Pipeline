@@ -12,20 +12,17 @@ Functions:
 """
 
 from pathlib import Path
-import os
 import logging
+
 import pandas as pd
 import pandas_datareader as pdr
 
 
-from google.oauth2 import service_account
-from google.cloud import storage, bigquery
+from google.cloud import bigquery
 
-from aws_config import AWSConfig
-from gcp_config import GCPUtils
-from config.gcp_service import GCPService
-from config.logging_config import get_logger
-from config import ETLConfig
+
+from gcp_service import GCPService
+from logging_config import get_logger
 
 
 def to_local(data_frame: pd.DataFrame, file_name: str) -> Path:
