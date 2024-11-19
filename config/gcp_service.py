@@ -1,6 +1,6 @@
 from functools import lru_cache
 from typing import Optional
-from gcp_config import GCPUtils
+from airflow.config.gcp_config import GCPUtils
 import os
 
 

@@ -4,7 +4,6 @@ numpy
 pandas_datareader
 apache-airflow
 setuptools
-apache-airflow
 apache-airflow-providers-google
 pyarrow
 pyspark

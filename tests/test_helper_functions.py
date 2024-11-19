@@ -12,7 +12,7 @@ Functions:
 
 import pandas as pd
 
-from sp500_ETL_Pipeline.airflow.dags.helper_functions import (
+from airflow.dags.helper_functions import (
     to_local,
 )
 

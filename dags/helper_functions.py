@@ -21,8 +21,8 @@ import pandas_datareader as pdr
 from google.cloud import bigquery
 
 
-from gcp_service import GCPService
-from logging_config import get_logger
+from airflow.config.gcp_service import GCPService
+from airflow.config.logging_config import get_logger
 
 
 def to_local(data_frame: pd.DataFrame, file_name: str) -> Path:
