@@ -1,0 +1,61 @@
+[2023-03-29 14:49:40,274] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v1.transform_data_task manual__2023-03-29T14:47:16.172839+00:00 [queued]>
+[2023-03-29 14:49:40,330] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v1.transform_data_task manual__2023-03-29T14:47:16.172839+00:00 [queued]>
+[2023-03-29 14:49:40,334] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 14:49:40,336] {taskinstance.py:1239} INFO - Starting attempt 2 of 3
+[2023-03-29 14:49:40,339] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 14:49:40,402] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): transform_data_task> on 2023-03-29 14:47:16.172839+00:00
+[2023-03-29 14:49:40,418] {standard_task_runner.py:52} INFO - Started process 1543 to run task
+[2023-03-29 14:49:40,428] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'SP_500_DATA_PIPELINE_v1', 'transform_data_task', 'manual__2023-03-29T14:47:16.172839+00:00', '--job-id', '136', '--raw', '--subdir', 'DAGS_FOLDER/first_dag.py', '--cfg-path', '/tmp/tmpqt95utuk', '--error-file', '/tmp/tmpqiuncw6m']
+[2023-03-29 14:49:40,436] {standard_task_runner.py:77} INFO - Job 136: Subtask transform_data_task
+[2023-03-29 14:49:40,605] {logging_mixin.py:109} INFO - Running <TaskInstance: SP_500_DATA_PIPELINE_v1.transform_data_task manual__2023-03-29T14:47:16.172839+00:00 [running]> on host ebd786f8513c
+[2023-03-29 14:49:40,772] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=
+AIRFLOW_CTX_DAG_OWNER=me
+AIRFLOW_CTX_DAG_ID=SP_500_DATA_PIPELINE_v1
+AIRFLOW_CTX_TASK_ID=transform_data_task
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-29T14:47:16.172839+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-29T14:47:16.172839+00:00
+[2023-03-29 14:51:36,653] {stock_data_transform.py:133} ERROR - An error occurred during transformation: Recursive view `stock_data` detected (cycle: `stock_data` -> `stock_data`)
+[2023-03-29 14:52:02,171] {local_task_job.py:212} WARNING - State of this instance has been externally set to failed. Terminating instance.
+[2023-03-29 14:52:02,186] {process_utils.py:124} INFO - Sending Signals.SIGTERM to group 1543. PIDs of all processes in the group: [1545, 1543]
+[2023-03-29 14:52:02,190] {process_utils.py:75} INFO - Sending the signal Signals.SIGTERM to group 1543
+[2023-03-29 14:52:02,198] {taskinstance.py:1408} ERROR - Received SIGTERM. Terminating subprocesses.
+[2023-03-29 14:52:02,215] {clientserver.py:502} INFO - Error while receiving.
+Traceback (most recent call last):
+  File "/opt/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/clientserver.py", line 475, in send_command
+    answer = smart_decode(self.stream.readline()[:-1])
+  File "/usr/local/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1410, in signal_handler
+    raise AirflowException("Task received SIGTERM signal")
+airflow.exceptions.AirflowException: Task received SIGTERM signal
+[2023-03-29 14:52:02,241] {clientserver.py:507} INFO - Closing down clientserver connection
+[2023-03-29 14:52:02,244] {java_gateway.py:1056} ERROR - Exception while sending command.
+Traceback (most recent call last):
+  File "/opt/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/clientserver.py", line 475, in send_command
+    answer = smart_decode(self.stream.readline()[:-1])
+  File "/usr/local/lib/python3.7/socket.py", line 589, in readinto
+    return self._sock.recv_into(b)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1410, in signal_handler
+    raise AirflowException("Task received SIGTERM signal")
+airflow.exceptions.AirflowException: Task received SIGTERM signal
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1038, in send_command
+    response = connection.send_command(command)
+  File "/opt/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/clientserver.py", line 504, in send_command
+    "Error while sending or receiving", e, proto.ERROR_ON_RECEIVE)
+py4j.protocol.Py4JNetworkError: Error while sending or receiving
+[2023-03-29 14:52:02,258] {warnings.py:110} WARNING - /opt/spark/python/pyspark/context.py:472: RuntimeWarning: Unable to cleanly shutdown Spark JVM process. It is possible that the process has crashed, been killed or may also be in a zombie state.
+  RuntimeWarning
+
+[2023-03-29 14:52:02,441] {python.py:175} INFO - Done. Returned value was: None
+[2023-03-29 14:52:02,508] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=SP_500_DATA_PIPELINE_v1, task_id=transform_data_task, execution_date=20230329T144716, start_date=20230329T144940, end_date=20230329T145202
+[2023-03-29 14:52:02,650] {process_utils.py:70} INFO - Process psutil.Process(pid=1543, status='terminated', exitcode=0, started='14:49:39') (1543) terminated with exit code 0
+[2023-03-29 14:53:02,212] {process_utils.py:138} WARNING - process psutil.Process(pid=1545, name='java', status='sleeping', started='14:49:40') did not respond to SIGTERM. Trying SIGKILL
+[2023-03-29 14:53:02,229] {process_utils.py:75} INFO - Sending the signal Signals.SIGKILL to group 1543
+[2023-03-29 14:53:02,949] {process_utils.py:70} INFO - Process psutil.Process(pid=1545, name='java', status='terminated', started='14:49:40') (1545) terminated with exit code None

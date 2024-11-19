@@ -1,0 +1,76 @@
+[2023-03-29 13:32:18,189] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v2.ingest_data_into_bigquery manual__2023-03-29T13:28:56.910609+00:00 [queued]>
+[2023-03-29 13:32:18,229] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v2.ingest_data_into_bigquery manual__2023-03-29T13:28:56.910609+00:00 [queued]>
+[2023-03-29 13:32:18,230] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 13:32:18,232] {taskinstance.py:1239} INFO - Starting attempt 2 of 3
+[2023-03-29 13:32:18,233] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 13:32:18,274] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): ingest_data_into_bigquery> on 2023-03-29 13:28:56.910609+00:00
+[2023-03-29 13:32:18,286] {standard_task_runner.py:52} INFO - Started process 14092 to run task
+[2023-03-29 13:32:18,296] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'SP_500_DATA_PIPELINE_v2', 'ingest_data_into_bigquery', 'manual__2023-03-29T13:28:56.910609+00:00', '--job-id', '111', '--raw', '--subdir', 'DAGS_FOLDER/first_dag.py', '--cfg-path', '/tmp/tmpjen3jbdd', '--error-file', '/tmp/tmp_024shs6']
+[2023-03-29 13:32:18,299] {standard_task_runner.py:77} INFO - Job 111: Subtask ingest_data_into_bigquery
+[2023-03-29 13:32:18,427] {logging_mixin.py:109} INFO - Running <TaskInstance: SP_500_DATA_PIPELINE_v2.ingest_data_into_bigquery manual__2023-03-29T13:28:56.910609+00:00 [running]> on host 5ebc180c7cc0
+[2023-03-29 13:32:18,568] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=
+AIRFLOW_CTX_DAG_OWNER=me
+AIRFLOW_CTX_DAG_ID=SP_500_DATA_PIPELINE_v2
+AIRFLOW_CTX_TASK_ID=ingest_data_into_bigquery
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-29T13:28:56.910609+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-29T13:28:56.910609+00:00
+[2023-03-29 13:32:19,307] {logging_mixin.py:109} INFO - Error creating dataset: 409 POST https://bigquery.googleapis.com/bigquery/v2/projects/dataengineering-378316/datasets?prettyPrint=false: Already Exists: Dataset dataengineering-378316:sp_500_data
+[2023-03-29 13:32:19,599] {logging_mixin.py:109} INFO - Table sp_500_data.sp_500_data_table already exists.
+[2023-03-29 13:32:20,558] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/etl_operation_functions.py", line 288, in ingest_from_gcs_to_bquery
+    load_job.result()  # Wait for the job to complete.
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/job/base.py", line 727, in result
+    return super(_AsyncJob, self).result(timeout=timeout, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/future/polling.py", line 135, in result
+    raise self._exception
+google.api_core.exceptions.NotFound: 404 Not found: URI gs://dtc_data_lake_dataengineering-378316/transformed-data/sp_500_data.csv
+[2023-03-29 13:32:20,617] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=SP_500_DATA_PIPELINE_v2, task_id=ingest_data_into_bigquery, execution_date=20230329T132856, start_date=20230329T133218, end_date=20230329T133220
+[2023-03-29 13:32:20,685] {standard_task_runner.py:92} ERROR - Failed to execute job 111 for task ingest_data_into_bigquery
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/etl_operation_functions.py", line 288, in ingest_from_gcs_to_bquery
+    load_job.result()  # Wait for the job to complete.
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/job/base.py", line 727, in result
+    return super(_AsyncJob, self).result(timeout=timeout, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/future/polling.py", line 135, in result
+    raise self._exception
+google.api_core.exceptions.NotFound: 404 Not found: URI gs://dtc_data_lake_dataengineering-378316/transformed-data/sp_500_data.csv
+[2023-03-29 13:32:20,734] {local_task_job.py:154} INFO - Task exited with return code 1
+[2023-03-29 13:32:20,862] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check

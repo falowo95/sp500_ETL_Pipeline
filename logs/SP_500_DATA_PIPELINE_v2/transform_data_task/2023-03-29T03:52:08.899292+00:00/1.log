@@ -1,0 +1,78 @@
+[2023-03-29 03:52:14,410] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v2.transform_data_task manual__2023-03-29T03:52:08.899292+00:00 [queued]>
+[2023-03-29 03:52:14,485] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v2.transform_data_task manual__2023-03-29T03:52:08.899292+00:00 [queued]>
+[2023-03-29 03:52:14,488] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 03:52:14,490] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2023-03-29 03:52:14,492] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 03:52:14,547] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): transform_data_task> on 2023-03-29 03:52:08.899292+00:00
+[2023-03-29 03:52:14,558] {standard_task_runner.py:52} INFO - Started process 1419 to run task
+[2023-03-29 03:52:14,575] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'SP_500_DATA_PIPELINE_v2', 'transform_data_task', 'manual__2023-03-29T03:52:08.899292+00:00', '--job-id', '69', '--raw', '--subdir', 'DAGS_FOLDER/first_dag.py', '--cfg-path', '/tmp/tmpr_j_u10q', '--error-file', '/tmp/tmpqthbdzle']
+[2023-03-29 03:52:14,580] {standard_task_runner.py:77} INFO - Job 69: Subtask transform_data_task
+[2023-03-29 03:52:14,763] {logging_mixin.py:109} INFO - Running <TaskInstance: SP_500_DATA_PIPELINE_v2.transform_data_task manual__2023-03-29T03:52:08.899292+00:00 [running]> on host 5ebc180c7cc0
+[2023-03-29 03:52:15,065] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=
+AIRFLOW_CTX_DAG_OWNER=me
+AIRFLOW_CTX_DAG_ID=SP_500_DATA_PIPELINE_v2
+AIRFLOW_CTX_TASK_ID=transform_data_task
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-29T03:52:08.899292+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-29T03:52:08.899292+00:00
+[2023-03-29 03:53:07,127] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/stock_data_transform.py", line 51, in transform_stock_data
+    df_spark = spark.read.csv(gcs_input_data_path, header=True, inferSchema=True)
+  File "/opt/spark/python/pyspark/sql/readwriter.py", line 410, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/opt/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1322, in __call__
+    answer, self.gateway_client, self.target_id, self.name)
+  File "/opt/spark/python/pyspark/sql/utils.py", line 117, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: Path does not exist: file:/input-data/sp_500_data.csv
+[2023-03-29 03:53:07,387] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=SP_500_DATA_PIPELINE_v2, task_id=transform_data_task, execution_date=20230329T035208, start_date=20230329T035214, end_date=20230329T035307
+[2023-03-29 03:53:07,469] {standard_task_runner.py:92} ERROR - Failed to execute job 69 for task transform_data_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/stock_data_transform.py", line 51, in transform_stock_data
+    df_spark = spark.read.csv(gcs_input_data_path, header=True, inferSchema=True)
+  File "/opt/spark/python/pyspark/sql/readwriter.py", line 410, in csv
+    return self._df(self._jreader.csv(self._spark._sc._jvm.PythonUtils.toSeq(path)))
+  File "/opt/spark/python/lib/py4j-0.10.9.3-src.zip/py4j/java_gateway.py", line 1322, in __call__
+    answer, self.gateway_client, self.target_id, self.name)
+  File "/opt/spark/python/pyspark/sql/utils.py", line 117, in deco
+    raise converted from None
+pyspark.sql.utils.AnalysisException: Path does not exist: file:/input-data/sp_500_data.csv
+[2023-03-29 03:53:07,554] {local_task_job.py:154} INFO - Task exited with return code 1
+[2023-03-29 03:53:07,699] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
