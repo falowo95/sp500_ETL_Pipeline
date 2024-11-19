@@ -1,0 +1,2 @@
+[2023-03-29 13:45:40,324] {taskinstance.py:1026} INFO - Dependencies not met for <TaskInstance: SP_500_DATA_PIPELINE_v2.ingest_data_into_bigquery manual__2023-03-29T13:42:24.222819+00:00 [queued]>, dependency 'Trigger Rule' FAILED: Task's trigger rule 'all_success' requires all upstream tasks to have succeeded, but found 1 non-success(es). upstream_tasks_state={'total': 1, 'successes': 0, 'skipped': 0, 'failed': 0, 'upstream_failed': 0, 'done': 0}, upstream_task_ids={'transform_data_task'}
+[2023-03-29 13:45:40,347] {local_task_job.py:99} INFO - Task is not able to be run
