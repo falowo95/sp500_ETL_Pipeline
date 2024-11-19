@@ -22,22 +22,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install pylint
-        pip install pytest    
-        pip install py4j
-        pip install pandas
-        pip install numpy
-        pip install pandas_datareader
-        pip install apache-airflow
-        pip install apache-airflow
-        pip install apache-airflow-providers-google
-        pip install apache-airflow-providers-amazon
-        pip install pyarrow
-        pip install pyspark
-        pip install google-auth
-        pip install google-cloud-storage
-        pip install google-cloud-bigquery
-        pip install google-cloud-dataproc
         pip list  # Optional: Verify installed packages
     - name: Run tests
       run: |
