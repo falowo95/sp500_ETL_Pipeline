@@ -1,0 +1,62 @@
+[2023-03-29 00:56:59,893] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v2.process_data_task manual__2023-03-29T00:56:37.154934+00:00 [queued]>
+[2023-03-29 00:56:59,957] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v2.process_data_task manual__2023-03-29T00:56:37.154934+00:00 [queued]>
+[2023-03-29 00:56:59,958] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 00:56:59,961] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2023-03-29 00:56:59,963] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 00:57:00,044] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): process_data_task> on 2023-03-29 00:56:37.154934+00:00
+[2023-03-29 00:57:00,058] {standard_task_runner.py:52} INFO - Started process 1629 to run task
+[2023-03-29 00:57:00,076] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'SP_500_DATA_PIPELINE_v2', 'process_data_task', 'manual__2023-03-29T00:56:37.154934+00:00', '--job-id', '43', '--raw', '--subdir', 'DAGS_FOLDER/first_dag.py', '--cfg-path', '/tmp/tmpr55s8r5b', '--error-file', '/tmp/tmppvjj8ixk']
+[2023-03-29 00:57:00,088] {standard_task_runner.py:77} INFO - Job 43: Subtask process_data_task
+[2023-03-29 00:57:00,348] {logging_mixin.py:109} INFO - Running <TaskInstance: SP_500_DATA_PIPELINE_v2.process_data_task manual__2023-03-29T00:56:37.154934+00:00 [running]> on host 67d8effe805a
+[2023-03-29 00:57:00,660] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=
+AIRFLOW_CTX_DAG_OWNER=me
+AIRFLOW_CTX_DAG_ID=SP_500_DATA_PIPELINE_v2
+AIRFLOW_CTX_TASK_ID=process_data_task
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-29T00:56:37.154934+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-29T00:56:37.154934+00:00
+[2023-03-29 00:57:00,666] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+TypeError: transform_stock_data() missing 1 required positional argument: 'gcs_output_data_path'
+[2023-03-29 00:57:00,747] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=SP_500_DATA_PIPELINE_v2, task_id=process_data_task, execution_date=20230329T005637, start_date=20230329T005659, end_date=20230329T005700
+[2023-03-29 00:57:00,845] {standard_task_runner.py:92} ERROR - Failed to execute job 43 for task process_data_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+TypeError: transform_stock_data() missing 1 required positional argument: 'gcs_output_data_path'
+[2023-03-29 00:57:00,927] {local_task_job.py:154} INFO - Task exited with return code 1
+[2023-03-29 00:57:01,209] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check

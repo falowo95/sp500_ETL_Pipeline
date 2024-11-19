@@ -1,0 +1,974 @@
+[2023-06-02 22:27:01,676] {processor.py:163} INFO - Started process (PID=308) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:27:01,707] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:27:01,738] {logging_mixin.py:109} INFO - [2023-06-02 22:27:01,727] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:27:32,240] {logging_mixin.py:109} INFO - [2023-06-02 22:27:32,223] {timeout.py:36} ERROR - Process timed out, PID: 308
+[2023-06-02 22:27:32,315] {logging_mixin.py:109} INFO - [2023-06-02 22:27:32,258] {dagbag.py:334} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/dagbag.py", line 331, in _load_modules_from_file
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 18, in <module>
+    import pandas as pd
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/__init__.py", line 50, in <module>
+    from pandas.core.api import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/api.py", line 48, in <module>
+    from pandas.core.groupby import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/groupby/__init__.py", line 1, in <module>
+    from pandas.core.groupby.generic import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/groupby/generic.py", line 73, in <module>
+    from pandas.core.frame import DataFrame
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/timeout.py", line 37, in handle_timeout
+    raise AirflowTaskTimeout(self.error_message)
+airflow.exceptions.AirflowTaskTimeout: DagBag import timeout for /opt/airflow/dags/sp_500_data_processing_dag.py after 30.0s.
+Please take a look at these docs to improve your DAG import time:
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#top-level-python-code
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#reducing-dag-complexity, PID: 308
+[2023-06-02 22:27:32,525] {processor.py:690} INFO - Deactivated 1 DAGs which are no longer present in /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:27:32,532] {processor.py:656} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:27:32,704] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 31.069 seconds
+[2023-06-02 22:28:03,790] {processor.py:163} INFO - Started process (PID=360) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:28:03,824] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:28:03,841] {logging_mixin.py:109} INFO - [2023-06-02 22:28:03,841] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:28:33,939] {logging_mixin.py:109} INFO - [2023-06-02 22:28:33,907] {timeout.py:36} ERROR - Process timed out, PID: 360
+[2023-06-02 22:28:33,978] {logging_mixin.py:109} INFO - [2023-06-02 22:28:33,946] {dagbag.py:334} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/dagbag.py", line 331, in _load_modules_from_file
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 18, in <module>
+    import pandas as pd
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/__init__.py", line 143, in <module>
+    from pandas.io.api import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/api.py", line 18, in <module>
+    from pandas.io.parquet import read_parquet
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/timeout.py", line 37, in handle_timeout
+    raise AirflowTaskTimeout(self.error_message)
+airflow.exceptions.AirflowTaskTimeout: DagBag import timeout for /opt/airflow/dags/sp_500_data_processing_dag.py after 30.0s.
+Please take a look at these docs to improve your DAG import time:
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#top-level-python-code
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#reducing-dag-complexity, PID: 360
+[2023-06-02 22:28:34,232] {processor.py:656} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:28:34,400] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 30.651 seconds
+[2023-06-02 22:36:42,805] {processor.py:163} INFO - Started process (PID=298) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:36:42,827] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:36:42,848] {logging_mixin.py:109} INFO - [2023-06-02 22:36:42,848] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:37:12,938] {logging_mixin.py:109} INFO - [2023-06-02 22:37:12,918] {timeout.py:36} ERROR - Process timed out, PID: 298
+[2023-06-02 22:37:13,008] {logging_mixin.py:109} INFO - [2023-06-02 22:37:12,955] {dagbag.py:334} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/dagbag.py", line 331, in _load_modules_from_file
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 18, in <module>
+    import pandas as pd
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/__init__.py", line 50, in <module>
+    from pandas.core.api import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/api.py", line 48, in <module>
+    from pandas.core.groupby import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/groupby/__init__.py", line 1, in <module>
+    from pandas.core.groupby.generic import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/groupby/generic.py", line 73, in <module>
+    from pandas.core.frame import DataFrame
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/timeout.py", line 37, in handle_timeout
+    raise AirflowTaskTimeout(self.error_message)
+airflow.exceptions.AirflowTaskTimeout: DagBag import timeout for /opt/airflow/dags/sp_500_data_processing_dag.py after 30.0s.
+Please take a look at these docs to improve your DAG import time:
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#top-level-python-code
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#reducing-dag-complexity, PID: 298
+[2023-06-02 22:37:13,256] {processor.py:656} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:37:13,429] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 30.660 seconds
+[2023-06-02 22:37:44,073] {processor.py:163} INFO - Started process (PID=351) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:37:44,080] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:37:44,102] {logging_mixin.py:109} INFO - [2023-06-02 22:37:44,102] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:38:14,137] {logging_mixin.py:109} INFO - [2023-06-02 22:38:14,126] {timeout.py:36} ERROR - Process timed out, PID: 351
+[2023-06-02 22:38:14,284] {logging_mixin.py:109} INFO - [2023-06-02 22:38:14,146] {dagbag.py:334} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/dagbag.py", line 331, in _load_modules_from_file
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 23, in <module>
+    from google.cloud import storage, bigquery
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/__init__.py", line 35, in <module>
+    from google.cloud.bigquery.client import Client
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/client.py", line 61, in <module>
+    from google.cloud.bigquery_storage_v1.services.big_query_read.client import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery_storage_v1/__init__.py", line 25, in <module>
+    from google.cloud.bigquery_storage_v1 import client
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery_storage_v1/client.py", line 24, in <module>
+    import google.api_core.gapic_v1.method
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/gapic_v1/__init__.py", line 19, in <module>
+    from google.api_core.gapic_v1 import method
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/gapic_v1/method.py", line 22, in <module>
+    from google.api_core import grpc_helpers
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/grpc_helpers.py", line 31, in <module>
+    import grpc_gcp
+  File "/home/airflow/.local/lib/python3.7/site-packages/grpc_gcp/__init__.py", line 15, in <module>
+    from google.protobuf import text_format
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/protobuf/text_format.py", line 1217, in <module>
+    class Tokenizer(object):
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/protobuf/text_format.py", line 1228, in Tokenizer
+    _WHITESPACE_OR_COMMENT = re.compile(r'(\s|(#.*$))+', re.MULTILINE)
+  File "/usr/local/lib/python3.7/re.py", line 236, in compile
+    return _compile(pattern, flags)
+  File "/usr/local/lib/python3.7/re.py", line 288, in _compile
+    p = sre_compile.compile(pattern, flags)
+  File "/usr/local/lib/python3.7/sre_compile.py", line 764, in compile
+    p = sre_parse.parse(p, flags)
+  File "/usr/local/lib/python3.7/sre_parse.py", line 924, in parse
+    p = _parse_sub(source, pattern, flags & SRE_FLAG_VERBOSE, 0)
+  File "/usr/local/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/usr/local/lib/python3.7/sre_parse.py", line 810, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/usr/local/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/usr/local/lib/python3.7/sre_parse.py", line 810, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+  File "/usr/local/lib/python3.7/sre_parse.py", line 420, in _parse_sub
+    not nested and not items))
+  File "/usr/local/lib/python3.7/sre_parse.py", line 653, in _parse
+    if sourcematch("?"):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/timeout.py", line 37, in handle_timeout
+    raise AirflowTaskTimeout(self.error_message)
+airflow.exceptions.AirflowTaskTimeout: DagBag import timeout for /opt/airflow/dags/sp_500_data_processing_dag.py after 30.0s.
+Please take a look at these docs to improve your DAG import time:
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#top-level-python-code
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#reducing-dag-complexity, PID: 351
+[2023-06-02 22:38:14,469] {processor.py:656} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:38:14,599] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 30.575 seconds
+[2023-06-02 22:38:45,249] {processor.py:163} INFO - Started process (PID=405) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:38:45,256] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:38:45,262] {logging_mixin.py:109} INFO - [2023-06-02 22:38:45,261] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:39:03,705] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:39:13,966] {logging_mixin.py:109} INFO - [2023-06-02 22:39:13,958] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:39:14,329] {logging_mixin.py:109} INFO - [2023-06-02 22:39:14,329] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:39:03.323969+00:00
+[2023-06-02 22:39:14,540] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 29.329 seconds
+[2023-06-02 22:39:45,154] {processor.py:163} INFO - Started process (PID=458) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:39:45,160] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:39:45,166] {logging_mixin.py:109} INFO - [2023-06-02 22:39:45,165] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:40:00,346] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:40:04,676] {logging_mixin.py:109} INFO - [2023-06-02 22:40:04,674] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:40:04,867] {logging_mixin.py:109} INFO - [2023-06-02 22:40:04,867] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:40:00.106457+00:00
+[2023-06-02 22:40:04,970] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 19.830 seconds
+[2023-06-02 22:40:35,584] {processor.py:163} INFO - Started process (PID=512) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:40:35,593] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:40:35,600] {logging_mixin.py:109} INFO - [2023-06-02 22:40:35,599] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:40:47,098] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:40:50,193] {logging_mixin.py:109} INFO - [2023-06-02 22:40:50,192] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:40:50,371] {logging_mixin.py:109} INFO - [2023-06-02 22:40:50,370] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:40:46.728253+00:00
+[2023-06-02 22:40:50,471] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 14.910 seconds
+[2023-06-02 22:41:21,310] {processor.py:163} INFO - Started process (PID=550) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:41:21,317] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:41:21,324] {logging_mixin.py:109} INFO - [2023-06-02 22:41:21,323] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:41:25,984] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:41:27,297] {logging_mixin.py:109} INFO - [2023-06-02 22:41:27,296] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:41:27,356] {logging_mixin.py:109} INFO - [2023-06-02 22:41:27,355] {dag.py:2415} INFO - Creating ORM DAG for SP_500_DATA_PIPELINE_v1
+[2023-06-02 22:41:27,448] {logging_mixin.py:109} INFO - [2023-06-02 22:41:27,447] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:41:25.917608+00:00
+[2023-06-02 22:41:27,532] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.230 seconds
+[2023-06-02 22:41:57,790] {processor.py:163} INFO - Started process (PID=588) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:41:57,795] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:41:57,799] {logging_mixin.py:109} INFO - [2023-06-02 22:41:57,798] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:42:01,440] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:42:02,232] {logging_mixin.py:109} INFO - [2023-06-02 22:42:02,231] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:42:02,286] {logging_mixin.py:109} INFO - [2023-06-02 22:42:02,286] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:42:01.395143+00:00
+[2023-06-02 22:42:02,315] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.534 seconds
+[2023-06-02 22:42:32,530] {processor.py:163} INFO - Started process (PID=626) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:42:32,535] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:42:32,538] {logging_mixin.py:109} INFO - [2023-06-02 22:42:32,537] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:42:37,245] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:42:38,408] {logging_mixin.py:109} INFO - [2023-06-02 22:42:38,406] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:42:38,481] {logging_mixin.py:109} INFO - [2023-06-02 22:42:38,480] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:42:37.180860+00:00
+[2023-06-02 22:42:38,518] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.995 seconds
+[2023-06-02 22:43:08,972] {processor.py:163} INFO - Started process (PID=664) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:43:08,978] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:43:08,981] {logging_mixin.py:109} INFO - [2023-06-02 22:43:08,981] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:43:13,990] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:43:15,233] {logging_mixin.py:109} INFO - [2023-06-02 22:43:15,232] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:43:15,308] {logging_mixin.py:109} INFO - [2023-06-02 22:43:15,307] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:43:13.929420+00:00
+[2023-06-02 22:43:15,347] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.385 seconds
+[2023-06-02 22:43:45,450] {processor.py:163} INFO - Started process (PID=686) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:43:45,457] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:43:45,464] {logging_mixin.py:109} INFO - [2023-06-02 22:43:45,464] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:43:49,889] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:43:51,036] {logging_mixin.py:109} INFO - [2023-06-02 22:43:51,034] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:43:51,167] {logging_mixin.py:109} INFO - [2023-06-02 22:43:51,166] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:43:49.829711+00:00
+[2023-06-02 22:43:51,202] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.768 seconds
+[2023-06-02 22:44:21,466] {processor.py:163} INFO - Started process (PID=724) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:44:21,471] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:44:21,474] {logging_mixin.py:109} INFO - [2023-06-02 22:44:21,474] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:44:24,918] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:44:25,685] {logging_mixin.py:109} INFO - [2023-06-02 22:44:25,684] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:44:25,740] {logging_mixin.py:109} INFO - [2023-06-02 22:44:25,739] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:44:24.866383+00:00
+[2023-06-02 22:44:25,769] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.311 seconds
+[2023-06-02 22:44:55,995] {processor.py:163} INFO - Started process (PID=762) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:44:56,001] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:44:56,006] {logging_mixin.py:109} INFO - [2023-06-02 22:44:56,006] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:45:00,631] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:45:01,395] {logging_mixin.py:109} INFO - [2023-06-02 22:45:01,394] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:45:01,455] {logging_mixin.py:109} INFO - [2023-06-02 22:45:01,454] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:45:00.574078+00:00
+[2023-06-02 22:45:01,484] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.500 seconds
+[2023-06-02 22:45:31,757] {processor.py:163} INFO - Started process (PID=800) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:45:31,762] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:45:31,766] {logging_mixin.py:109} INFO - [2023-06-02 22:45:31,765] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:45:36,620] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:45:37,853] {logging_mixin.py:109} INFO - [2023-06-02 22:45:37,851] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:45:37,930] {logging_mixin.py:109} INFO - [2023-06-02 22:45:37,929] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:45:36.548981+00:00
+[2023-06-02 22:45:37,971] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.224 seconds
+[2023-06-02 22:46:08,204] {processor.py:163} INFO - Started process (PID=838) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:46:08,211] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:46:08,214] {logging_mixin.py:109} INFO - [2023-06-02 22:46:08,214] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:46:13,023] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:46:14,179] {logging_mixin.py:109} INFO - [2023-06-02 22:46:14,177] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:46:14,356] {logging_mixin.py:109} INFO - [2023-06-02 22:46:14,355] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:46:12.926162+00:00
+[2023-06-02 22:46:14,426] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.230 seconds
+[2023-06-02 22:46:44,597] {processor.py:163} INFO - Started process (PID=860) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:46:44,603] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:46:44,606] {logging_mixin.py:109} INFO - [2023-06-02 22:46:44,606] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:46:48,809] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:46:49,845] {logging_mixin.py:109} INFO - [2023-06-02 22:46:49,844] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:46:49,916] {logging_mixin.py:109} INFO - [2023-06-02 22:46:49,915] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:46:48.683292+00:00
+[2023-06-02 22:46:49,997] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.409 seconds
+[2023-06-02 22:47:20,147] {processor.py:163} INFO - Started process (PID=899) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:47:20,151] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:47:20,155] {logging_mixin.py:109} INFO - [2023-06-02 22:47:20,154] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:47:23,585] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:47:24,439] {logging_mixin.py:109} INFO - [2023-06-02 22:47:24,437] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:47:24,494] {logging_mixin.py:109} INFO - [2023-06-02 22:47:24,493] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:47:23.532739+00:00
+[2023-06-02 22:47:24,523] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.386 seconds
+[2023-06-02 22:47:54,710] {processor.py:163} INFO - Started process (PID=937) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:47:54,718] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:47:54,721] {logging_mixin.py:109} INFO - [2023-06-02 22:47:54,720] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:47:59,601] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:48:00,560] {logging_mixin.py:109} INFO - [2023-06-02 22:48:00,559] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:48:00,628] {logging_mixin.py:109} INFO - [2023-06-02 22:48:00,627] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:47:59.542278+00:00
+[2023-06-02 22:48:00,670] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.969 seconds
+[2023-06-02 22:48:30,978] {processor.py:163} INFO - Started process (PID=975) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:48:30,984] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:48:30,988] {logging_mixin.py:109} INFO - [2023-06-02 22:48:30,987] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:48:36,232] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:48:37,418] {logging_mixin.py:109} INFO - [2023-06-02 22:48:37,417] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:48:37,506] {logging_mixin.py:109} INFO - [2023-06-02 22:48:37,505] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:48:36.163486+00:00
+[2023-06-02 22:48:37,543] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.574 seconds
+[2023-06-02 22:49:07,868] {processor.py:163} INFO - Started process (PID=1013) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:49:07,880] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:49:07,886] {logging_mixin.py:109} INFO - [2023-06-02 22:49:07,885] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:49:12,896] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:49:14,005] {logging_mixin.py:109} INFO - [2023-06-02 22:49:14,004] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:49:14,177] {logging_mixin.py:109} INFO - [2023-06-02 22:49:14,170] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:49:12.795819+00:00
+[2023-06-02 22:49:14,273] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.417 seconds
+[2023-06-02 22:49:44,625] {processor.py:163} INFO - Started process (PID=1034) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:49:44,629] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:49:44,632] {logging_mixin.py:109} INFO - [2023-06-02 22:49:44,632] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:49:48,513] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:49:49,639] {logging_mixin.py:109} INFO - [2023-06-02 22:49:49,638] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:49:49,724] {logging_mixin.py:109} INFO - [2023-06-02 22:49:49,724] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:49:48.454978+00:00
+[2023-06-02 22:49:49,765] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.148 seconds
+[2023-06-02 22:50:20,012] {processor.py:163} INFO - Started process (PID=1071) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:50:20,017] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:50:20,020] {logging_mixin.py:109} INFO - [2023-06-02 22:50:20,020] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:50:23,590] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:50:24,376] {logging_mixin.py:109} INFO - [2023-06-02 22:50:24,375] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:50:24,431] {logging_mixin.py:109} INFO - [2023-06-02 22:50:24,431] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:50:23.540340+00:00
+[2023-06-02 22:50:24,460] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.455 seconds
+[2023-06-02 22:50:54,699] {processor.py:163} INFO - Started process (PID=1109) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:50:54,705] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:50:54,709] {logging_mixin.py:109} INFO - [2023-06-02 22:50:54,708] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:50:59,836] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:51:00,730] {logging_mixin.py:109} INFO - [2023-06-02 22:51:00,729] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:51:00,794] {logging_mixin.py:109} INFO - [2023-06-02 22:51:00,793] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:50:59.779551+00:00
+[2023-06-02 22:51:00,828] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.138 seconds
+[2023-06-02 22:51:31,221] {processor.py:163} INFO - Started process (PID=1146) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:51:31,228] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:51:31,232] {logging_mixin.py:109} INFO - [2023-06-02 22:51:31,232] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:51:36,516] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:51:37,630] {logging_mixin.py:109} INFO - [2023-06-02 22:51:37,629] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:51:37,715] {logging_mixin.py:109} INFO - [2023-06-02 22:51:37,714] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:51:36.440539+00:00
+[2023-06-02 22:51:37,753] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.544 seconds
+[2023-06-02 22:52:08,104] {processor.py:163} INFO - Started process (PID=1184) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:52:08,108] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:52:08,112] {logging_mixin.py:109} INFO - [2023-06-02 22:52:08,111] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:52:12,832] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:52:14,006] {logging_mixin.py:109} INFO - [2023-06-02 22:52:14,005] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:52:14,083] {logging_mixin.py:109} INFO - [2023-06-02 22:52:14,082] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:52:12.768510+00:00
+[2023-06-02 22:52:14,123] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.028 seconds
+[2023-06-02 22:52:44,576] {processor.py:163} INFO - Started process (PID=1206) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:52:44,582] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:52:44,586] {logging_mixin.py:109} INFO - [2023-06-02 22:52:44,585] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:52:48,706] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:52:49,796] {logging_mixin.py:109} INFO - [2023-06-02 22:52:49,794] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:52:49,875] {logging_mixin.py:109} INFO - [2023-06-02 22:52:49,874] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:52:48.646721+00:00
+[2023-06-02 22:52:49,913] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.348 seconds
+[2023-06-02 22:53:20,154] {processor.py:163} INFO - Started process (PID=1244) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:53:20,158] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:53:20,161] {logging_mixin.py:109} INFO - [2023-06-02 22:53:20,161] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:53:23,524] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:53:24,259] {logging_mixin.py:109} INFO - [2023-06-02 22:53:24,258] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:53:24,314] {logging_mixin.py:109} INFO - [2023-06-02 22:53:24,314] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:53:23.478701+00:00
+[2023-06-02 22:53:24,344] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.198 seconds
+[2023-06-02 22:53:54,528] {processor.py:163} INFO - Started process (PID=1282) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:53:54,534] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:53:54,537] {logging_mixin.py:109} INFO - [2023-06-02 22:53:54,537] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:53:59,545] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:54:00,410] {logging_mixin.py:109} INFO - [2023-06-02 22:54:00,409] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:54:00,473] {logging_mixin.py:109} INFO - [2023-06-02 22:54:00,473] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:53:59.489104+00:00
+[2023-06-02 22:54:00,506] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.988 seconds
+[2023-06-02 22:54:31,028] {processor.py:163} INFO - Started process (PID=1321) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:54:31,033] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:54:31,037] {logging_mixin.py:109} INFO - [2023-06-02 22:54:31,036] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:54:36,010] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:54:37,214] {logging_mixin.py:109} INFO - [2023-06-02 22:54:37,212] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:54:37,303] {logging_mixin.py:109} INFO - [2023-06-02 22:54:37,302] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:54:35.879382+00:00
+[2023-06-02 22:54:37,345] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.326 seconds
+[2023-06-02 22:55:07,544] {processor.py:163} INFO - Started process (PID=1360) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:55:07,550] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:55:07,555] {logging_mixin.py:109} INFO - [2023-06-02 22:55:07,553] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:55:12,109] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:55:13,269] {logging_mixin.py:109} INFO - [2023-06-02 22:55:13,268] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:55:13,343] {logging_mixin.py:109} INFO - [2023-06-02 22:55:13,343] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:55:12.047842+00:00
+[2023-06-02 22:55:13,393] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.863 seconds
+[2023-06-02 22:55:43,745] {processor.py:163} INFO - Started process (PID=1382) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:55:43,750] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:55:43,753] {logging_mixin.py:109} INFO - [2023-06-02 22:55:43,753] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:55:47,497] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:55:48,689] {logging_mixin.py:109} INFO - [2023-06-02 22:55:48,688] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:55:48,775] {logging_mixin.py:109} INFO - [2023-06-02 22:55:48,774] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:55:47.431973+00:00
+[2023-06-02 22:55:48,828] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.094 seconds
+[2023-06-02 22:56:19,059] {processor.py:163} INFO - Started process (PID=1420) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:56:19,064] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:56:19,067] {logging_mixin.py:109} INFO - [2023-06-02 22:56:19,067] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:56:22,555] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:56:23,320] {logging_mixin.py:109} INFO - [2023-06-02 22:56:23,319] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:56:23,379] {logging_mixin.py:109} INFO - [2023-06-02 22:56:23,379] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:56:22.507199+00:00
+[2023-06-02 22:56:23,430] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.379 seconds
+[2023-06-02 22:56:53,611] {processor.py:163} INFO - Started process (PID=1457) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:56:53,617] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:56:53,620] {logging_mixin.py:109} INFO - [2023-06-02 22:56:53,620] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:56:59,072] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:57:00,158] {logging_mixin.py:109} INFO - [2023-06-02 22:57:00,157] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:57:00,228] {logging_mixin.py:109} INFO - [2023-06-02 22:57:00,228] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:56:58.972413+00:00
+[2023-06-02 22:57:00,267] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.665 seconds
+[2023-06-02 22:57:30,534] {processor.py:163} INFO - Started process (PID=1495) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:57:30,540] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:57:30,544] {logging_mixin.py:109} INFO - [2023-06-02 22:57:30,543] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:57:35,545] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:57:36,626] {logging_mixin.py:109} INFO - [2023-06-02 22:57:36,625] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:57:36,783] {logging_mixin.py:109} INFO - [2023-06-02 22:57:36,783] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:57:35.478590+00:00
+[2023-06-02 22:57:36,820] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.297 seconds
+[2023-06-02 22:58:07,026] {processor.py:163} INFO - Started process (PID=1528) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:58:07,031] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:58:07,035] {logging_mixin.py:109} INFO - [2023-06-02 22:58:07,034] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:58:12,122] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:58:13,194] {logging_mixin.py:109} INFO - [2023-06-02 22:58:13,192] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:58:13,320] {logging_mixin.py:109} INFO - [2023-06-02 22:58:13,319] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:58:12.058709+00:00
+[2023-06-02 22:58:13,412] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.399 seconds
+[2023-06-02 22:58:43,718] {processor.py:163} INFO - Started process (PID=1556) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:58:43,723] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:58:43,727] {logging_mixin.py:109} INFO - [2023-06-02 22:58:43,726] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:58:47,404] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:58:48,517] {logging_mixin.py:109} INFO - [2023-06-02 22:58:48,516] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:58:48,597] {logging_mixin.py:109} INFO - [2023-06-02 22:58:48,596] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:58:47.338977+00:00
+[2023-06-02 22:58:48,635] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.929 seconds
+[2023-06-02 22:59:19,078] {processor.py:163} INFO - Started process (PID=1594) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:59:19,083] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:59:19,086] {logging_mixin.py:109} INFO - [2023-06-02 22:59:19,086] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:59:22,595] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:59:23,417] {logging_mixin.py:109} INFO - [2023-06-02 22:59:23,416] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:59:23,470] {logging_mixin.py:109} INFO - [2023-06-02 22:59:23,470] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:59:22.549530+00:00
+[2023-06-02 22:59:23,497] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.427 seconds
+[2023-06-02 22:59:53,743] {processor.py:163} INFO - Started process (PID=1631) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:59:53,748] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 22:59:53,751] {logging_mixin.py:109} INFO - [2023-06-02 22:59:53,751] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:59:58,603] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 22:59:59,507] {logging_mixin.py:109} INFO - [2023-06-02 22:59:59,506] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 22:59:59,570] {logging_mixin.py:109} INFO - [2023-06-02 22:59:59,569] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T22:59:58.544409+00:00
+[2023-06-02 22:59:59,603] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.867 seconds
+[2023-06-02 23:00:29,856] {processor.py:163} INFO - Started process (PID=1669) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:00:29,862] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:00:29,865] {logging_mixin.py:109} INFO - [2023-06-02 23:00:29,864] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:00:34,897] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:00:36,003] {logging_mixin.py:109} INFO - [2023-06-02 23:00:36,001] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:00:36,102] {logging_mixin.py:109} INFO - [2023-06-02 23:00:36,101] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:00:34.831724+00:00
+[2023-06-02 23:00:36,138] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.291 seconds
+[2023-06-02 23:01:06,263] {processor.py:163} INFO - Started process (PID=1691) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:01:06,267] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:01:06,269] {logging_mixin.py:109} INFO - [2023-06-02 23:01:06,269] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:01:10,458] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:01:11,551] {logging_mixin.py:109} INFO - [2023-06-02 23:01:11,549] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:01:11,620] {logging_mixin.py:109} INFO - [2023-06-02 23:01:11,619] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:01:10.399541+00:00
+[2023-06-02 23:01:11,668] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.412 seconds
+[2023-06-02 23:01:41,901] {processor.py:163} INFO - Started process (PID=1729) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:01:41,907] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:01:41,911] {logging_mixin.py:109} INFO - [2023-06-02 23:01:41,910] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:01:45,670] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:01:46,573] {logging_mixin.py:109} INFO - [2023-06-02 23:01:46,572] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:01:46,635] {logging_mixin.py:109} INFO - [2023-06-02 23:01:46,634] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:01:45.613029+00:00
+[2023-06-02 23:01:46,668] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.778 seconds
+[2023-06-02 23:02:17,121] {processor.py:163} INFO - Started process (PID=1767) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:02:17,126] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:02:17,130] {logging_mixin.py:109} INFO - [2023-06-02 23:02:17,129] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:02:21,707] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:02:22,552] {logging_mixin.py:109} INFO - [2023-06-02 23:02:22,551] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:02:22,613] {logging_mixin.py:109} INFO - [2023-06-02 23:02:22,613] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:02:21.646515+00:00
+[2023-06-02 23:02:22,646] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.547 seconds
+[2023-06-02 23:02:52,890] {processor.py:163} INFO - Started process (PID=1806) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:02:52,895] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:02:52,901] {logging_mixin.py:109} INFO - [2023-06-02 23:02:52,901] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:02:58,193] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:02:59,470] {logging_mixin.py:109} INFO - [2023-06-02 23:02:59,468] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:02:59,543] {logging_mixin.py:109} INFO - [2023-06-02 23:02:59,542] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:02:58.116615+00:00
+[2023-06-02 23:02:59,584] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.710 seconds
+[2023-06-02 23:03:30,013] {processor.py:163} INFO - Started process (PID=1844) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:03:30,019] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:03:30,023] {logging_mixin.py:109} INFO - [2023-06-02 23:03:30,023] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:03:35,720] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:03:37,196] {logging_mixin.py:109} INFO - [2023-06-02 23:03:37,194] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:03:37,290] {logging_mixin.py:109} INFO - [2023-06-02 23:03:37,289] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:03:35.641205+00:00
+[2023-06-02 23:03:37,351] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.349 seconds
+[2023-06-02 23:04:07,699] {processor.py:163} INFO - Started process (PID=1875) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:04:07,705] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:04:07,709] {logging_mixin.py:109} INFO - [2023-06-02 23:04:07,709] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:04:12,917] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:04:14,139] {logging_mixin.py:109} INFO - [2023-06-02 23:04:14,137] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:04:14,221] {logging_mixin.py:109} INFO - [2023-06-02 23:04:14,220] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:04:12.852904+00:00
+[2023-06-02 23:04:14,269] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.581 seconds
+[2023-06-02 23:04:44,485] {processor.py:163} INFO - Started process (PID=1903) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:04:44,489] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:04:44,492] {logging_mixin.py:109} INFO - [2023-06-02 23:04:44,492] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:04:48,843] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:04:50,155] {logging_mixin.py:109} INFO - [2023-06-02 23:04:50,154] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:04:50,271] {logging_mixin.py:109} INFO - [2023-06-02 23:04:50,271] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:04:48.767386+00:00
+[2023-06-02 23:04:50,367] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.890 seconds
+[2023-06-02 23:05:20,671] {processor.py:163} INFO - Started process (PID=1941) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:05:20,676] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:05:20,679] {logging_mixin.py:109} INFO - [2023-06-02 23:05:20,678] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:05:24,477] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:05:25,454] {logging_mixin.py:109} INFO - [2023-06-02 23:05:25,452] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:05:25,526] {logging_mixin.py:109} INFO - [2023-06-02 23:05:25,525] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:05:24.425556+00:00
+[2023-06-02 23:05:25,570] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.907 seconds
+[2023-06-02 23:05:55,843] {processor.py:163} INFO - Started process (PID=1979) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:05:55,850] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:05:55,853] {logging_mixin.py:109} INFO - [2023-06-02 23:05:55,853] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:06:00,913] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:06:01,915] {logging_mixin.py:109} INFO - [2023-06-02 23:06:01,913] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:06:01,982] {logging_mixin.py:109} INFO - [2023-06-02 23:06:01,982] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:06:00.851381+00:00
+[2023-06-02 23:06:02,021] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.190 seconds
+[2023-06-02 23:06:32,133] {processor.py:163} INFO - Started process (PID=2017) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:06:32,138] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:06:32,143] {logging_mixin.py:109} INFO - [2023-06-02 23:06:32,142] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:06:37,041] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:06:38,301] {logging_mixin.py:109} INFO - [2023-06-02 23:06:38,300] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:06:38,384] {logging_mixin.py:109} INFO - [2023-06-02 23:06:38,383] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:06:36.958526+00:00
+[2023-06-02 23:06:38,426] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.303 seconds
+[2023-06-02 23:07:08,753] {processor.py:163} INFO - Started process (PID=2056) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:07:08,759] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:07:08,764] {logging_mixin.py:109} INFO - [2023-06-02 23:07:08,764] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:07:13,866] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:07:15,070] {logging_mixin.py:109} INFO - [2023-06-02 23:07:15,069] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:07:15,152] {logging_mixin.py:109} INFO - [2023-06-02 23:07:15,151] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:07:13.800263+00:00
+[2023-06-02 23:07:15,196] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.458 seconds
+[2023-06-02 23:07:45,505] {processor.py:163} INFO - Started process (PID=2078) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:07:45,511] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:07:45,515] {logging_mixin.py:109} INFO - [2023-06-02 23:07:45,515] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:07:50,126] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:07:51,401] {logging_mixin.py:109} INFO - [2023-06-02 23:07:51,400] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:07:51,479] {logging_mixin.py:109} INFO - [2023-06-02 23:07:51,478] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:07:50.057775+00:00
+[2023-06-02 23:07:51,524] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.035 seconds
+[2023-06-02 23:08:21,916] {processor.py:163} INFO - Started process (PID=2116) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:08:21,920] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:08:21,923] {logging_mixin.py:109} INFO - [2023-06-02 23:08:21,923] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:08:25,491] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:08:26,319] {logging_mixin.py:109} INFO - [2023-06-02 23:08:26,318] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:08:26,383] {logging_mixin.py:109} INFO - [2023-06-02 23:08:26,383] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:08:25.437599+00:00
+[2023-06-02 23:08:26,416] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.507 seconds
+[2023-06-02 23:08:56,657] {processor.py:163} INFO - Started process (PID=2154) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:08:56,664] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:08:56,669] {logging_mixin.py:109} INFO - [2023-06-02 23:08:56,668] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:09:01,421] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:09:02,388] {logging_mixin.py:109} INFO - [2023-06-02 23:09:02,386] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:09:02,448] {logging_mixin.py:109} INFO - [2023-06-02 23:09:02,447] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:09:01.365264+00:00
+[2023-06-02 23:09:02,483] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.837 seconds
+[2023-06-02 23:09:33,324] {processor.py:163} INFO - Started process (PID=2191) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:09:33,332] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:09:33,340] {logging_mixin.py:109} INFO - [2023-06-02 23:09:33,339] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:09:39,127] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:09:40,537] {logging_mixin.py:109} INFO - [2023-06-02 23:09:40,536] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:09:40,626] {logging_mixin.py:109} INFO - [2023-06-02 23:09:40,626] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:09:39.000944+00:00
+[2023-06-02 23:09:40,668] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.360 seconds
+[2023-06-02 23:10:10,787] {processor.py:163} INFO - Started process (PID=2229) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:10:10,796] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:10:10,802] {logging_mixin.py:109} INFO - [2023-06-02 23:10:10,801] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:10:16,004] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:10:17,737] {logging_mixin.py:109} INFO - [2023-06-02 23:10:17,736] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:10:17,961] {logging_mixin.py:109} INFO - [2023-06-02 23:10:17,961] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:10:15.923748+00:00
+[2023-06-02 23:10:18,013] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.235 seconds
+[2023-06-02 23:10:48,414] {processor.py:163} INFO - Started process (PID=2267) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:10:48,421] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:10:48,426] {logging_mixin.py:109} INFO - [2023-06-02 23:10:48,425] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:10:53,756] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:10:54,999] {logging_mixin.py:109} INFO - [2023-06-02 23:10:54,997] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:10:55,081] {logging_mixin.py:109} INFO - [2023-06-02 23:10:55,081] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:10:53.682532+00:00
+[2023-06-02 23:10:55,122] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.719 seconds
+[2023-06-02 23:11:25,441] {processor.py:163} INFO - Started process (PID=2289) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:11:25,446] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:11:25,449] {logging_mixin.py:109} INFO - [2023-06-02 23:11:25,449] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:11:30,394] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:11:31,683] {logging_mixin.py:109} INFO - [2023-06-02 23:11:31,682] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:11:31,786] {logging_mixin.py:109} INFO - [2023-06-02 23:11:31,785] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:11:30.326522+00:00
+[2023-06-02 23:11:31,828] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.397 seconds
+[2023-06-02 23:12:02,174] {processor.py:163} INFO - Started process (PID=2327) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:12:02,180] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:12:02,185] {logging_mixin.py:109} INFO - [2023-06-02 23:12:02,185] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:12:05,874] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:12:06,758] {logging_mixin.py:109} INFO - [2023-06-02 23:12:06,757] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:12:06,823] {logging_mixin.py:109} INFO - [2023-06-02 23:12:06,822] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:12:05.817454+00:00
+[2023-06-02 23:12:06,860] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.696 seconds
+[2023-06-02 23:12:37,305] {processor.py:163} INFO - Started process (PID=2365) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:12:37,312] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:12:37,316] {logging_mixin.py:109} INFO - [2023-06-02 23:12:37,316] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:12:41,971] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:12:42,874] {logging_mixin.py:109} INFO - [2023-06-02 23:12:42,873] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:12:42,934] {logging_mixin.py:109} INFO - [2023-06-02 23:12:42,933] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:12:41.909180+00:00
+[2023-06-02 23:12:42,971] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.676 seconds
+[2023-06-02 23:13:13,323] {processor.py:163} INFO - Started process (PID=2403) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:13:13,337] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:13:13,341] {logging_mixin.py:109} INFO - [2023-06-02 23:13:13,341] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:13:19,182] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:13:20,516] {logging_mixin.py:109} INFO - [2023-06-02 23:13:20,515] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:13:20,598] {logging_mixin.py:109} INFO - [2023-06-02 23:13:20,597] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:13:19.086279+00:00
+[2023-06-02 23:13:20,656] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.348 seconds
+[2023-06-02 23:13:50,843] {processor.py:163} INFO - Started process (PID=2440) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:13:50,847] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:13:50,852] {logging_mixin.py:109} INFO - [2023-06-02 23:13:50,851] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:13:56,115] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:13:57,426] {logging_mixin.py:109} INFO - [2023-06-02 23:13:57,424] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:13:57,505] {logging_mixin.py:109} INFO - [2023-06-02 23:13:57,505] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:13:56.041296+00:00
+[2023-06-02 23:13:57,549] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.715 seconds
+[2023-06-02 23:14:27,883] {processor.py:163} INFO - Started process (PID=2473) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:14:27,891] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:14:27,895] {logging_mixin.py:109} INFO - [2023-06-02 23:14:27,894] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:14:33,093] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:14:34,631] {logging_mixin.py:109} INFO - [2023-06-02 23:14:34,629] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:14:34,707] {logging_mixin.py:109} INFO - [2023-06-02 23:14:34,706] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:14:33.023962+00:00
+[2023-06-02 23:14:34,747] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.873 seconds
+[2023-06-02 23:15:05,068] {processor.py:163} INFO - Started process (PID=2501) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:15:05,074] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:15:05,078] {logging_mixin.py:109} INFO - [2023-06-02 23:15:05,077] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:15:09,471] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:15:10,720] {logging_mixin.py:109} INFO - [2023-06-02 23:15:10,719] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:15:10,809] {logging_mixin.py:109} INFO - [2023-06-02 23:15:10,808] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:15:09.397086+00:00
+[2023-06-02 23:15:10,853] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.796 seconds
+[2023-06-02 23:15:41,089] {processor.py:163} INFO - Started process (PID=2540) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:15:41,095] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:15:41,098] {logging_mixin.py:109} INFO - [2023-06-02 23:15:41,098] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:15:44,854] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:15:45,786] {logging_mixin.py:109} INFO - [2023-06-02 23:15:45,785] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:15:45,848] {logging_mixin.py:109} INFO - [2023-06-02 23:15:45,847] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:15:44.801791+00:00
+[2023-06-02 23:15:45,886] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.805 seconds
+[2023-06-02 23:16:16,124] {processor.py:163} INFO - Started process (PID=2579) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:16:16,130] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:16:16,136] {logging_mixin.py:109} INFO - [2023-06-02 23:16:16,136] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:16:21,317] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:16:22,270] {logging_mixin.py:109} INFO - [2023-06-02 23:16:22,269] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:16:22,340] {logging_mixin.py:109} INFO - [2023-06-02 23:16:22,339] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:16:21.242275+00:00
+[2023-06-02 23:16:22,378] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.287 seconds
+[2023-06-02 23:16:52,617] {processor.py:163} INFO - Started process (PID=2616) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:16:52,628] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:16:52,632] {logging_mixin.py:109} INFO - [2023-06-02 23:16:52,631] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:16:58,417] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:16:59,809] {logging_mixin.py:109} INFO - [2023-06-02 23:16:59,807] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:16:59,888] {logging_mixin.py:109} INFO - [2023-06-02 23:16:59,887] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:16:58.333844+00:00
+[2023-06-02 23:16:59,931] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.325 seconds
+[2023-06-02 23:17:30,183] {processor.py:163} INFO - Started process (PID=2653) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:17:30,188] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:17:30,192] {logging_mixin.py:109} INFO - [2023-06-02 23:17:30,191] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:17:35,276] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:17:36,588] {logging_mixin.py:109} INFO - [2023-06-02 23:17:36,587] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:17:36,704] {logging_mixin.py:109} INFO - [2023-06-02 23:17:36,703] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:17:35.202547+00:00
+[2023-06-02 23:17:36,744] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.571 seconds
+[2023-06-02 23:18:07,002] {processor.py:163} INFO - Started process (PID=2676) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:18:07,006] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:18:07,009] {logging_mixin.py:109} INFO - [2023-06-02 23:18:07,009] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:18:12,485] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:18:13,756] {logging_mixin.py:109} INFO - [2023-06-02 23:18:13,754] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:18:13,830] {logging_mixin.py:109} INFO - [2023-06-02 23:18:13,830] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:18:12.399497+00:00
+[2023-06-02 23:18:13,873] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.879 seconds
+[2023-06-02 23:18:44,162] {processor.py:163} INFO - Started process (PID=2713) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:18:44,167] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:18:44,170] {logging_mixin.py:109} INFO - [2023-06-02 23:18:44,170] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:18:48,038] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:18:49,332] {logging_mixin.py:109} INFO - [2023-06-02 23:18:49,330] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:18:49,412] {logging_mixin.py:109} INFO - [2023-06-02 23:18:49,412] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:18:47.966458+00:00
+[2023-06-02 23:18:49,456] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.302 seconds
+[2023-06-02 23:19:19,633] {processor.py:163} INFO - Started process (PID=2751) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:19:19,639] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:19:19,643] {logging_mixin.py:109} INFO - [2023-06-02 23:19:19,642] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:19:23,726] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:19:24,562] {logging_mixin.py:109} INFO - [2023-06-02 23:19:24,561] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:19:24,625] {logging_mixin.py:109} INFO - [2023-06-02 23:19:24,624] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:19:23.667260+00:00
+[2023-06-02 23:19:24,657] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.033 seconds
+[2023-06-02 23:19:55,079] {processor.py:163} INFO - Started process (PID=2789) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:19:55,085] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:19:55,090] {logging_mixin.py:109} INFO - [2023-06-02 23:19:55,089] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:20:00,717] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:20:01,744] {logging_mixin.py:109} INFO - [2023-06-02 23:20:01,743] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:20:01,819] {logging_mixin.py:109} INFO - [2023-06-02 23:20:01,818] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:20:00.642748+00:00
+[2023-06-02 23:20:01,858] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.789 seconds
+[2023-06-02 23:20:32,182] {processor.py:163} INFO - Started process (PID=2826) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:20:32,188] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:20:32,193] {logging_mixin.py:109} INFO - [2023-06-02 23:20:32,192] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:20:37,699] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:20:39,168] {logging_mixin.py:109} INFO - [2023-06-02 23:20:39,167] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:20:39,254] {logging_mixin.py:109} INFO - [2023-06-02 23:20:39,254] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:20:37.626645+00:00
+[2023-06-02 23:20:39,299] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.127 seconds
+[2023-06-02 23:21:09,611] {processor.py:163} INFO - Started process (PID=2864) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:21:09,617] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:21:09,622] {logging_mixin.py:109} INFO - [2023-06-02 23:21:09,621] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:21:14,947] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:21:16,187] {logging_mixin.py:109} INFO - [2023-06-02 23:21:16,186] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:21:16,272] {logging_mixin.py:109} INFO - [2023-06-02 23:21:16,271] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:21:14.865751+00:00
+[2023-06-02 23:21:16,318] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.717 seconds
+[2023-06-02 23:21:46,597] {processor.py:163} INFO - Started process (PID=2885) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:21:46,602] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:21:46,606] {logging_mixin.py:109} INFO - [2023-06-02 23:21:46,605] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:21:51,502] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:21:52,760] {logging_mixin.py:109} INFO - [2023-06-02 23:21:52,758] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:21:52,868] {logging_mixin.py:109} INFO - [2023-06-02 23:21:52,867] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:21:51.429517+00:00
+[2023-06-02 23:21:52,933] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.343 seconds
+[2023-06-02 23:22:23,200] {processor.py:163} INFO - Started process (PID=2924) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:22:23,205] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:22:23,209] {logging_mixin.py:109} INFO - [2023-06-02 23:22:23,208] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:22:26,937] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:22:27,907] {logging_mixin.py:109} INFO - [2023-06-02 23:22:27,906] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:22:27,998] {logging_mixin.py:109} INFO - [2023-06-02 23:22:27,997] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:22:26.874087+00:00
+[2023-06-02 23:22:28,096] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.904 seconds
+[2023-06-02 23:22:58,395] {processor.py:163} INFO - Started process (PID=2963) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:22:58,402] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:22:58,406] {logging_mixin.py:109} INFO - [2023-06-02 23:22:58,405] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:23:03,303] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:23:04,211] {logging_mixin.py:109} INFO - [2023-06-02 23:23:04,209] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:23:04,270] {logging_mixin.py:109} INFO - [2023-06-02 23:23:04,269] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:23:03.237639+00:00
+[2023-06-02 23:23:04,301] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.918 seconds
+[2023-06-02 23:23:34,680] {processor.py:163} INFO - Started process (PID=3001) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:23:34,685] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:23:34,689] {logging_mixin.py:109} INFO - [2023-06-02 23:23:34,689] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:23:41,298] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:23:42,457] {logging_mixin.py:109} INFO - [2023-06-02 23:23:42,456] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:23:42,527] {logging_mixin.py:109} INFO - [2023-06-02 23:23:42,526] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:23:41.160978+00:00
+[2023-06-02 23:23:42,566] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.896 seconds
+[2023-06-02 23:24:12,939] {processor.py:163} INFO - Started process (PID=3038) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:24:12,946] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:24:12,954] {logging_mixin.py:109} INFO - [2023-06-02 23:24:12,953] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:24:18,660] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:24:20,204] {logging_mixin.py:109} INFO - [2023-06-02 23:24:20,203] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:24:20,333] {logging_mixin.py:109} INFO - [2023-06-02 23:24:20,332] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:24:18.579745+00:00
+[2023-06-02 23:24:20,376] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.446 seconds
+[2023-06-02 23:24:50,715] {processor.py:163} INFO - Started process (PID=3075) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:24:50,729] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:24:50,738] {logging_mixin.py:109} INFO - [2023-06-02 23:24:50,738] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:24:56,021] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:24:57,180] {logging_mixin.py:109} INFO - [2023-06-02 23:24:57,179] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:24:57,262] {logging_mixin.py:109} INFO - [2023-06-02 23:24:57,261] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:24:55.948525+00:00
+[2023-06-02 23:24:57,316] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.615 seconds
+[2023-06-02 23:25:27,592] {processor.py:163} INFO - Started process (PID=3096) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:25:27,607] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:25:27,612] {logging_mixin.py:109} INFO - [2023-06-02 23:25:27,611] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:25:32,782] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:25:34,020] {logging_mixin.py:109} INFO - [2023-06-02 23:25:34,019] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:25:34,106] {logging_mixin.py:109} INFO - [2023-06-02 23:25:34,105] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:25:32.704269+00:00
+[2023-06-02 23:25:34,144] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.563 seconds
+[2023-06-02 23:26:04,411] {processor.py:163} INFO - Started process (PID=3133) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:26:04,416] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:26:04,419] {logging_mixin.py:109} INFO - [2023-06-02 23:26:04,419] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:26:08,203] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:26:09,367] {logging_mixin.py:109} INFO - [2023-06-02 23:26:09,366] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:26:09,449] {logging_mixin.py:109} INFO - [2023-06-02 23:26:09,448] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:26:08.107055+00:00
+[2023-06-02 23:26:09,487] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.083 seconds
+[2023-06-02 23:26:39,771] {processor.py:163} INFO - Started process (PID=3170) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:26:39,776] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:26:39,780] {logging_mixin.py:109} INFO - [2023-06-02 23:26:39,779] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:26:43,576] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:26:44,422] {logging_mixin.py:109} INFO - [2023-06-02 23:26:44,421] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:26:44,484] {logging_mixin.py:109} INFO - [2023-06-02 23:26:44,484] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:26:43.521148+00:00
+[2023-06-02 23:26:44,515] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.750 seconds
+[2023-06-02 23:27:14,814] {processor.py:163} INFO - Started process (PID=3209) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:27:14,819] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:27:14,823] {logging_mixin.py:109} INFO - [2023-06-02 23:27:14,823] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:27:19,883] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:27:21,035] {logging_mixin.py:109} INFO - [2023-06-02 23:27:21,034] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:27:21,104] {logging_mixin.py:109} INFO - [2023-06-02 23:27:21,103] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:27:19.813121+00:00
+[2023-06-02 23:27:21,141] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.337 seconds
+[2023-06-02 23:27:51,375] {processor.py:163} INFO - Started process (PID=3248) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:27:51,382] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:27:51,387] {logging_mixin.py:109} INFO - [2023-06-02 23:27:51,386] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:27:56,979] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:27:58,307] {logging_mixin.py:109} INFO - [2023-06-02 23:27:58,305] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:27:58,410] {logging_mixin.py:109} INFO - [2023-06-02 23:27:58,409] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:27:56.889173+00:00
+[2023-06-02 23:27:58,455] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.089 seconds
+[2023-06-02 23:28:28,836] {processor.py:163} INFO - Started process (PID=3287) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:28:28,847] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:28:28,853] {logging_mixin.py:109} INFO - [2023-06-02 23:28:28,852] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:28:34,298] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:28:35,730] {logging_mixin.py:109} INFO - [2023-06-02 23:28:35,729] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:28:35,833] {logging_mixin.py:109} INFO - [2023-06-02 23:28:35,832] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:28:34.223113+00:00
+[2023-06-02 23:28:35,876] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.055 seconds
+[2023-06-02 23:29:06,254] {processor.py:163} INFO - Started process (PID=3309) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:29:06,260] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:29:06,265] {logging_mixin.py:109} INFO - [2023-06-02 23:29:06,264] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:29:10,925] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:29:12,283] {logging_mixin.py:109} INFO - [2023-06-02 23:29:12,282] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:29:12,372] {logging_mixin.py:109} INFO - [2023-06-02 23:29:12,372] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:29:10.855149+00:00
+[2023-06-02 23:29:12,414] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.169 seconds
+[2023-06-02 23:29:42,759] {processor.py:163} INFO - Started process (PID=3347) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:29:42,764] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:29:42,768] {logging_mixin.py:109} INFO - [2023-06-02 23:29:42,768] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:29:46,435] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:29:47,301] {logging_mixin.py:109} INFO - [2023-06-02 23:29:47,300] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:29:47,364] {logging_mixin.py:109} INFO - [2023-06-02 23:29:47,363] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:29:46.377103+00:00
+[2023-06-02 23:29:47,397] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.646 seconds
+[2023-06-02 23:30:17,696] {processor.py:163} INFO - Started process (PID=3385) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:30:17,713] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:30:17,719] {logging_mixin.py:109} INFO - [2023-06-02 23:30:17,718] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:30:23,144] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:30:24,128] {logging_mixin.py:109} INFO - [2023-06-02 23:30:24,127] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:30:24,201] {logging_mixin.py:109} INFO - [2023-06-02 23:30:24,201] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:30:23.081905+00:00
+[2023-06-02 23:30:24,241] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.578 seconds
+[2023-06-02 23:30:54,696] {processor.py:163} INFO - Started process (PID=3422) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:30:54,702] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:30:54,707] {logging_mixin.py:109} INFO - [2023-06-02 23:30:54,706] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:31:00,689] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:31:01,909] {logging_mixin.py:109} INFO - [2023-06-02 23:31:01,908] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:31:01,980] {logging_mixin.py:109} INFO - [2023-06-02 23:31:01,980] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:31:00.616623+00:00
+[2023-06-02 23:31:02,018] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.332 seconds
+[2023-06-02 23:31:32,320] {processor.py:163} INFO - Started process (PID=3461) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:31:32,331] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:31:32,344] {logging_mixin.py:109} INFO - [2023-06-02 23:31:32,344] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:31:38,232] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:31:39,783] {logging_mixin.py:109} INFO - [2023-06-02 23:31:39,782] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:31:39,883] {logging_mixin.py:109} INFO - [2023-06-02 23:31:39,882] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:31:38.128600+00:00
+[2023-06-02 23:31:39,977] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.690 seconds
+[2023-06-02 23:32:10,380] {processor.py:163} INFO - Started process (PID=3499) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:32:10,386] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:32:10,390] {logging_mixin.py:109} INFO - [2023-06-02 23:32:10,389] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:32:15,752] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:32:16,931] {logging_mixin.py:109} INFO - [2023-06-02 23:32:16,929] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:32:17,069] {logging_mixin.py:109} INFO - [2023-06-02 23:32:17,068] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:32:15.682256+00:00
+[2023-06-02 23:32:17,121] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.750 seconds
+[2023-06-02 23:32:47,265] {processor.py:163} INFO - Started process (PID=3522) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:32:47,270] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:32:47,273] {logging_mixin.py:109} INFO - [2023-06-02 23:32:47,273] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:32:52,505] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:32:53,956] {logging_mixin.py:109} INFO - [2023-06-02 23:32:53,954] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:32:54,029] {logging_mixin.py:109} INFO - [2023-06-02 23:32:54,029] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:32:52.432663+00:00
+[2023-06-02 23:32:54,075] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.818 seconds
+[2023-06-02 23:33:24,308] {processor.py:163} INFO - Started process (PID=3560) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:33:24,313] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:33:24,317] {logging_mixin.py:109} INFO - [2023-06-02 23:33:24,317] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:33:27,923] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:33:29,110] {logging_mixin.py:109} INFO - [2023-06-02 23:33:29,109] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:33:29,193] {logging_mixin.py:109} INFO - [2023-06-02 23:33:29,192] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:33:27.861532+00:00
+[2023-06-02 23:33:29,236] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.936 seconds
+[2023-06-02 23:33:59,506] {processor.py:163} INFO - Started process (PID=3597) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:33:59,520] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:33:59,526] {logging_mixin.py:109} INFO - [2023-06-02 23:33:59,525] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:34:04,179] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:34:05,062] {logging_mixin.py:109} INFO - [2023-06-02 23:34:05,060] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:34:05,134] {logging_mixin.py:109} INFO - [2023-06-02 23:34:05,133] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:34:04.122032+00:00
+[2023-06-02 23:34:05,174] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.705 seconds
+[2023-06-02 23:34:35,634] {processor.py:163} INFO - Started process (PID=3635) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:34:35,640] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:34:35,649] {logging_mixin.py:109} INFO - [2023-06-02 23:34:35,649] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:34:41,412] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:34:42,479] {logging_mixin.py:109} INFO - [2023-06-02 23:34:42,478] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:34:42,548] {logging_mixin.py:109} INFO - [2023-06-02 23:34:42,547] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:34:41.348296+00:00
+[2023-06-02 23:34:42,587] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.977 seconds
+[2023-06-02 23:35:13,029] {processor.py:163} INFO - Started process (PID=3673) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:35:13,035] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:35:13,041] {logging_mixin.py:109} INFO - [2023-06-02 23:35:13,040] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:35:18,601] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:35:20,034] {logging_mixin.py:109} INFO - [2023-06-02 23:35:20,032] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:35:20,117] {logging_mixin.py:109} INFO - [2023-06-02 23:35:20,117] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:35:18.529122+00:00
+[2023-06-02 23:35:20,160] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.142 seconds
+[2023-06-02 23:35:50,480] {processor.py:163} INFO - Started process (PID=3711) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:35:50,487] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:35:50,491] {logging_mixin.py:109} INFO - [2023-06-02 23:35:50,491] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:35:55,697] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:35:57,020] {logging_mixin.py:109} INFO - [2023-06-02 23:35:57,019] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:35:57,106] {logging_mixin.py:109} INFO - [2023-06-02 23:35:57,106] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:35:55.627377+00:00
+[2023-06-02 23:35:57,149] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.680 seconds
+[2023-06-02 23:36:27,443] {processor.py:163} INFO - Started process (PID=3733) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:36:27,448] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:36:27,451] {logging_mixin.py:109} INFO - [2023-06-02 23:36:27,451] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:36:32,551] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:36:33,895] {logging_mixin.py:109} INFO - [2023-06-02 23:36:33,894] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:36:34,041] {logging_mixin.py:109} INFO - [2023-06-02 23:36:34,040] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:36:32.481214+00:00
+[2023-06-02 23:36:34,154] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.719 seconds
+[2023-06-02 23:37:04,631] {processor.py:163} INFO - Started process (PID=3771) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:37:04,638] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:37:04,643] {logging_mixin.py:109} INFO - [2023-06-02 23:37:04,642] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:37:08,516] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:37:09,783] {logging_mixin.py:109} INFO - [2023-06-02 23:37:09,781] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:37:09,886] {logging_mixin.py:109} INFO - [2023-06-02 23:37:09,886] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:37:08.446680+00:00
+[2023-06-02 23:37:09,933] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.316 seconds
+[2023-06-02 23:37:40,232] {processor.py:163} INFO - Started process (PID=3810) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:37:40,239] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:37:40,245] {logging_mixin.py:109} INFO - [2023-06-02 23:37:40,244] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:37:44,706] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:37:45,726] {logging_mixin.py:109} INFO - [2023-06-02 23:37:45,725] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:37:45,792] {logging_mixin.py:109} INFO - [2023-06-02 23:37:45,791] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:37:44.640869+00:00
+[2023-06-02 23:37:45,826] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.609 seconds
+[2023-06-02 23:38:16,143] {processor.py:163} INFO - Started process (PID=3849) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:38:16,149] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:38:16,155] {logging_mixin.py:109} INFO - [2023-06-02 23:38:16,154] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:38:21,657] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:38:22,662] {logging_mixin.py:109} INFO - [2023-06-02 23:38:22,660] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:38:22,730] {logging_mixin.py:109} INFO - [2023-06-02 23:38:22,730] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:38:21.596515+00:00
+[2023-06-02 23:38:22,766] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.631 seconds
+[2023-06-02 23:38:53,074] {processor.py:163} INFO - Started process (PID=3889) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:38:53,081] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:38:53,086] {logging_mixin.py:109} INFO - [2023-06-02 23:38:53,085] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:38:58,699] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:39:00,092] {logging_mixin.py:109} INFO - [2023-06-02 23:39:00,090] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:39:00,269] {logging_mixin.py:109} INFO - [2023-06-02 23:39:00,269] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:38:58.526582+00:00
+[2023-06-02 23:39:00,355] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.293 seconds
+[2023-06-02 23:39:30,675] {processor.py:163} INFO - Started process (PID=3926) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:39:30,681] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:39:30,686] {logging_mixin.py:109} INFO - [2023-06-02 23:39:30,686] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:39:35,914] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:39:37,087] {logging_mixin.py:109} INFO - [2023-06-02 23:39:37,086] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:39:37,168] {logging_mixin.py:109} INFO - [2023-06-02 23:39:37,167] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:39:35.827870+00:00
+[2023-06-02 23:39:37,209] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.546 seconds
+[2023-06-02 23:40:07,463] {processor.py:163} INFO - Started process (PID=3948) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:40:07,468] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:40:07,471] {logging_mixin.py:109} INFO - [2023-06-02 23:40:07,471] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:40:12,345] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:40:13,654] {logging_mixin.py:109} INFO - [2023-06-02 23:40:13,652] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:40:13,737] {logging_mixin.py:109} INFO - [2023-06-02 23:40:13,736] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:40:12.277037+00:00
+[2023-06-02 23:40:13,780] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.327 seconds
+[2023-06-02 23:40:43,892] {processor.py:163} INFO - Started process (PID=3985) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:40:43,898] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:40:43,902] {logging_mixin.py:109} INFO - [2023-06-02 23:40:43,901] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:40:47,764] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:40:48,932] {logging_mixin.py:109} INFO - [2023-06-02 23:40:48,931] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:40:49,104] {logging_mixin.py:109} INFO - [2023-06-02 23:40:49,103] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:40:47.708964+00:00
+[2023-06-02 23:40:49,191] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.308 seconds
+[2023-06-02 23:41:19,464] {processor.py:163} INFO - Started process (PID=4021) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:41:19,472] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:41:19,477] {logging_mixin.py:109} INFO - [2023-06-02 23:41:19,476] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:41:24,058] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:41:24,939] {logging_mixin.py:109} INFO - [2023-06-02 23:41:24,938] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:41:25,009] {logging_mixin.py:109} INFO - [2023-06-02 23:41:25,009] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:41:24.002736+00:00
+[2023-06-02 23:41:25,042] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 5.592 seconds
+[2023-06-02 23:41:55,292] {processor.py:163} INFO - Started process (PID=4058) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:41:55,297] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:41:55,301] {logging_mixin.py:109} INFO - [2023-06-02 23:41:55,301] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:42:00,694] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:42:01,879] {logging_mixin.py:109} INFO - [2023-06-02 23:42:01,877] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:42:01,956] {logging_mixin.py:109} INFO - [2023-06-02 23:42:01,955] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:42:00.582496+00:00
+[2023-06-02 23:42:01,999] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.717 seconds
+[2023-06-02 23:42:32,603] {processor.py:163} INFO - Started process (PID=4097) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:42:32,609] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:42:32,613] {logging_mixin.py:109} INFO - [2023-06-02 23:42:32,612] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:42:37,949] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:42:39,366] {logging_mixin.py:109} INFO - [2023-06-02 23:42:39,364] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:42:39,455] {logging_mixin.py:109} INFO - [2023-06-02 23:42:39,454] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:42:37.870496+00:00
+[2023-06-02 23:42:39,522] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.930 seconds
+[2023-06-02 23:43:09,861] {processor.py:163} INFO - Started process (PID=4134) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:43:09,867] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:43:09,871] {logging_mixin.py:109} INFO - [2023-06-02 23:43:09,870] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:43:15,170] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:43:16,505] {logging_mixin.py:109} INFO - [2023-06-02 23:43:16,503] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:43:16,597] {logging_mixin.py:109} INFO - [2023-06-02 23:43:16,596] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:43:15.080689+00:00
+[2023-06-02 23:43:16,654] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.808 seconds
+[2023-06-02 23:43:46,845] {processor.py:163} INFO - Started process (PID=4156) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:43:46,854] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:43:46,870] {logging_mixin.py:109} INFO - [2023-06-02 23:43:46,869] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:44:20,528] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:44:22,397] {logging_mixin.py:109} INFO - [2023-06-02 23:44:22,390] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:44:23,249] {logging_mixin.py:109} INFO - [2023-06-02 23:44:23,244] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:44:20.431266+00:00
+[2023-06-02 23:44:23,658] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 22.622 seconds
+[2023-06-02 23:44:55,761] {processor.py:163} INFO - Started process (PID=4208) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:44:55,772] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:44:55,780] {logging_mixin.py:109} INFO - [2023-06-02 23:44:55,778] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:45:05,129] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:45:07,504] {logging_mixin.py:109} INFO - [2023-06-02 23:45:07,503] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:45:07,594] {logging_mixin.py:109} INFO - [2023-06-02 23:45:07,593] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:45:04.793005+00:00
+[2023-06-02 23:45:07,681] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 11.940 seconds
+[2023-06-02 23:45:38,128] {processor.py:163} INFO - Started process (PID=4246) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:45:38,135] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:45:38,139] {logging_mixin.py:109} INFO - [2023-06-02 23:45:38,139] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:45:41,847] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:45:42,744] {logging_mixin.py:109} INFO - [2023-06-02 23:45:42,742] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:45:42,817] {logging_mixin.py:109} INFO - [2023-06-02 23:45:42,817] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:45:41.792587+00:00
+[2023-06-02 23:45:42,856] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 4.738 seconds
+[2023-06-02 23:46:13,321] {processor.py:163} INFO - Started process (PID=4284) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:46:13,336] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:46:13,346] {logging_mixin.py:109} INFO - [2023-06-02 23:46:13,345] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:46:19,918] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:46:20,805] {logging_mixin.py:109} INFO - [2023-06-02 23:46:20,804] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:46:20,880] {logging_mixin.py:109} INFO - [2023-06-02 23:46:20,880] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:46:19.869332+00:00
+[2023-06-02 23:46:20,910] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.615 seconds
+[2023-06-02 23:46:51,506] {processor.py:163} INFO - Started process (PID=4321) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:46:51,512] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:46:51,518] {logging_mixin.py:109} INFO - [2023-06-02 23:46:51,517] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:46:57,351] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:46:58,322] {logging_mixin.py:109} INFO - [2023-06-02 23:46:58,321] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:46:58,403] {logging_mixin.py:109} INFO - [2023-06-02 23:46:58,402] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:46:57.283571+00:00
+[2023-06-02 23:46:58,441] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.951 seconds
+[2023-06-02 23:47:29,110] {processor.py:163} INFO - Started process (PID=4358) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:47:29,127] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:47:29,151] {logging_mixin.py:109} INFO - [2023-06-02 23:47:29,141] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:47:38,799] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:47:39,988] {logging_mixin.py:109} INFO - [2023-06-02 23:47:39,986] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:47:40,070] {logging_mixin.py:109} INFO - [2023-06-02 23:47:40,069] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:47:38.716679+00:00
+[2023-06-02 23:47:40,117] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 11.056 seconds
+[2023-06-02 23:48:10,428] {processor.py:163} INFO - Started process (PID=4397) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:48:10,456] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:48:10,459] {logging_mixin.py:109} INFO - [2023-06-02 23:48:10,459] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:48:16,285] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:48:17,347] {logging_mixin.py:109} INFO - [2023-06-02 23:48:17,345] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:48:17,421] {logging_mixin.py:109} INFO - [2023-06-02 23:48:17,420] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:48:16.192999+00:00
+[2023-06-02 23:48:17,462] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 7.043 seconds
+[2023-06-02 23:48:47,978] {processor.py:163} INFO - Started process (PID=4435) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:48:47,993] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:48:48,011] {logging_mixin.py:109} INFO - [2023-06-02 23:48:48,010] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:48:54,066] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:48:55,909] {logging_mixin.py:109} INFO - [2023-06-02 23:48:55,907] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:48:55,955] {logging_mixin.py:109} INFO - [2023-06-02 23:48:55,953] {dag.py:2415} INFO - Creating ORM DAG for SP_500_DATA_PIPELINE_v1
+[2023-06-02 23:48:56,061] {logging_mixin.py:109} INFO - [2023-06-02 23:48:56,054] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:48:53.980154+00:00
+[2023-06-02 23:48:56,174] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 8.209 seconds
+[2023-06-02 23:49:26,601] {processor.py:163} INFO - Started process (PID=4473) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:49:26,607] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:49:26,610] {logging_mixin.py:109} INFO - [2023-06-02 23:49:26,610] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:49:31,652] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:49:32,811] {logging_mixin.py:109} INFO - [2023-06-02 23:49:32,809] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:49:32,914] {logging_mixin.py:109} INFO - [2023-06-02 23:49:32,913] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:49:31.587997+00:00
+[2023-06-02 23:49:32,971] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.379 seconds
+[2023-06-02 23:50:03,080] {processor.py:163} INFO - Started process (PID=4505) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:50:03,086] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:50:03,089] {logging_mixin.py:109} INFO - [2023-06-02 23:50:03,089] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:50:10,374] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:50:12,057] {logging_mixin.py:109} INFO - [2023-06-02 23:50:12,055] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:50:12,147] {logging_mixin.py:109} INFO - [2023-06-02 23:50:12,146] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:50:10.304759+00:00
+[2023-06-02 23:50:12,233] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 9.164 seconds
+[2023-06-02 23:50:42,835] {processor.py:163} INFO - Started process (PID=4543) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:50:42,843] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:50:42,848] {logging_mixin.py:109} INFO - [2023-06-02 23:50:42,847] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:50:48,116] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:50:49,635] {logging_mixin.py:109} INFO - [2023-06-02 23:50:49,633] {dag.py:2396} INFO - Sync 1 DAGs
+[2023-06-02 23:50:49,716] {logging_mixin.py:109} INFO - [2023-06-02 23:50:49,716] {dag.py:2935} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2023-06-02T23:50:48.052438+00:00
+[2023-06-02 23:50:49,783] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 6.960 seconds
+[2023-06-02 23:51:20,398] {processor.py:163} INFO - Started process (PID=4571) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:51:20,403] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2023-06-02 23:51:20,407] {logging_mixin.py:109} INFO - [2023-06-02 23:51:20,406] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2023-06-02 23:51:26,304] {processor.py:654} INFO - DAG(s) dict_keys(['SP_500_DATA_PIPELINE_v1']) retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py

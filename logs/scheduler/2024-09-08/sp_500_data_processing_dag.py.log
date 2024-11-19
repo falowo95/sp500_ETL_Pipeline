@@ -1,0 +1,79 @@
+[2024-09-08 13:52:27,298] {processor.py:163} INFO - Started process (PID=403) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-09-08 13:52:27,368] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-09-08 13:52:27,414] {logging_mixin.py:109} INFO - [2024-09-08 13:52:27,413] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-09-08 13:52:57,542] {logging_mixin.py:109} INFO - [2024-09-08 13:52:57,484] {timeout.py:36} ERROR - Process timed out, PID: 403
+[2024-09-08 13:52:57,861] {logging_mixin.py:109} INFO - [2024-09-08 13:52:57,561] {dagbag.py:334} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/dagbag.py", line 331, in _load_modules_from_file
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 10, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 18, in <module>
+    import pandas as pd
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/__init__.py", line 50, in <module>
+    from pandas.core.api import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/api.py", line 48, in <module>
+    from pandas.core.groupby import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/groupby/__init__.py", line 1, in <module>
+    from pandas.core.groupby.generic import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/groupby/generic.py", line 64, in <module>
+    from pandas.core.aggregation import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/aggregation.py", line 33, in <module>
+    from pandas.core.indexes.api import Index
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/indexes/api.py", line 18, in <module>
+    from pandas.core.indexes.category import CategoricalIndex
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/indexes/category.py", line 47, in <module>
+    from pandas.core.indexes.extension import (
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/indexes/extension.py", line 221, in <module>
+    class ExtensionIndex(Index):
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/indexes/extension.py", line 424, in ExtensionIndex
+    @doc(Index.equals)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/util/_decorators.py", line 391, in decorator
+    for component in docstring_components
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/util/_decorators.py", line 391, in <genexpr>
+    for component in docstring_components
+  File "/usr/local/lib/python3.7/textwrap.py", line 431, in dedent
+    indents = _leading_whitespace_re.findall(text)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/timeout.py", line 37, in handle_timeout
+    raise AirflowTaskTimeout(self.error_message)
+airflow.exceptions.AirflowTaskTimeout: DagBag import timeout for /opt/airflow/dags/sp_500_data_processing_dag.py after 30.0s.
+Please take a look at these docs to improve your DAG import time:
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#top-level-python-code
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#reducing-dag-complexity, PID: 403
+[2024-09-08 13:52:58,460] {processor.py:690} INFO - Deactivated 1 DAGs which are no longer present in /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-09-08 13:52:58,486] {processor.py:656} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-09-08 13:52:59,047] {processor.py:171} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 31.859 seconds
+[2024-09-08 13:53:31,116] {processor.py:163} INFO - Started process (PID=453) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-09-08 13:53:31,186] {processor.py:642} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-09-08 13:53:31,285] {logging_mixin.py:109} INFO - [2024-09-08 13:53:31,283] {dagbag.py:500} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-09-08 13:54:01,541] {logging_mixin.py:109} INFO - [2024-09-08 13:54:01,476] {timeout.py:36} ERROR - Process timed out, PID: 453
+[2024-09-08 13:54:01,696] {logging_mixin.py:109} WARNING - Exception ignored in: <function WeakValueDictionary.__init__.<locals>.remove at 0x40064960e0>
+[2024-09-08 13:54:01,714] {logging_mixin.py:109} WARNING - Traceback (most recent call last):
+[2024-09-08 13:54:01,734] {logging_mixin.py:109} WARNING -   File "/usr/local/lib/python3.7/weakref.py", line 109, in remove
+[2024-09-08 13:54:01,792] {logging_mixin.py:109} WARNING -     def remove(wr, selfref=ref(self), _atomic_removal=_remove_dead_weakref):
+[2024-09-08 13:54:01,833] {logging_mixin.py:109} WARNING -   File "/home/airflow/.local/lib/python3.7/site-packages/airflow/dag_processing/manager.py", line 496, in _exit_gracefully
+[2024-09-08 13:54:01,866] {logging_mixin.py:109} WARNING -     self.log.debug("Current Stacktrace is: %s", '\n'.join(map(str, inspect.stack())))
+[2024-09-08 13:54:01,869] {logging_mixin.py:109} WARNING -   File "/usr/local/lib/python3.7/inspect.py", line 1513, in stack
+[2024-09-08 13:54:01,915] {logging_mixin.py:109} WARNING -     return getouterframes(sys._getframe(1), context)
+[2024-09-08 13:54:01,917] {logging_mixin.py:109} WARNING -   File "/usr/local/lib/python3.7/inspect.py", line 1490, in getouterframes
+[2024-09-08 13:54:01,950] {logging_mixin.py:109} WARNING -     frameinfo = (frame,) + getframeinfo(frame, context)
+[2024-09-08 13:54:01,974] {logging_mixin.py:109} WARNING -   File "/usr/local/lib/python3.7/inspect.py", line 1464, in getframeinfo
+[2024-09-08 13:54:02,003] {logging_mixin.py:109} WARNING -     lines, lnum = findsource(frame)
+[2024-09-08 13:54:02,024] {logging_mixin.py:109} WARNING -   File "/usr/local/lib/python3.7/inspect.py", line 780, in findsource
+[2024-09-08 13:54:02,041] {logging_mixin.py:109} WARNING -     module = getmodule(object, file)
+[2024-09-08 13:54:02,067] {logging_mixin.py:109} WARNING -   File "/usr/local/lib/python3.7/inspect.py", line 742, in getmodule
+[2024-09-08 13:54:02,076] {logging_mixin.py:109} WARNING -     os.path.realpath(f)] = module.__name__
+[2024-09-08 13:54:02,096] {logging_mixin.py:109} WARNING -   File "/usr/local/lib/python3.7/posixpath.py", line 395, in realpath
+[2024-09-08 13:54:02,120] {logging_mixin.py:109} WARNING -     path, ok = _joinrealpath(filename[:0], filename, {})
+[2024-09-08 13:54:02,123] {logging_mixin.py:109} WARNING -   File "/usr/local/lib/python3.7/posixpath.py", line 429, in _joinrealpath
+[2024-09-08 13:54:02,132] {logging_mixin.py:109} WARNING -     if not islink(newpath):
+[2024-09-08 13:54:02,150] {logging_mixin.py:109} WARNING -   File "/usr/local/lib/python3.7/posixpath.py", line 171, in islink
+[2024-09-08 13:54:02,181] {logging_mixin.py:109} WARNING -     st = os.lstat(path)
+[2024-09-08 13:54:02,183] {logging_mixin.py:109} WARNING -   File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/timeout.py", line 37, in handle_timeout
+[2024-09-08 13:54:02,188] {logging_mixin.py:109} WARNING -     raise AirflowTaskTimeout(self.error_message)
+[2024-09-08 13:54:02,208] {logging_mixin.py:109} WARNING - airflow.exceptions.AirflowTaskTimeout: DagBag import timeout for /opt/airflow/dags/sp_500_data_processing_dag.py after 30.0s.
+Please take a look at these docs to improve your DAG import time:
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#top-level-python-code
+* https://airflow.apache.org/docs/apache-airflow/2.2.3/best-practices.html#reducing-dag-complexity, PID: 453
