@@ -3,11 +3,7 @@ pandas
 numpy
 pandas_datareader
 apache-airflow
-<<<<<<< HEAD
-
-=======
 setuptools
->>>>>>> master
 apache-airflow
 apache-airflow-providers-google
 pyarrow
