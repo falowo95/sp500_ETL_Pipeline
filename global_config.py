@@ -4,8 +4,8 @@ from typing import List, Optional
 from pathlib import Path
 import os
 from functools import cached_property
-from gcp_config import GCPUtils
-from config.gcp_service import GCPService
+from airflow.config.gcp_config import GCPUtils
+from airflow.config.gcp_service import GCPService
 
 
 @dataclass(frozen=True)
