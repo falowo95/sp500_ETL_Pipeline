@@ -1,0 +1,97 @@
+[2023-03-29 00:38:36,757] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v2.extract_data_task manual__2023-03-29T00:38:24.418938+00:00 [queued]>
+[2023-03-29 00:38:36,804] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v2.extract_data_task manual__2023-03-29T00:38:24.418938+00:00 [queued]>
+[2023-03-29 00:38:36,806] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 00:38:36,809] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2023-03-29 00:38:36,811] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 00:38:36,877] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): extract_data_task> on 2023-03-29 00:38:24.418938+00:00
+[2023-03-29 00:38:36,905] {standard_task_runner.py:52} INFO - Started process 636 to run task
+[2023-03-29 00:38:36,907] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'SP_500_DATA_PIPELINE_v2', 'extract_data_task', 'manual__2023-03-29T00:38:24.418938+00:00', '--job-id', '32', '--raw', '--subdir', 'DAGS_FOLDER/first_dag.py', '--cfg-path', '/tmp/tmp6a5b1ttn', '--error-file', '/tmp/tmpy03ggmtu']
+[2023-03-29 00:38:36,911] {standard_task_runner.py:77} INFO - Job 32: Subtask extract_data_task
+[2023-03-29 00:38:37,093] {logging_mixin.py:109} INFO - Running <TaskInstance: SP_500_DATA_PIPELINE_v2.extract_data_task manual__2023-03-29T00:38:24.418938+00:00 [running]> on host 67d8effe805a
+[2023-03-29 00:38:37,413] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=
+AIRFLOW_CTX_DAG_OWNER=me
+AIRFLOW_CTX_DAG_ID=SP_500_DATA_PIPELINE_v2
+AIRFLOW_CTX_TASK_ID=extract_data_task
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-29T00:38:24.418938+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-29T00:38:24.418938+00:00
+[2023-03-29 00:38:42,017] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/pandas_datareader/tiingo.py:234: FutureWarning: In a future version of pandas all arguments of concat except for the argument 'objs' will be keyword-only
+  return pd.concat(dfs, self._concat_axis)
+
+[2023-03-29 00:38:42,119] {logging_mixin.py:109} INFO - ingestion from api completed
+[2023-03-29 00:38:42,238] {logging_mixin.py:109} INFO - file has been saved at :sp_500_data.csv
+[2023-03-29 00:38:42,241] {python.py:175} INFO - Done. Returned value was: sp_500_data.csv
+[2023-03-29 00:38:42,246] {xcom.py:334} ERROR - Could not serialize the XCom value into JSON. If you are using pickle instead of JSON for XCom, then you need to enable pickle support for XCom in your *** config.
+[2023-03-29 00:38:42,252] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1514, in _execute_task
+    self.xcom_push(key=XCOM_RETURN_KEY, value=result)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 2141, in xcom_push
+    session=session,
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 67, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/xcom.py", line 100, in set
+    value = XCom.serialize_value(value)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/xcom.py", line 331, in serialize_value
+    return json.dumps(value).encode('UTF-8')
+  File "/usr/local/lib/python3.7/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+  File "/usr/local/lib/python3.7/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.7/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.7/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type PosixPath is not JSON serializable
+[2023-03-29 00:38:42,348] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=SP_500_DATA_PIPELINE_v2, task_id=extract_data_task, execution_date=20230329T003824, start_date=20230329T003836, end_date=20230329T003842
+[2023-03-29 00:38:42,466] {standard_task_runner.py:92} ERROR - Failed to execute job 32 for task extract_data_task
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1514, in _execute_task
+    self.xcom_push(key=XCOM_RETURN_KEY, value=result)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 2141, in xcom_push
+    session=session,
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 67, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/xcom.py", line 100, in set
+    value = XCom.serialize_value(value)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/xcom.py", line 331, in serialize_value
+    return json.dumps(value).encode('UTF-8')
+  File "/usr/local/lib/python3.7/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+  File "/usr/local/lib/python3.7/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/local/lib/python3.7/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/usr/local/lib/python3.7/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type PosixPath is not JSON serializable
+[2023-03-29 00:38:42,517] {local_task_job.py:154} INFO - Task exited with return code 1
+[2023-03-29 00:38:42,744] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
