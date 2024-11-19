@@ -12,7 +12,7 @@ Functions:
 
 import pandas as pd
 
-from airflow.dags.helper_functions import (
+from dags.helper_functions import (
     to_local,
 )
 

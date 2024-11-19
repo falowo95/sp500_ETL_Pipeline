@@ -866,3 +866,179 @@
 [2024-11-19T02:30:24.241+0000] {logging_mixin.py:190} INFO - [2024-11-19T02:30:24.241+0000] {dag.py:3239} INFO - Sync 1 DAGs
 [2024-11-19T02:30:24.252+0000] {logging_mixin.py:190} INFO - [2024-11-19T02:30:24.252+0000] {dag.py:4180} INFO - Setting next_dagrun for SP_500_DATA_PIPELINE_v1 to 2024-11-20 00:00:00+00:00, run_after=2024-11-21 00:00:00+00:00
 [2024-11-19T02:30:24.262+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 0.613 seconds
+[2024-11-19T04:05:32.500+0000] {processor.py:186} INFO - Started process (PID=38) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:05:32.502+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-11-19T04:05:32.505+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:05:32.504+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:05:34.898+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:05:34.879+0000] {dagbag.py:387} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 24, in <module>
+    from airflow.config.gcp_service import GCPService
+ModuleNotFoundError: No module named 'airflow.config'
+[2024-11-19T04:05:34.902+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:05:34.926+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 2.435 seconds
+[2024-11-19T04:06:05.317+0000] {processor.py:186} INFO - Started process (PID=62) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:06:05.319+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-11-19T04:06:05.323+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:06:05.323+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:06:06.052+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:06:06.048+0000] {dagbag.py:387} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 24, in <module>
+    from airflow.config.gcp_service import GCPService
+ModuleNotFoundError: No module named 'airflow.config'
+[2024-11-19T04:06:06.054+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:06:06.067+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 0.756 seconds
+[2024-11-19T04:06:36.341+0000] {processor.py:186} INFO - Started process (PID=80) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:06:36.345+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-11-19T04:06:36.352+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:06:36.351+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:06:37.010+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:06:37.004+0000] {dagbag.py:387} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 24, in <module>
+    from airflow.config.gcp_service import GCPService
+ModuleNotFoundError: No module named 'airflow.config'
+[2024-11-19T04:06:37.012+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:06:37.031+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 0.712 seconds
+[2024-11-19T04:07:07.388+0000] {processor.py:186} INFO - Started process (PID=103) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:07:07.390+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-11-19T04:07:07.395+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:07:07.394+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:07:08.002+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:07:07.998+0000] {dagbag.py:387} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 24, in <module>
+    from airflow.config.gcp_service import GCPService
+ModuleNotFoundError: No module named 'airflow.config'
+[2024-11-19T04:07:08.005+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:07:08.020+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 0.640 seconds
+[2024-11-19T04:07:38.497+0000] {processor.py:186} INFO - Started process (PID=121) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:07:38.501+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-11-19T04:07:38.507+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:07:38.506+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:07:39.300+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:07:39.296+0000] {dagbag.py:387} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 24, in <module>
+    from airflow.config.gcp_service import GCPService
+ModuleNotFoundError: No module named 'airflow.config'
+[2024-11-19T04:07:39.302+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:07:39.323+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 0.834 seconds
+[2024-11-19T04:08:09.421+0000] {processor.py:186} INFO - Started process (PID=145) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:08:09.424+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-11-19T04:08:09.429+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:08:09.429+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:08:09.988+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:08:09.983+0000] {dagbag.py:387} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 24, in <module>
+    from airflow.config.gcp_service import GCPService
+ModuleNotFoundError: No module named 'airflow.config'
+[2024-11-19T04:08:09.990+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:08:10.005+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 0.592 seconds
+[2024-11-19T04:08:40.403+0000] {processor.py:186} INFO - Started process (PID=169) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:08:40.407+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-11-19T04:08:40.414+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:08:40.413+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:08:41.213+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:08:41.207+0000] {dagbag.py:387} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 24, in <module>
+    from airflow.config.gcp_service import GCPService
+ModuleNotFoundError: No module named 'airflow.config'
+[2024-11-19T04:08:41.215+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:08:41.241+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 0.859 seconds
+[2024-11-19T04:09:11.645+0000] {processor.py:186} INFO - Started process (PID=186) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:09:11.647+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-11-19T04:09:11.651+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:09:11.651+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:09:12.250+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:09:12.245+0000] {dagbag.py:387} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 24, in <module>
+    from airflow.config.gcp_service import GCPService
+ModuleNotFoundError: No module named 'airflow.config'
+[2024-11-19T04:09:12.251+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:09:12.266+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 0.627 seconds
+[2024-11-19T04:09:42.668+0000] {processor.py:186} INFO - Started process (PID=211) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:09:42.671+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-11-19T04:09:42.676+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:09:42.675+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:09:43.288+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:09:43.283+0000] {dagbag.py:387} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 24, in <module>
+    from airflow.config.gcp_service import GCPService
+ModuleNotFoundError: No module named 'airflow.config'
+[2024-11-19T04:09:43.290+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:09:43.303+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 0.643 seconds
+[2024-11-19T04:10:13.676+0000] {processor.py:186} INFO - Started process (PID=238) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:10:13.679+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-11-19T04:10:13.683+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:10:13.682+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:10:14.292+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:10:14.287+0000] {dagbag.py:387} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 24, in <module>
+    from airflow.config.gcp_service import GCPService
+ModuleNotFoundError: No module named 'airflow.config'
+[2024-11-19T04:10:14.294+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:10:14.309+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 0.639 seconds
+[2024-11-19T04:10:44.720+0000] {processor.py:186} INFO - Started process (PID=255) to work on /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:10:44.724+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/sp_500_data_processing_dag.py for tasks to queue
+[2024-11-19T04:10:44.730+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:10:44.729+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:10:45.330+0000] {logging_mixin.py:190} INFO - [2024-11-19T04:10:45.325+0000] {dagbag.py:387} ERROR - Failed to import: /opt/airflow/dags/sp_500_data_processing_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 383, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/sp_500_data_processing_dag.py", line 15, in <module>
+    from helper_functions import (
+  File "/opt/airflow/dags/helper_functions.py", line 24, in <module>
+    from airflow.config.gcp_service import GCPService
+ModuleNotFoundError: No module named 'airflow.config'
+[2024-11-19T04:10:45.331+0000] {processor.py:927} WARNING - No viable dags retrieved from /opt/airflow/dags/sp_500_data_processing_dag.py
+[2024-11-19T04:10:45.346+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/sp_500_data_processing_dag.py took 0.635 seconds
