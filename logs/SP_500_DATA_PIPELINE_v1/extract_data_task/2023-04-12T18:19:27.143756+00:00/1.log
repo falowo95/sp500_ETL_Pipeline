@@ -1,0 +1,36 @@
+[2023-04-12 18:19:35,387] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v1.extract_data_task manual__2023-04-12T18:19:27.143756+00:00 [queued]>
+[2023-04-12 18:19:35,457] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v1.extract_data_task manual__2023-04-12T18:19:27.143756+00:00 [queued]>
+[2023-04-12 18:19:35,467] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2023-04-12 18:19:35,470] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2023-04-12 18:19:35,471] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2023-04-12 18:19:35,586] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): extract_data_task> on 2023-04-12 18:19:27.143756+00:00
+[2023-04-12 18:19:35,618] {standard_task_runner.py:52} INFO - Started process 831 to run task
+[2023-04-12 18:19:35,676] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'SP_500_DATA_PIPELINE_v1', 'extract_data_task', 'manual__2023-04-12T18:19:27.143756+00:00', '--job-id', '210', '--raw', '--subdir', 'DAGS_FOLDER/sp_500_data_processing_dag.py', '--cfg-path', '/tmp/tmpy1y005jc', '--error-file', '/tmp/tmpt9ykn_x6']
+[2023-04-12 18:19:35,682] {standard_task_runner.py:77} INFO - Job 210: Subtask extract_data_task
+[2023-04-12 18:19:36,076] {logging_mixin.py:109} INFO - Running <TaskInstance: SP_500_DATA_PIPELINE_v1.extract_data_task manual__2023-04-12T18:19:27.143756+00:00 [running]> on host 7b33c6d8ff37
+[2023-04-12 18:19:36,450] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=
+AIRFLOW_CTX_DAG_OWNER=me
+AIRFLOW_CTX_DAG_ID=SP_500_DATA_PIPELINE_v1
+AIRFLOW_CTX_TASK_ID=extract_data_task
+AIRFLOW_CTX_EXECUTION_DATE=2023-04-12T18:19:27.143756+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-04-12T18:19:27.143756+00:00
+[2023-04-12 18:19:41,521] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/pandas_datareader/tiingo.py:234: FutureWarning: In a future version of pandas all arguments of concat except for the argument 'objs' will be keyword-only
+  return pd.concat(dfs, self._concat_axis)
+
+[2023-04-12 18:20:43,703] {logging_mixin.py:109} INFO - Error while extracting data for BRK.B: Unable to read URL: https://api.tiingo.com/tiingo/daily/BRK.B/prices?startDate=2018-04-13&endDate=2023-04-12&format=json
+Response Text:
+b'{"detail":"Error: Ticker \'BRK.B\' not found"}'
+[2023-04-12 18:21:00,347] {logging_mixin.py:109} INFO - Error while extracting data for BF.B: Unable to read URL: https://api.tiingo.com/tiingo/daily/BF.B/prices?startDate=2018-04-13&endDate=2023-04-12&format=json
+Response Text:
+b'{"detail":"Error: Ticker \'BF.B\' not found"}'
+[2023-04-12 18:27:29,633] {logging_mixin.py:109} INFO - Failed to retrieve data for the following tickers: ['BRK.B', 'BF.B']
+[2023-04-12 18:27:33,491] {logging_mixin.py:109} INFO - ingestion from api completed
+[2023-04-12 18:28:18,603] {logging_mixin.py:109} INFO - file has been saved at :sp_500_data.csv
+[2023-04-12 18:28:18,607] {logging_mixin.py:109} INFO - sp_500_data.csv
+[2023-04-12 18:28:18,697] {python.py:175} INFO - Done. Returned value was: None
+[2023-04-12 18:28:18,748] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=SP_500_DATA_PIPELINE_v1, task_id=extract_data_task, execution_date=20230412T181927, start_date=20230412T181935, end_date=20230412T182818
+[2023-04-12 18:28:18,943] {local_task_job.py:154} INFO - Task exited with return code 0
+[2023-04-12 18:28:19,079] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check

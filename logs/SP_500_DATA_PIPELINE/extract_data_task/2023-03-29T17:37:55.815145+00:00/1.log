@@ -1,0 +1,29 @@
+[2023-03-29 17:38:00,457] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE.extract_data_task manual__2023-03-29T17:37:55.815145+00:00 [queued]>
+[2023-03-29 17:38:00,494] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE.extract_data_task manual__2023-03-29T17:37:55.815145+00:00 [queued]>
+[2023-03-29 17:38:00,496] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 17:38:00,498] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2023-03-29 17:38:00,499] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 17:38:00,543] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): extract_data_task> on 2023-03-29 17:37:55.815145+00:00
+[2023-03-29 17:38:00,554] {standard_task_runner.py:52} INFO - Started process 2098 to run task
+[2023-03-29 17:38:00,563] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'SP_500_DATA_PIPELINE', 'extract_data_task', 'manual__2023-03-29T17:37:55.815145+00:00', '--job-id', '162', '--raw', '--subdir', 'DAGS_FOLDER/first_dag.py', '--cfg-path', '/tmp/tmp98ny308_', '--error-file', '/tmp/tmppjn0qtr6']
+[2023-03-29 17:38:00,566] {standard_task_runner.py:77} INFO - Job 162: Subtask extract_data_task
+[2023-03-29 17:38:00,713] {logging_mixin.py:109} INFO - Running <TaskInstance: SP_500_DATA_PIPELINE.extract_data_task manual__2023-03-29T17:37:55.815145+00:00 [running]> on host eebc01130c53
+[2023-03-29 17:38:00,857] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=
+AIRFLOW_CTX_DAG_OWNER=me
+AIRFLOW_CTX_DAG_ID=SP_500_DATA_PIPELINE
+AIRFLOW_CTX_TASK_ID=extract_data_task
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-29T17:37:55.815145+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-29T17:37:55.815145+00:00
+[2023-03-29 17:38:04,883] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/pandas_datareader/tiingo.py:234: FutureWarning: In a future version of pandas all arguments of concat except for the argument 'objs' will be keyword-only
+  return pd.concat(dfs, self._concat_axis)
+
+[2023-03-29 17:38:04,953] {logging_mixin.py:109} INFO - ingestion from api completed
+[2023-03-29 17:38:05,057] {logging_mixin.py:109} INFO - file has been saved at :sp_500_data.csv
+[2023-03-29 17:38:05,060] {logging_mixin.py:109} INFO - sp_500_data.csv
+[2023-03-29 17:38:05,063] {python.py:175} INFO - Done. Returned value was: None
+[2023-03-29 17:38:05,117] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=SP_500_DATA_PIPELINE, task_id=extract_data_task, execution_date=20230329T173755, start_date=20230329T173800, end_date=20230329T173805
+[2023-03-29 17:38:05,195] {local_task_job.py:154} INFO - Task exited with return code 0
+[2023-03-29 17:38:05,362] {local_task_job.py:264} INFO - 1 downstream tasks scheduled from follow-on schedule check

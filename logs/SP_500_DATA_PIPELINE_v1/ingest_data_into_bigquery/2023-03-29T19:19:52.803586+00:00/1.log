@@ -1,0 +1,26 @@
+[2023-03-29 19:40:40,298] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v1.ingest_data_into_bigquery manual__2023-03-29T19:19:52.803586+00:00 [queued]>
+[2023-03-29 19:40:40,356] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v1.ingest_data_into_bigquery manual__2023-03-29T19:19:52.803586+00:00 [queued]>
+[2023-03-29 19:40:40,358] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 19:40:40,359] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2023-03-29 19:40:40,362] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 19:40:40,418] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): ingest_data_into_bigquery> on 2023-03-29 19:19:52.803586+00:00
+[2023-03-29 19:40:40,440] {standard_task_runner.py:52} INFO - Started process 2055 to run task
+[2023-03-29 19:40:40,458] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'SP_500_DATA_PIPELINE_v1', 'ingest_data_into_bigquery', 'manual__2023-03-29T19:19:52.803586+00:00', '--job-id', '189', '--raw', '--subdir', 'DAGS_FOLDER/first_dag.py', '--cfg-path', '/tmp/tmpjs9gqfz4', '--error-file', '/tmp/tmphcfwrgc4']
+[2023-03-29 19:40:40,463] {standard_task_runner.py:77} INFO - Job 189: Subtask ingest_data_into_bigquery
+[2023-03-29 19:40:40,638] {logging_mixin.py:109} INFO - Running <TaskInstance: SP_500_DATA_PIPELINE_v1.ingest_data_into_bigquery manual__2023-03-29T19:19:52.803586+00:00 [running]> on host f6db1c430e11
+[2023-03-29 19:40:40,805] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=
+AIRFLOW_CTX_DAG_OWNER=me
+AIRFLOW_CTX_DAG_ID=SP_500_DATA_PIPELINE_v1
+AIRFLOW_CTX_TASK_ID=ingest_data_into_bigquery
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-29T19:19:52.803586+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-29T19:19:52.803586+00:00
+[2023-03-29 19:40:41,682] {logging_mixin.py:109} INFO - Error creating dataset: 409 POST https://bigquery.googleapis.com/bigquery/v2/projects/dataengineering-378316/datasets?prettyPrint=false: Already Exists: Dataset dataengineering-378316:sp_500_data
+[2023-03-29 19:40:42,007] {logging_mixin.py:109} INFO - Table sp_500_data.sp_500_data_table already exists.
+[2023-03-29 19:41:47,219] {logging_mixin.py:109} INFO - Loaded 623467 rows into sp_500_data.sp_500_data_table
+[2023-03-29 19:41:47,224] {python.py:175} INFO - Done. Returned value was: None
+[2023-03-29 19:41:47,268] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=SP_500_DATA_PIPELINE_v1, task_id=ingest_data_into_bigquery, execution_date=20230329T191952, start_date=20230329T194040, end_date=20230329T194147
+[2023-03-29 19:41:47,366] {local_task_job.py:154} INFO - Task exited with return code 0
+[2023-03-29 19:41:47,459] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
