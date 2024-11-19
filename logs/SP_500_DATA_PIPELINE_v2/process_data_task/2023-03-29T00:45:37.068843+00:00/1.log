@@ -1,0 +1,27 @@
+[2023-03-29 00:46:02,282] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v2.process_data_task manual__2023-03-29T00:45:37.068843+00:00 [queued]>
+[2023-03-29 00:46:02,330] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: SP_500_DATA_PIPELINE_v2.process_data_task manual__2023-03-29T00:45:37.068843+00:00 [queued]>
+[2023-03-29 00:46:02,332] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 00:46:02,334] {taskinstance.py:1239} INFO - Starting attempt 1 of 3
+[2023-03-29 00:46:02,335] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-29 00:46:02,383] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): process_data_task> on 2023-03-29 00:45:37.068843+00:00
+[2023-03-29 00:46:02,394] {standard_task_runner.py:52} INFO - Started process 1032 to run task
+[2023-03-29 00:46:02,406] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'SP_500_DATA_PIPELINE_v2', 'process_data_task', 'manual__2023-03-29T00:45:37.068843+00:00', '--job-id', '40', '--raw', '--subdir', 'DAGS_FOLDER/first_dag.py', '--cfg-path', '/tmp/tmpe_3j6jcv', '--error-file', '/tmp/tmprwypa3cx']
+[2023-03-29 00:46:02,410] {standard_task_runner.py:77} INFO - Job 40: Subtask process_data_task
+[2023-03-29 00:46:02,545] {logging_mixin.py:109} INFO - Running <TaskInstance: SP_500_DATA_PIPELINE_v2.process_data_task manual__2023-03-29T00:45:37.068843+00:00 [running]> on host 67d8effe805a
+[2023-03-29 00:46:02,702] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=
+AIRFLOW_CTX_DAG_OWNER=me
+AIRFLOW_CTX_DAG_ID=SP_500_DATA_PIPELINE_v2
+AIRFLOW_CTX_TASK_ID=process_data_task
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-29T00:45:37.068843+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-29T00:45:37.068843+00:00
+[2023-03-29 00:55:14,440] {local_task_job.py:212} WARNING - State of this instance has been externally set to failed. Terminating instance.
+[2023-03-29 00:55:14,451] {process_utils.py:124} INFO - Sending Signals.SIGTERM to group 1032. PIDs of all processes in the group: [1034, 1032]
+[2023-03-29 00:55:14,453] {process_utils.py:75} INFO - Sending the signal Signals.SIGTERM to group 1032
+[2023-03-29 00:55:14,457] {taskinstance.py:1408} ERROR - Received SIGTERM. Terminating subprocesses.
+[2023-03-29 00:55:14,638] {process_utils.py:70} INFO - Process psutil.Process(pid=1032, status='terminated', exitcode=0, started='00:46:02') (1032) terminated with exit code 0
+[2023-03-29 00:56:14,475] {process_utils.py:138} WARNING - process psutil.Process(pid=1034, name='java', status='sleeping', started='00:46:02') did not respond to SIGTERM. Trying SIGKILL
+[2023-03-29 00:56:14,482] {process_utils.py:75} INFO - Sending the signal Signals.SIGKILL to group 1032
+[2023-03-29 00:56:14,783] {process_utils.py:70} INFO - Process psutil.Process(pid=1034, name='java', status='terminated', started='00:46:02') (1034) terminated with exit code None

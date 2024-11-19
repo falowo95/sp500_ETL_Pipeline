@@ -1,0 +1,633 @@
+[2024-11-18T10:12:31.148+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-11-18T10:12:31.159+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: SP_500_DATA_PIPELINE_v1.extract_data_task manual__2024-11-18T10:12:29.568654+00:00 [queued]>
+[2024-11-18T10:12:31.165+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: SP_500_DATA_PIPELINE_v1.extract_data_task manual__2024-11-18T10:12:29.568654+00:00 [queued]>
+[2024-11-18T10:12:31.166+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 3
+[2024-11-18T10:12:31.173+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_data_task> on 2024-11-18 10:12:29.568654+00:00
+[2024-11-18T10:12:31.181+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1593) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-11-18T10:12:31.184+0000] {standard_task_runner.py:72} INFO - Started process 1594 to run task
+[2024-11-18T10:12:31.184+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'SP_500_DATA_PIPELINE_v1', 'extract_data_task', 'manual__2024-11-18T10:12:29.568654+00:00', '--job-id', '14', '--raw', '--subdir', 'DAGS_FOLDER/sp_500_data_processing_dag.py', '--cfg-path', '/tmp/tmpkmtc8u4a']
+[2024-11-18T10:12:31.188+0000] {standard_task_runner.py:105} INFO - Job 14: Subtask extract_data_task
+[2024-11-18T10:12:31.200+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/settings.py:209: DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+  SQL_ALCHEMY_CONN = conf.get("database", "SQL_ALCHEMY_CONN")
+
+[2024-11-18T10:12:31.228+0000] {task_command.py:467} INFO - Running <TaskInstance: SP_500_DATA_PIPELINE_v1.extract_data_task manual__2024-11-18T10:12:29.568654+00:00 [running]> on host 9db2eae589c0
+[2024-11-18T10:12:31.279+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='' AIRFLOW_CTX_DAG_OWNER='me' AIRFLOW_CTX_DAG_ID='SP_500_DATA_PIPELINE_v1' AIRFLOW_CTX_TASK_ID='extract_data_task' AIRFLOW_CTX_EXECUTION_DATE='2024-11-18T10:12:29.568654+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-18T10:12:29.568654+00:00'
+[2024-11-18T10:12:31.282+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-11-18T10:12:32.230+0000] {helper_functions.py:86} ERROR - Error while extracting data for MMM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:32.925+0000] {helper_functions.py:86} ERROR - Error while extracting data for AOS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:33.678+0000] {helper_functions.py:86} ERROR - Error while extracting data for ABT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:34.359+0000] {helper_functions.py:86} ERROR - Error while extracting data for ABBV: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:35.069+0000] {helper_functions.py:86} ERROR - Error while extracting data for ACN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:35.844+0000] {helper_functions.py:86} ERROR - Error while extracting data for ADBE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:36.628+0000] {helper_functions.py:86} ERROR - Error while extracting data for AMD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:37.313+0000] {helper_functions.py:86} ERROR - Error while extracting data for AES: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:37.969+0000] {helper_functions.py:86} ERROR - Error while extracting data for AFL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:38.639+0000] {helper_functions.py:86} ERROR - Error while extracting data for A: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:39.289+0000] {helper_functions.py:86} ERROR - Error while extracting data for APD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:39.589+0000] {helper_functions.py:86} ERROR - Error while extracting data for ABNB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:40.227+0000] {helper_functions.py:86} ERROR - Error while extracting data for AKAM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:40.873+0000] {helper_functions.py:86} ERROR - Error while extracting data for ALB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:41.560+0000] {helper_functions.py:86} ERROR - Error while extracting data for ARE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:42.224+0000] {helper_functions.py:86} ERROR - Error while extracting data for ALGN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:42.916+0000] {helper_functions.py:86} ERROR - Error while extracting data for ALLE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:43.631+0000] {helper_functions.py:86} ERROR - Error while extracting data for LNT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:44.320+0000] {helper_functions.py:86} ERROR - Error while extracting data for ALL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:45.046+0000] {helper_functions.py:86} ERROR - Error while extracting data for GOOGL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:45.704+0000] {helper_functions.py:86} ERROR - Error while extracting data for GOOG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:46.369+0000] {helper_functions.py:86} ERROR - Error while extracting data for MO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:47.050+0000] {helper_functions.py:86} ERROR - Error while extracting data for AMZN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:47.551+0000] {helper_functions.py:86} ERROR - Error while extracting data for AMCR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:47.849+0000] {helper_functions.py:86} ERROR - Error while extracting data for AMTM: 'date'
+[2024-11-18T10:12:48.501+0000] {helper_functions.py:86} ERROR - Error while extracting data for AEE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:49.152+0000] {helper_functions.py:86} ERROR - Error while extracting data for AEP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:49.835+0000] {helper_functions.py:86} ERROR - Error while extracting data for AXP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:50.534+0000] {helper_functions.py:86} ERROR - Error while extracting data for AIG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:51.221+0000] {helper_functions.py:86} ERROR - Error while extracting data for AMT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:51.879+0000] {helper_functions.py:86} ERROR - Error while extracting data for AWK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:52.560+0000] {helper_functions.py:86} ERROR - Error while extracting data for AMP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:53.211+0000] {helper_functions.py:86} ERROR - Error while extracting data for AME: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:53.925+0000] {helper_functions.py:86} ERROR - Error while extracting data for AMGN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:54.622+0000] {helper_functions.py:86} ERROR - Error while extracting data for APH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:55.331+0000] {helper_functions.py:86} ERROR - Error while extracting data for ADI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:56.040+0000] {helper_functions.py:86} ERROR - Error while extracting data for ANSS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:56.713+0000] {helper_functions.py:86} ERROR - Error while extracting data for AON: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:58.218+0000] {helper_functions.py:86} ERROR - Error while extracting data for APA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:58.942+0000] {helper_functions.py:86} ERROR - Error while extracting data for AAPL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:12:59.619+0000] {helper_functions.py:86} ERROR - Error while extracting data for AMAT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:00.289+0000] {helper_functions.py:86} ERROR - Error while extracting data for APTV: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:00.959+0000] {helper_functions.py:86} ERROR - Error while extracting data for ACGL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:01.651+0000] {helper_functions.py:86} ERROR - Error while extracting data for ADM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:02.340+0000] {helper_functions.py:86} ERROR - Error while extracting data for ANET: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:02.965+0000] {helper_functions.py:86} ERROR - Error while extracting data for AJG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:03.649+0000] {helper_functions.py:86} ERROR - Error while extracting data for AIZ: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:04.288+0000] {helper_functions.py:86} ERROR - Error while extracting data for T: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:04.980+0000] {helper_functions.py:86} ERROR - Error while extracting data for ATO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:05.706+0000] {helper_functions.py:86} ERROR - Error while extracting data for ADSK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:06.365+0000] {helper_functions.py:86} ERROR - Error while extracting data for ADP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:07.025+0000] {helper_functions.py:86} ERROR - Error while extracting data for AZO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:07.690+0000] {helper_functions.py:86} ERROR - Error while extracting data for AVB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:08.333+0000] {helper_functions.py:86} ERROR - Error while extracting data for AVY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:08.981+0000] {helper_functions.py:86} ERROR - Error while extracting data for AXON: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:09.565+0000] {helper_functions.py:86} ERROR - Error while extracting data for BKR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:10.228+0000] {helper_functions.py:86} ERROR - Error while extracting data for BALL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:10.889+0000] {helper_functions.py:86} ERROR - Error while extracting data for BAC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:11.535+0000] {helper_functions.py:86} ERROR - Error while extracting data for BAX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:12.195+0000] {helper_functions.py:86} ERROR - Error while extracting data for BDX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:13.370+0000] {helper_functions.py:86} ERROR - Error while extracting data for BRK.B: Unable to read URL: https://api.tiingo.com/tiingo/daily/BRK.B/prices?startDate=2015-01-01&endDate=2021-01-01&format=json
+Response Text:
+b'{"detail":"Error: Ticker \'BRK.B\' not found"}'
+[2024-11-18T10:13:14.070+0000] {helper_functions.py:86} ERROR - Error while extracting data for BBY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:14.723+0000] {helper_functions.py:86} ERROR - Error while extracting data for TECH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:15.420+0000] {helper_functions.py:86} ERROR - Error while extracting data for BIIB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:16.073+0000] {helper_functions.py:86} ERROR - Error while extracting data for BLK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:16.750+0000] {helper_functions.py:86} ERROR - Error while extracting data for BX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:17.452+0000] {helper_functions.py:86} ERROR - Error while extracting data for BK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:18.114+0000] {helper_functions.py:86} ERROR - Error while extracting data for BA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:18.824+0000] {helper_functions.py:86} ERROR - Error while extracting data for BKNG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:19.503+0000] {helper_functions.py:86} ERROR - Error while extracting data for BWA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:20.190+0000] {helper_functions.py:86} ERROR - Error while extracting data for BSX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:20.828+0000] {helper_functions.py:86} ERROR - Error while extracting data for BMY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:21.641+0000] {helper_functions.py:86} ERROR - Error while extracting data for AVGO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:22.313+0000] {helper_functions.py:86} ERROR - Error while extracting data for BR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:23.004+0000] {helper_functions.py:86} ERROR - Error while extracting data for BRO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:24.154+0000] {helper_functions.py:86} ERROR - Error while extracting data for BF.B: Unable to read URL: https://api.tiingo.com/tiingo/daily/BF.B/prices?startDate=2015-01-01&endDate=2021-01-01&format=json
+Response Text:
+b'{"detail":"Error: Ticker \'BF.B\' not found"}'
+[2024-11-18T10:13:24.834+0000] {helper_functions.py:86} ERROR - Error while extracting data for BLDR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:25.495+0000] {helper_functions.py:86} ERROR - Error while extracting data for BG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:26.181+0000] {helper_functions.py:86} ERROR - Error while extracting data for BXP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:26.849+0000] {helper_functions.py:86} ERROR - Error while extracting data for CHRW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:27.494+0000] {helper_functions.py:86} ERROR - Error while extracting data for CDNS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:28.156+0000] {helper_functions.py:86} ERROR - Error while extracting data for CZR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:28.815+0000] {helper_functions.py:86} ERROR - Error while extracting data for CPT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:29.502+0000] {helper_functions.py:86} ERROR - Error while extracting data for CPB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:30.178+0000] {helper_functions.py:86} ERROR - Error while extracting data for COF: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:30.898+0000] {helper_functions.py:86} ERROR - Error while extracting data for CAH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:31.569+0000] {helper_functions.py:86} ERROR - Error while extracting data for KMX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:32.296+0000] {helper_functions.py:86} ERROR - Error while extracting data for CCL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:32.769+0000] {helper_functions.py:86} ERROR - Error while extracting data for CARR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:33.433+0000] {helper_functions.py:86} ERROR - Error while extracting data for CTLT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:34.201+0000] {helper_functions.py:86} ERROR - Error while extracting data for CAT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:35.017+0000] {helper_functions.py:86} ERROR - Error while extracting data for CBOE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:35.870+0000] {helper_functions.py:86} ERROR - Error while extracting data for CBRE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:36.683+0000] {helper_functions.py:86} ERROR - Error while extracting data for CDW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:37.472+0000] {helper_functions.py:86} ERROR - Error while extracting data for CE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:38.235+0000] {helper_functions.py:86} ERROR - Error while extracting data for COR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:39.046+0000] {helper_functions.py:86} ERROR - Error while extracting data for CNC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:39.836+0000] {helper_functions.py:86} ERROR - Error while extracting data for CNP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:40.792+0000] {helper_functions.py:86} ERROR - Error while extracting data for CF: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:41.576+0000] {helper_functions.py:86} ERROR - Error while extracting data for CRL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:42.437+0000] {helper_functions.py:86} ERROR - Error while extracting data for SCHW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:43.268+0000] {helper_functions.py:86} ERROR - Error while extracting data for CHTR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:44.023+0000] {helper_functions.py:86} ERROR - Error while extracting data for CVX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:44.799+0000] {helper_functions.py:86} ERROR - Error while extracting data for CMG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:45.575+0000] {helper_functions.py:86} ERROR - Error while extracting data for CB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:46.380+0000] {helper_functions.py:86} ERROR - Error while extracting data for CHD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:47.152+0000] {helper_functions.py:86} ERROR - Error while extracting data for CI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:47.977+0000] {helper_functions.py:86} ERROR - Error while extracting data for CINF: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:48.731+0000] {helper_functions.py:86} ERROR - Error while extracting data for CTAS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:49.534+0000] {helper_functions.py:86} ERROR - Error while extracting data for CSCO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:50.296+0000] {helper_functions.py:86} ERROR - Error while extracting data for C: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:51.121+0000] {helper_functions.py:86} ERROR - Error while extracting data for CFG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:51.884+0000] {helper_functions.py:86} ERROR - Error while extracting data for CLX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:52.667+0000] {helper_functions.py:86} ERROR - Error while extracting data for CME: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:53.649+0000] {helper_functions.py:86} ERROR - Error while extracting data for CMS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:54.680+0000] {helper_functions.py:86} ERROR - Error while extracting data for KO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:55.537+0000] {helper_functions.py:86} ERROR - Error while extracting data for CTSH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:56.525+0000] {helper_functions.py:86} ERROR - Error while extracting data for CL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:57.309+0000] {helper_functions.py:86} ERROR - Error while extracting data for CMCSA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:58.163+0000] {helper_functions.py:86} ERROR - Error while extracting data for CAG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:59.136+0000] {helper_functions.py:86} ERROR - Error while extracting data for COP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:13:59.944+0000] {helper_functions.py:86} ERROR - Error while extracting data for ED: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:00.775+0000] {helper_functions.py:86} ERROR - Error while extracting data for STZ: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:01.105+0000] {helper_functions.py:86} ERROR - Error while extracting data for CEG: 'date'
+[2024-11-18T10:14:01.943+0000] {helper_functions.py:86} ERROR - Error while extracting data for COO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:02.659+0000] {helper_functions.py:86} ERROR - Error while extracting data for CPRT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:03.408+0000] {helper_functions.py:86} ERROR - Error while extracting data for GLW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:04.220+0000] {helper_functions.py:86} ERROR - Error while extracting data for CPAY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:04.889+0000] {helper_functions.py:86} ERROR - Error while extracting data for CTVA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:05.621+0000] {helper_functions.py:86} ERROR - Error while extracting data for CSGP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:06.272+0000] {helper_functions.py:86} ERROR - Error while extracting data for COST: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:07.072+0000] {helper_functions.py:86} ERROR - Error while extracting data for CTRA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:07.581+0000] {helper_functions.py:86} ERROR - Error while extracting data for CRWD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:08.248+0000] {helper_functions.py:86} ERROR - Error while extracting data for CCI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:08.894+0000] {helper_functions.py:86} ERROR - Error while extracting data for CSX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:09.578+0000] {helper_functions.py:86} ERROR - Error while extracting data for CMI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:10.230+0000] {helper_functions.py:86} ERROR - Error while extracting data for CVS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:10.886+0000] {helper_functions.py:86} ERROR - Error while extracting data for DHR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:11.566+0000] {helper_functions.py:86} ERROR - Error while extracting data for DRI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:12.222+0000] {helper_functions.py:86} ERROR - Error while extracting data for DVA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:12.820+0000] {helper_functions.py:86} ERROR - Error while extracting data for DAY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:13.476+0000] {helper_functions.py:86} ERROR - Error while extracting data for DECK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:14.476+0000] {helper_functions.py:86} ERROR - Error while extracting data for DE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:15.080+0000] {helper_functions.py:86} ERROR - Error while extracting data for DELL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:15.774+0000] {helper_functions.py:86} ERROR - Error while extracting data for DAL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:16.461+0000] {helper_functions.py:86} ERROR - Error while extracting data for DVN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:17.116+0000] {helper_functions.py:86} ERROR - Error while extracting data for DXCM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:17.802+0000] {helper_functions.py:86} ERROR - Error while extracting data for FANG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:18.496+0000] {helper_functions.py:86} ERROR - Error while extracting data for DLR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:19.166+0000] {helper_functions.py:86} ERROR - Error while extracting data for DFS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:19.834+0000] {helper_functions.py:86} ERROR - Error while extracting data for DG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:20.525+0000] {helper_functions.py:86} ERROR - Error while extracting data for DLTR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:21.177+0000] {helper_functions.py:86} ERROR - Error while extracting data for D: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:21.829+0000] {helper_functions.py:86} ERROR - Error while extracting data for DPZ: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:22.477+0000] {helper_functions.py:86} ERROR - Error while extracting data for DOV: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:22.980+0000] {helper_functions.py:86} ERROR - Error while extracting data for DOW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:23.639+0000] {helper_functions.py:86} ERROR - Error while extracting data for DHI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:24.300+0000] {helper_functions.py:86} ERROR - Error while extracting data for DTE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:24.956+0000] {helper_functions.py:86} ERROR - Error while extracting data for DUK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:26.505+0000] {helper_functions.py:86} ERROR - Error while extracting data for DD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:27.138+0000] {helper_functions.py:86} ERROR - Error while extracting data for EMN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:27.847+0000] {helper_functions.py:86} ERROR - Error while extracting data for ETN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:28.579+0000] {helper_functions.py:86} ERROR - Error while extracting data for EBAY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:29.294+0000] {helper_functions.py:86} ERROR - Error while extracting data for ECL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:29.949+0000] {helper_functions.py:86} ERROR - Error while extracting data for EIX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:30.632+0000] {helper_functions.py:86} ERROR - Error while extracting data for EW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:31.306+0000] {helper_functions.py:86} ERROR - Error while extracting data for EA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:32.003+0000] {helper_functions.py:86} ERROR - Error while extracting data for ELV: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:32.677+0000] {helper_functions.py:86} ERROR - Error while extracting data for EMR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:33.313+0000] {helper_functions.py:86} ERROR - Error while extracting data for ENPH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:33.998+0000] {helper_functions.py:86} ERROR - Error while extracting data for ETR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:34.682+0000] {helper_functions.py:86} ERROR - Error while extracting data for EOG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:35.318+0000] {helper_functions.py:86} ERROR - Error while extracting data for EPAM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:35.976+0000] {helper_functions.py:86} ERROR - Error while extracting data for EQT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:36.635+0000] {helper_functions.py:86} ERROR - Error while extracting data for EFX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:37.284+0000] {helper_functions.py:86} ERROR - Error while extracting data for EQIX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:37.969+0000] {helper_functions.py:86} ERROR - Error while extracting data for EQR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:38.659+0000] {helper_functions.py:86} ERROR - Error while extracting data for ERIE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:39.349+0000] {helper_functions.py:86} ERROR - Error while extracting data for ESS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:40.041+0000] {helper_functions.py:86} ERROR - Error while extracting data for EL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:40.708+0000] {helper_functions.py:86} ERROR - Error while extracting data for EG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:41.299+0000] {helper_functions.py:86} ERROR - Error while extracting data for EVRG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:41.992+0000] {helper_functions.py:86} ERROR - Error while extracting data for ES: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:42.656+0000] {helper_functions.py:86} ERROR - Error while extracting data for EXC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:43.376+0000] {helper_functions.py:86} ERROR - Error while extracting data for EXPE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:44.054+0000] {helper_functions.py:86} ERROR - Error while extracting data for EXPD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:44.736+0000] {helper_functions.py:86} ERROR - Error while extracting data for EXR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:45.441+0000] {helper_functions.py:86} ERROR - Error while extracting data for XOM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:46.098+0000] {helper_functions.py:86} ERROR - Error while extracting data for FFIV: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:46.756+0000] {helper_functions.py:86} ERROR - Error while extracting data for FDS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:47.407+0000] {helper_functions.py:86} ERROR - Error while extracting data for FICO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:48.081+0000] {helper_functions.py:86} ERROR - Error while extracting data for FAST: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:48.749+0000] {helper_functions.py:86} ERROR - Error while extracting data for FRT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:49.430+0000] {helper_functions.py:86} ERROR - Error while extracting data for FDX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:50.072+0000] {helper_functions.py:86} ERROR - Error while extracting data for FIS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:50.726+0000] {helper_functions.py:86} ERROR - Error while extracting data for FITB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:51.421+0000] {helper_functions.py:86} ERROR - Error while extracting data for FSLR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:52.062+0000] {helper_functions.py:86} ERROR - Error while extracting data for FE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:52.713+0000] {helper_functions.py:86} ERROR - Error while extracting data for FI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:53.407+0000] {helper_functions.py:86} ERROR - Error while extracting data for FMC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:55.099+0000] {helper_functions.py:86} ERROR - Error while extracting data for F: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:55.800+0000] {helper_functions.py:86} ERROR - Error while extracting data for FTNT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:56.465+0000] {helper_functions.py:86} ERROR - Error while extracting data for FTV: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:57.530+0000] {helper_functions.py:86} ERROR - Error while extracting data for FOXA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:58.069+0000] {helper_functions.py:86} ERROR - Error while extracting data for FOX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:58.722+0000] {helper_functions.py:86} ERROR - Error while extracting data for BEN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:14:59.460+0000] {helper_functions.py:86} ERROR - Error while extracting data for FCX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:00.327+0000] {helper_functions.py:86} ERROR - Error while extracting data for GRMN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:01.006+0000] {helper_functions.py:86} ERROR - Error while extracting data for IT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:01.681+0000] {helper_functions.py:86} ERROR - Error while extracting data for GE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:02.003+0000] {helper_functions.py:86} ERROR - Error while extracting data for GEHC: 'date'
+[2024-11-18T10:15:02.325+0000] {helper_functions.py:86} ERROR - Error while extracting data for GEV: 'date'
+[2024-11-18T10:15:02.994+0000] {helper_functions.py:86} ERROR - Error while extracting data for GEN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:03.660+0000] {helper_functions.py:86} ERROR - Error while extracting data for GNRC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:04.338+0000] {helper_functions.py:86} ERROR - Error while extracting data for GD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:05.017+0000] {helper_functions.py:86} ERROR - Error while extracting data for GIS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:05.696+0000] {helper_functions.py:86} ERROR - Error while extracting data for GM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:06.386+0000] {helper_functions.py:86} ERROR - Error while extracting data for GPC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:07.055+0000] {helper_functions.py:86} ERROR - Error while extracting data for GILD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:07.746+0000] {helper_functions.py:86} ERROR - Error while extracting data for GPN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:08.499+0000] {helper_functions.py:86} ERROR - Error while extracting data for GL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:09.166+0000] {helper_functions.py:86} ERROR - Error while extracting data for GDDY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:09.824+0000] {helper_functions.py:86} ERROR - Error while extracting data for GS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:10.493+0000] {helper_functions.py:86} ERROR - Error while extracting data for HAL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:11.141+0000] {helper_functions.py:86} ERROR - Error while extracting data for HIG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:11.805+0000] {helper_functions.py:86} ERROR - Error while extracting data for HAS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:12.454+0000] {helper_functions.py:86} ERROR - Error while extracting data for HCA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:13.156+0000] {helper_functions.py:86} ERROR - Error while extracting data for DOC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:13.896+0000] {helper_functions.py:86} ERROR - Error while extracting data for HSIC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:14.563+0000] {helper_functions.py:86} ERROR - Error while extracting data for HSY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:15.241+0000] {helper_functions.py:86} ERROR - Error while extracting data for HES: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:15.919+0000] {helper_functions.py:86} ERROR - Error while extracting data for HPE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:16.619+0000] {helper_functions.py:86} ERROR - Error while extracting data for HLT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:17.293+0000] {helper_functions.py:86} ERROR - Error while extracting data for HOLX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:17.941+0000] {helper_functions.py:86} ERROR - Error while extracting data for HD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:18.693+0000] {helper_functions.py:86} ERROR - Error while extracting data for HON: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:19.358+0000] {helper_functions.py:86} ERROR - Error while extracting data for HRL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:20.011+0000] {helper_functions.py:86} ERROR - Error while extracting data for HST: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:20.674+0000] {helper_functions.py:86} ERROR - Error while extracting data for HWM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:21.340+0000] {helper_functions.py:86} ERROR - Error while extracting data for HPQ: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:21.990+0000] {helper_functions.py:86} ERROR - Error while extracting data for HUBB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:22.682+0000] {helper_functions.py:86} ERROR - Error while extracting data for HUM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:23.440+0000] {helper_functions.py:86} ERROR - Error while extracting data for HBAN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:24.099+0000] {helper_functions.py:86} ERROR - Error while extracting data for HII: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:24.818+0000] {helper_functions.py:86} ERROR - Error while extracting data for IBM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:25.479+0000] {helper_functions.py:86} ERROR - Error while extracting data for IEX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:26.138+0000] {helper_functions.py:86} ERROR - Error while extracting data for IDXX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:26.769+0000] {helper_functions.py:86} ERROR - Error while extracting data for ITW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:27.443+0000] {helper_functions.py:86} ERROR - Error while extracting data for INCY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:28.052+0000] {helper_functions.py:86} ERROR - Error while extracting data for IR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:28.718+0000] {helper_functions.py:86} ERROR - Error while extracting data for PODD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:29.418+0000] {helper_functions.py:86} ERROR - Error while extracting data for INTC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:30.094+0000] {helper_functions.py:86} ERROR - Error while extracting data for ICE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:30.773+0000] {helper_functions.py:86} ERROR - Error while extracting data for IFF: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:31.436+0000] {helper_functions.py:86} ERROR - Error while extracting data for IP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:32.089+0000] {helper_functions.py:86} ERROR - Error while extracting data for IPG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:32.729+0000] {helper_functions.py:86} ERROR - Error while extracting data for INTU: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:33.444+0000] {helper_functions.py:86} ERROR - Error while extracting data for ISRG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:34.431+0000] {helper_functions.py:86} ERROR - Error while extracting data for IVZ: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:35.045+0000] {helper_functions.py:86} ERROR - Error while extracting data for INVH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:35.696+0000] {helper_functions.py:86} ERROR - Error while extracting data for IQV: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:36.366+0000] {helper_functions.py:86} ERROR - Error while extracting data for IRM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:37.013+0000] {helper_functions.py:86} ERROR - Error while extracting data for JBHT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:37.685+0000] {helper_functions.py:86} ERROR - Error while extracting data for JBL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:38.340+0000] {helper_functions.py:86} ERROR - Error while extracting data for JKHY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:39.009+0000] {helper_functions.py:86} ERROR - Error while extracting data for J: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:39.758+0000] {helper_functions.py:86} ERROR - Error while extracting data for JNJ: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:40.402+0000] {helper_functions.py:86} ERROR - Error while extracting data for JCI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:41.042+0000] {helper_functions.py:86} ERROR - Error while extracting data for JPM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:41.693+0000] {helper_functions.py:86} ERROR - Error while extracting data for JNPR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:42.384+0000] {helper_functions.py:86} ERROR - Error while extracting data for K: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:42.677+0000] {helper_functions.py:86} ERROR - Error while extracting data for KVUE: 'date'
+[2024-11-18T10:15:43.331+0000] {helper_functions.py:86} ERROR - Error while extracting data for KDP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:44.043+0000] {helper_functions.py:86} ERROR - Error while extracting data for KEY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:44.700+0000] {helper_functions.py:86} ERROR - Error while extracting data for KEYS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:45.464+0000] {helper_functions.py:86} ERROR - Error while extracting data for KMB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:46.172+0000] {helper_functions.py:86} ERROR - Error while extracting data for KIM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:46.857+0000] {helper_functions.py:86} ERROR - Error while extracting data for KMI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:47.517+0000] {helper_functions.py:86} ERROR - Error while extracting data for KKR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:48.869+0000] {helper_functions.py:86} ERROR - Error while extracting data for KLAC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:49.538+0000] {helper_functions.py:86} ERROR - Error while extracting data for KHC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:50.240+0000] {helper_functions.py:86} ERROR - Error while extracting data for KR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:50.883+0000] {helper_functions.py:86} ERROR - Error while extracting data for LHX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:51.579+0000] {helper_functions.py:86} ERROR - Error while extracting data for LH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:52.243+0000] {helper_functions.py:86} ERROR - Error while extracting data for LRCX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:52.886+0000] {helper_functions.py:86} ERROR - Error while extracting data for LW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:53.641+0000] {helper_functions.py:86} ERROR - Error while extracting data for LVS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:54.356+0000] {helper_functions.py:86} ERROR - Error while extracting data for LDOS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:55.021+0000] {helper_functions.py:86} ERROR - Error while extracting data for LEN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:55.681+0000] {helper_functions.py:86} ERROR - Error while extracting data for LLY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:56.263+0000] {helper_functions.py:86} ERROR - Error while extracting data for LIN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:56.941+0000] {helper_functions.py:86} ERROR - Error while extracting data for LYV: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:57.633+0000] {helper_functions.py:86} ERROR - Error while extracting data for LKQ: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:58.348+0000] {helper_functions.py:86} ERROR - Error while extracting data for LMT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:59.085+0000] {helper_functions.py:86} ERROR - Error while extracting data for L: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:15:59.752+0000] {helper_functions.py:86} ERROR - Error while extracting data for LOW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:00.386+0000] {helper_functions.py:86} ERROR - Error while extracting data for LULU: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:01.079+0000] {helper_functions.py:86} ERROR - Error while extracting data for LYB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:01.728+0000] {helper_functions.py:86} ERROR - Error while extracting data for MTB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:02.422+0000] {helper_functions.py:86} ERROR - Error while extracting data for MRO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:03.099+0000] {helper_functions.py:86} ERROR - Error while extracting data for MPC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:03.782+0000] {helper_functions.py:86} ERROR - Error while extracting data for MKTX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:04.472+0000] {helper_functions.py:86} ERROR - Error while extracting data for MAR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:05.185+0000] {helper_functions.py:86} ERROR - Error while extracting data for MMC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:06.535+0000] {helper_functions.py:86} ERROR - Error while extracting data for MLM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:07.227+0000] {helper_functions.py:86} ERROR - Error while extracting data for MAS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:07.919+0000] {helper_functions.py:86} ERROR - Error while extracting data for MA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:08.614+0000] {helper_functions.py:86} ERROR - Error while extracting data for MTCH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:09.311+0000] {helper_functions.py:86} ERROR - Error while extracting data for MKC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:09.987+0000] {helper_functions.py:86} ERROR - Error while extracting data for MCD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:10.630+0000] {helper_functions.py:86} ERROR - Error while extracting data for MCK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:11.357+0000] {helper_functions.py:86} ERROR - Error while extracting data for MDT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:12.047+0000] {helper_functions.py:86} ERROR - Error while extracting data for MRK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:12.726+0000] {helper_functions.py:86} ERROR - Error while extracting data for META: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:13.390+0000] {helper_functions.py:86} ERROR - Error while extracting data for MET: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:14.122+0000] {helper_functions.py:86} ERROR - Error while extracting data for MTD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:14.786+0000] {helper_functions.py:86} ERROR - Error while extracting data for MGM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:15.487+0000] {helper_functions.py:86} ERROR - Error while extracting data for MCHP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:16.173+0000] {helper_functions.py:86} ERROR - Error while extracting data for MU: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:16.849+0000] {helper_functions.py:86} ERROR - Error while extracting data for MSFT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:17.531+0000] {helper_functions.py:86} ERROR - Error while extracting data for MAA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:18.071+0000] {helper_functions.py:86} ERROR - Error while extracting data for MRNA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:18.730+0000] {helper_functions.py:86} ERROR - Error while extracting data for MHK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:19.430+0000] {helper_functions.py:86} ERROR - Error while extracting data for MOH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:20.128+0000] {helper_functions.py:86} ERROR - Error while extracting data for TAP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:20.801+0000] {helper_functions.py:86} ERROR - Error while extracting data for MDLZ: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:21.445+0000] {helper_functions.py:86} ERROR - Error while extracting data for MPWR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:22.117+0000] {helper_functions.py:86} ERROR - Error while extracting data for MNST: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:22.804+0000] {helper_functions.py:86} ERROR - Error while extracting data for MCO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:23.465+0000] {helper_functions.py:86} ERROR - Error while extracting data for MS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:24.106+0000] {helper_functions.py:86} ERROR - Error while extracting data for MOS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:24.798+0000] {helper_functions.py:86} ERROR - Error while extracting data for MSI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:25.494+0000] {helper_functions.py:86} ERROR - Error while extracting data for MSCI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:26.196+0000] {helper_functions.py:86} ERROR - Error while extracting data for NDAQ: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:26.857+0000] {helper_functions.py:86} ERROR - Error while extracting data for NTAP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:27.503+0000] {helper_functions.py:86} ERROR - Error while extracting data for NFLX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:28.217+0000] {helper_functions.py:86} ERROR - Error while extracting data for NEM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:28.867+0000] {helper_functions.py:86} ERROR - Error while extracting data for NWSA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:29.558+0000] {helper_functions.py:86} ERROR - Error while extracting data for NWS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:30.217+0000] {helper_functions.py:86} ERROR - Error while extracting data for NEE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:30.903+0000] {helper_functions.py:86} ERROR - Error while extracting data for NKE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:31.550+0000] {helper_functions.py:86} ERROR - Error while extracting data for NI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:32.247+0000] {helper_functions.py:86} ERROR - Error while extracting data for NDSN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:32.931+0000] {helper_functions.py:86} ERROR - Error while extracting data for NSC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:33.645+0000] {helper_functions.py:86} ERROR - Error while extracting data for NTRS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:34.626+0000] {helper_functions.py:86} ERROR - Error while extracting data for NOC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:35.292+0000] {helper_functions.py:86} ERROR - Error while extracting data for NCLH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:35.934+0000] {helper_functions.py:86} ERROR - Error while extracting data for NRG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:36.605+0000] {helper_functions.py:86} ERROR - Error while extracting data for NUE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:37.304+0000] {helper_functions.py:86} ERROR - Error while extracting data for NVDA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:37.989+0000] {helper_functions.py:86} ERROR - Error while extracting data for NVR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:38.631+0000] {helper_functions.py:86} ERROR - Error while extracting data for NXPI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:39.287+0000] {helper_functions.py:86} ERROR - Error while extracting data for ORLY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:39.990+0000] {helper_functions.py:86} ERROR - Error while extracting data for OXY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:40.681+0000] {helper_functions.py:86} ERROR - Error while extracting data for ODFL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:41.741+0000] {helper_functions.py:86} ERROR - Error while extracting data for OMC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:42.423+0000] {helper_functions.py:86} ERROR - Error while extracting data for ON: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:43.070+0000] {helper_functions.py:86} ERROR - Error while extracting data for OKE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:43.732+0000] {helper_functions.py:86} ERROR - Error while extracting data for ORCL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:44.151+0000] {helper_functions.py:86} ERROR - Error while extracting data for OTIS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:44.851+0000] {helper_functions.py:86} ERROR - Error while extracting data for PCAR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:45.517+0000] {helper_functions.py:86} ERROR - Error while extracting data for PKG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:45.865+0000] {helper_functions.py:86} ERROR - Error while extracting data for PLTR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:46.538+0000] {helper_functions.py:86} ERROR - Error while extracting data for PANW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:48.426+0000] {helper_functions.py:86} ERROR - Error while extracting data for PARA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:49.137+0000] {helper_functions.py:86} ERROR - Error while extracting data for PH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:50.153+0000] {helper_functions.py:86} ERROR - Error while extracting data for PAYX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:50.844+0000] {helper_functions.py:86} ERROR - Error while extracting data for PAYC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:51.482+0000] {helper_functions.py:86} ERROR - Error while extracting data for PYPL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:52.181+0000] {helper_functions.py:86} ERROR - Error while extracting data for PNR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:52.875+0000] {helper_functions.py:86} ERROR - Error while extracting data for PEP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:53.646+0000] {helper_functions.py:86} ERROR - Error while extracting data for PFE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:54.418+0000] {helper_functions.py:86} ERROR - Error while extracting data for PCG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:55.088+0000] {helper_functions.py:86} ERROR - Error while extracting data for PM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:55.756+0000] {helper_functions.py:86} ERROR - Error while extracting data for PSX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:56.443+0000] {helper_functions.py:86} ERROR - Error while extracting data for PNW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:57.149+0000] {helper_functions.py:86} ERROR - Error while extracting data for PNC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:57.820+0000] {helper_functions.py:86} ERROR - Error while extracting data for POOL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:58.526+0000] {helper_functions.py:86} ERROR - Error while extracting data for PPG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:59.202+0000] {helper_functions.py:86} ERROR - Error while extracting data for PPL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:16:59.890+0000] {helper_functions.py:86} ERROR - Error while extracting data for PFG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:00.574+0000] {helper_functions.py:86} ERROR - Error while extracting data for PG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:01.215+0000] {helper_functions.py:86} ERROR - Error while extracting data for PGR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:01.863+0000] {helper_functions.py:86} ERROR - Error while extracting data for PLD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:02.526+0000] {helper_functions.py:86} ERROR - Error while extracting data for PRU: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:03.189+0000] {helper_functions.py:86} ERROR - Error while extracting data for PEG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:03.846+0000] {helper_functions.py:86} ERROR - Error while extracting data for PTC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:04.513+0000] {helper_functions.py:86} ERROR - Error while extracting data for PSA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:05.191+0000] {helper_functions.py:86} ERROR - Error while extracting data for PHM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:05.851+0000] {helper_functions.py:86} ERROR - Error while extracting data for QRVO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:06.561+0000] {helper_functions.py:86} ERROR - Error while extracting data for PWR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:07.281+0000] {helper_functions.py:86} ERROR - Error while extracting data for QCOM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:07.960+0000] {helper_functions.py:86} ERROR - Error while extracting data for DGX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:08.637+0000] {helper_functions.py:86} ERROR - Error while extracting data for RL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:09.291+0000] {helper_functions.py:86} ERROR - Error while extracting data for RJF: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:09.946+0000] {helper_functions.py:86} ERROR - Error while extracting data for RTX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:10.624+0000] {helper_functions.py:86} ERROR - Error while extracting data for O: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:11.288+0000] {helper_functions.py:86} ERROR - Error while extracting data for REG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:11.929+0000] {helper_functions.py:86} ERROR - Error while extracting data for REGN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:12.572+0000] {helper_functions.py:86} ERROR - Error while extracting data for RF: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:13.240+0000] {helper_functions.py:86} ERROR - Error while extracting data for RSG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:13.997+0000] {helper_functions.py:86} ERROR - Error while extracting data for RMD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:14.685+0000] {helper_functions.py:86} ERROR - Error while extracting data for RVTY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:15.364+0000] {helper_functions.py:86} ERROR - Error while extracting data for ROK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:16.067+0000] {helper_functions.py:86} ERROR - Error while extracting data for ROL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:16.725+0000] {helper_functions.py:86} ERROR - Error while extracting data for ROP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:17.412+0000] {helper_functions.py:86} ERROR - Error while extracting data for ROST: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:18.115+0000] {helper_functions.py:86} ERROR - Error while extracting data for RCL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:18.810+0000] {helper_functions.py:86} ERROR - Error while extracting data for SPGI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:19.493+0000] {helper_functions.py:86} ERROR - Error while extracting data for CRM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:20.163+0000] {helper_functions.py:86} ERROR - Error while extracting data for SBAC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:20.838+0000] {helper_functions.py:86} ERROR - Error while extracting data for SLB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:21.500+0000] {helper_functions.py:86} ERROR - Error while extracting data for STX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:22.177+0000] {helper_functions.py:86} ERROR - Error while extracting data for SRE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:22.872+0000] {helper_functions.py:86} ERROR - Error while extracting data for NOW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:23.528+0000] {helper_functions.py:86} ERROR - Error while extracting data for SHW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:24.209+0000] {helper_functions.py:86} ERROR - Error while extracting data for SPG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:24.914+0000] {helper_functions.py:86} ERROR - Error while extracting data for SWKS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:25.613+0000] {helper_functions.py:86} ERROR - Error while extracting data for SJM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:25.909+0000] {helper_functions.py:86} ERROR - Error while extracting data for SW: 'date'
+[2024-11-18T10:17:26.561+0000] {helper_functions.py:86} ERROR - Error while extracting data for SNA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:26.858+0000] {helper_functions.py:86} ERROR - Error while extracting data for SOLV: 'date'
+[2024-11-18T10:17:28.862+0000] {helper_functions.py:86} ERROR - Error while extracting data for SO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:29.529+0000] {helper_functions.py:86} ERROR - Error while extracting data for LUV: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:30.180+0000] {helper_functions.py:86} ERROR - Error while extracting data for SWK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:30.842+0000] {helper_functions.py:86} ERROR - Error while extracting data for SBUX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:31.522+0000] {helper_functions.py:86} ERROR - Error while extracting data for STT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:32.223+0000] {helper_functions.py:86} ERROR - Error while extracting data for STLD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:35.275+0000] {helper_functions.py:86} ERROR - Error while extracting data for STE: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:35.982+0000] {helper_functions.py:86} ERROR - Error while extracting data for SYK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:36.680+0000] {helper_functions.py:86} ERROR - Error while extracting data for SMCI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:37.352+0000] {helper_functions.py:86} ERROR - Error while extracting data for SYF: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:38.020+0000] {helper_functions.py:86} ERROR - Error while extracting data for SNPS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:38.682+0000] {helper_functions.py:86} ERROR - Error while extracting data for SYY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:39.333+0000] {helper_functions.py:86} ERROR - Error while extracting data for TMUS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:39.989+0000] {helper_functions.py:86} ERROR - Error while extracting data for TROW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:40.646+0000] {helper_functions.py:86} ERROR - Error while extracting data for TTWO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:41.326+0000] {helper_functions.py:86} ERROR - Error while extracting data for TPR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:42.016+0000] {helper_functions.py:86} ERROR - Error while extracting data for TRGP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:42.718+0000] {helper_functions.py:86} ERROR - Error while extracting data for TGT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:43.392+0000] {helper_functions.py:86} ERROR - Error while extracting data for TEL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:44.087+0000] {helper_functions.py:86} ERROR - Error while extracting data for TDY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:44.745+0000] {helper_functions.py:86} ERROR - Error while extracting data for TFX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:45.411+0000] {helper_functions.py:86} ERROR - Error while extracting data for TER: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:46.091+0000] {helper_functions.py:86} ERROR - Error while extracting data for TSLA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:46.755+0000] {helper_functions.py:86} ERROR - Error while extracting data for TXN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:47.418+0000] {helper_functions.py:86} ERROR - Error while extracting data for TXT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:48.095+0000] {helper_functions.py:86} ERROR - Error while extracting data for TMO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:48.790+0000] {helper_functions.py:86} ERROR - Error while extracting data for TJX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:49.451+0000] {helper_functions.py:86} ERROR - Error while extracting data for TSCO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:50.117+0000] {helper_functions.py:86} ERROR - Error while extracting data for TT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:50.767+0000] {helper_functions.py:86} ERROR - Error while extracting data for TDG: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:51.492+0000] {helper_functions.py:86} ERROR - Error while extracting data for TRV: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:52.446+0000] {helper_functions.py:86} ERROR - Error while extracting data for TRMB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:53.305+0000] {helper_functions.py:86} ERROR - Error while extracting data for TFC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:53.997+0000] {helper_functions.py:86} ERROR - Error while extracting data for TYL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:54.661+0000] {helper_functions.py:86} ERROR - Error while extracting data for TSN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:55.331+0000] {helper_functions.py:86} ERROR - Error while extracting data for USB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:55.859+0000] {helper_functions.py:86} ERROR - Error while extracting data for UBER: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:56.544+0000] {helper_functions.py:86} ERROR - Error while extracting data for UDR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:57.255+0000] {helper_functions.py:86} ERROR - Error while extracting data for ULTA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:57.925+0000] {helper_functions.py:86} ERROR - Error while extracting data for UNP: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:17:58.569+0000] {helper_functions.py:86} ERROR - Error while extracting data for UAL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:00.241+0000] {helper_functions.py:86} ERROR - Error while extracting data for UPS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:00.973+0000] {helper_functions.py:86} ERROR - Error while extracting data for URI: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:01.693+0000] {helper_functions.py:86} ERROR - Error while extracting data for UNH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:02.351+0000] {helper_functions.py:86} ERROR - Error while extracting data for UHS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:02.994+0000] {helper_functions.py:86} ERROR - Error while extracting data for VLO: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:03.675+0000] {helper_functions.py:86} ERROR - Error while extracting data for VTR: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:03.977+0000] {helper_functions.py:86} ERROR - Error while extracting data for VLTO: 'date'
+[2024-11-18T10:18:04.678+0000] {helper_functions.py:86} ERROR - Error while extracting data for VRSN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:05.324+0000] {helper_functions.py:86} ERROR - Error while extracting data for VRSK: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:05.993+0000] {helper_functions.py:86} ERROR - Error while extracting data for VZ: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:06.666+0000] {helper_functions.py:86} ERROR - Error while extracting data for VRTX: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:06.964+0000] {helper_functions.py:86} ERROR - Error while extracting data for VTRS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:07.853+0000] {helper_functions.py:86} ERROR - Error while extracting data for VICI: HTTPSConnectionPool(host='api.tiingo.com', port=443): Max retries exceeded with url: /tiingo/daily/VICI/prices?startDate=2015-01-01&endDate=2021-01-01&format=json (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+[2024-11-18T10:18:08.594+0000] {helper_functions.py:86} ERROR - Error while extracting data for V: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:10.093+0000] {helper_functions.py:86} ERROR - Error while extracting data for VST: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:10.768+0000] {helper_functions.py:86} ERROR - Error while extracting data for VMC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:11.433+0000] {helper_functions.py:86} ERROR - Error while extracting data for WRB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:12.086+0000] {helper_functions.py:86} ERROR - Error while extracting data for GWW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:12.736+0000] {helper_functions.py:86} ERROR - Error while extracting data for WAB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:13.423+0000] {helper_functions.py:86} ERROR - Error while extracting data for WBA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:14.059+0000] {helper_functions.py:86} ERROR - Error while extracting data for WMT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:14.715+0000] {helper_functions.py:86} ERROR - Error while extracting data for DIS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:15.381+0000] {helper_functions.py:86} ERROR - Error while extracting data for WBD: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:16.032+0000] {helper_functions.py:86} ERROR - Error while extracting data for WM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:16.725+0000] {helper_functions.py:86} ERROR - Error while extracting data for WAT: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:17.402+0000] {helper_functions.py:86} ERROR - Error while extracting data for WEC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:18.072+0000] {helper_functions.py:86} ERROR - Error while extracting data for WFC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:18.768+0000] {helper_functions.py:86} ERROR - Error while extracting data for WELL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:19.448+0000] {helper_functions.py:86} ERROR - Error while extracting data for WST: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:20.089+0000] {helper_functions.py:86} ERROR - Error while extracting data for WDC: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:20.743+0000] {helper_functions.py:86} ERROR - Error while extracting data for WY: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:21.413+0000] {helper_functions.py:86} ERROR - Error while extracting data for WMB: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:22.060+0000] {helper_functions.py:86} ERROR - Error while extracting data for WTW: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:22.749+0000] {helper_functions.py:86} ERROR - Error while extracting data for WYNN: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:23.450+0000] {helper_functions.py:86} ERROR - Error while extracting data for XEL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:24.125+0000] {helper_functions.py:86} ERROR - Error while extracting data for XYL: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:24.778+0000] {helper_functions.py:86} ERROR - Error while extracting data for YUM: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:18:25.459+0000] {helper_functions.py:86} ERROR - Error while extracting data for ZBRA: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:46:10.703+0000] {helper_functions.py:86} ERROR - Error while extracting data for ZBH: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:46:11.383+0000] {helper_functions.py:86} ERROR - Error while extracting data for ZTS: concat() takes 1 positional argument but 2 were given
+[2024-11-18T10:46:11.385+0000] {helper_functions.py:93} INFO - Failed to retrieve data for the following tickers: ['MMM', 'AOS', 'ABT', 'ABBV', 'ACN', 'ADBE', 'AMD', 'AES', 'AFL', 'A', 'APD', 'ABNB', 'AKAM', 'ALB', 'ARE', 'ALGN', 'ALLE', 'LNT', 'ALL', 'GOOGL', 'GOOG', 'MO', 'AMZN', 'AMCR', 'AMTM', 'AEE', 'AEP', 'AXP', 'AIG', 'AMT', 'AWK', 'AMP', 'AME', 'AMGN', 'APH', 'ADI', 'ANSS', 'AON', 'APA', 'AAPL', 'AMAT', 'APTV', 'ACGL', 'ADM', 'ANET', 'AJG', 'AIZ', 'T', 'ATO', 'ADSK', 'ADP', 'AZO', 'AVB', 'AVY', 'AXON', 'BKR', 'BALL', 'BAC', 'BAX', 'BDX', 'BRK.B', 'BBY', 'TECH', 'BIIB', 'BLK', 'BX', 'BK', 'BA', 'BKNG', 'BWA', 'BSX', 'BMY', 'AVGO', 'BR', 'BRO', 'BF.B', 'BLDR', 'BG', 'BXP', 'CHRW', 'CDNS', 'CZR', 'CPT', 'CPB', 'COF', 'CAH', 'KMX', 'CCL', 'CARR', 'CTLT', 'CAT', 'CBOE', 'CBRE', 'CDW', 'CE', 'COR', 'CNC', 'CNP', 'CF', 'CRL', 'SCHW', 'CHTR', 'CVX', 'CMG', 'CB', 'CHD', 'CI', 'CINF', 'CTAS', 'CSCO', 'C', 'CFG', 'CLX', 'CME', 'CMS', 'KO', 'CTSH', 'CL', 'CMCSA', 'CAG', 'COP', 'ED', 'STZ', 'CEG', 'COO', 'CPRT', 'GLW', 'CPAY', 'CTVA', 'CSGP', 'COST', 'CTRA', 'CRWD', 'CCI', 'CSX', 'CMI', 'CVS', 'DHR', 'DRI', 'DVA', 'DAY', 'DECK', 'DE', 'DELL', 'DAL', 'DVN', 'DXCM', 'FANG', 'DLR', 'DFS', 'DG', 'DLTR', 'D', 'DPZ', 'DOV', 'DOW', 'DHI', 'DTE', 'DUK', 'DD', 'EMN', 'ETN', 'EBAY', 'ECL', 'EIX', 'EW', 'EA', 'ELV', 'EMR', 'ENPH', 'ETR', 'EOG', 'EPAM', 'EQT', 'EFX', 'EQIX', 'EQR', 'ERIE', 'ESS', 'EL', 'EG', 'EVRG', 'ES', 'EXC', 'EXPE', 'EXPD', 'EXR', 'XOM', 'FFIV', 'FDS', 'FICO', 'FAST', 'FRT', 'FDX', 'FIS', 'FITB', 'FSLR', 'FE', 'FI', 'FMC', 'F', 'FTNT', 'FTV', 'FOXA', 'FOX', 'BEN', 'FCX', 'GRMN', 'IT', 'GE', 'GEHC', 'GEV', 'GEN', 'GNRC', 'GD', 'GIS', 'GM', 'GPC', 'GILD', 'GPN', 'GL', 'GDDY', 'GS', 'HAL', 'HIG', 'HAS', 'HCA', 'DOC', 'HSIC', 'HSY', 'HES', 'HPE', 'HLT', 'HOLX', 'HD', 'HON', 'HRL', 'HST', 'HWM', 'HPQ', 'HUBB', 'HUM', 'HBAN', 'HII', 'IBM', 'IEX', 'IDXX', 'ITW', 'INCY', 'IR', 'PODD', 'INTC', 'ICE', 'IFF', 'IP', 'IPG', 'INTU', 'ISRG', 'IVZ', 'INVH', 'IQV', 'IRM', 'JBHT', 'JBL', 'JKHY', 'J', 'JNJ', 'JCI', 'JPM', 'JNPR', 'K', 'KVUE', 'KDP', 'KEY', 'KEYS', 'KMB', 'KIM', 'KMI', 'KKR', 'KLAC', 'KHC', 'KR', 'LHX', 'LH', 'LRCX', 'LW', 'LVS', 'LDOS', 'LEN', 'LLY', 'LIN', 'LYV', 'LKQ', 'LMT', 'L', 'LOW', 'LULU', 'LYB', 'MTB', 'MRO', 'MPC', 'MKTX', 'MAR', 'MMC', 'MLM', 'MAS', 'MA', 'MTCH', 'MKC', 'MCD', 'MCK', 'MDT', 'MRK', 'META', 'MET', 'MTD', 'MGM', 'MCHP', 'MU', 'MSFT', 'MAA', 'MRNA', 'MHK', 'MOH', 'TAP', 'MDLZ', 'MPWR', 'MNST', 'MCO', 'MS', 'MOS', 'MSI', 'MSCI', 'NDAQ', 'NTAP', 'NFLX', 'NEM', 'NWSA', 'NWS', 'NEE', 'NKE', 'NI', 'NDSN', 'NSC', 'NTRS', 'NOC', 'NCLH', 'NRG', 'NUE', 'NVDA', 'NVR', 'NXPI', 'ORLY', 'OXY', 'ODFL', 'OMC', 'ON', 'OKE', 'ORCL', 'OTIS', 'PCAR', 'PKG', 'PLTR', 'PANW', 'PARA', 'PH', 'PAYX', 'PAYC', 'PYPL', 'PNR', 'PEP', 'PFE', 'PCG', 'PM', 'PSX', 'PNW', 'PNC', 'POOL', 'PPG', 'PPL', 'PFG', 'PG', 'PGR', 'PLD', 'PRU', 'PEG', 'PTC', 'PSA', 'PHM', 'QRVO', 'PWR', 'QCOM', 'DGX', 'RL', 'RJF', 'RTX', 'O', 'REG', 'REGN', 'RF', 'RSG', 'RMD', 'RVTY', 'ROK', 'ROL', 'ROP', 'ROST', 'RCL', 'SPGI', 'CRM', 'SBAC', 'SLB', 'STX', 'SRE', 'NOW', 'SHW', 'SPG', 'SWKS', 'SJM', 'SW', 'SNA', 'SOLV', 'SO', 'LUV', 'SWK', 'SBUX', 'STT', 'STLD', 'STE', 'SYK', 'SMCI', 'SYF', 'SNPS', 'SYY', 'TMUS', 'TROW', 'TTWO', 'TPR', 'TRGP', 'TGT', 'TEL', 'TDY', 'TFX', 'TER', 'TSLA', 'TXN', 'TXT', 'TMO', 'TJX', 'TSCO', 'TT', 'TDG', 'TRV', 'TRMB', 'TFC', 'TYL', 'TSN', 'USB', 'UBER', 'UDR', 'ULTA', 'UNP', 'UAL', 'UPS', 'URI', 'UNH', 'UHS', 'VLO', 'VTR', 'VLTO', 'VRSN', 'VRSK', 'VZ', 'VRTX', 'VTRS', 'VICI', 'V', 'VST', 'VMC', 'WRB', 'GWW', 'WAB', 'WBA', 'WMT', 'DIS', 'WBD', 'WM', 'WAT', 'WEC', 'WFC', 'WELL', 'WST', 'WDC', 'WY', 'WMB', 'WTW', 'WYNN', 'XEL', 'XYL', 'YUM', 'ZBRA', 'ZBH', 'ZTS']
+[2024-11-18T10:46:11.388+0000] {helper_functions.py:108} ERROR - Failed to extract SP500 data: No objects to concatenate
+[2024-11-18T10:46:11.391+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/helper_functions.py", line 98, in extract_sp500_data_to_csv
+    data_frame = pd.concat(successful_tickers, ignore_index=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/reshape/concat.py", line 380, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/reshape/concat.py", line 443, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/reshape/concat.py", line 505, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+[2024-11-18T10:46:11.421+0000] {taskinstance.py:1225} INFO - Marking task as UP_FOR_RETRY. dag_id=SP_500_DATA_PIPELINE_v1, task_id=extract_data_task, run_id=manual__2024-11-18T10:12:29.568654+00:00, execution_date=20241118T101229, start_date=20241118T101231, end_date=20241118T104611
+[2024-11-18T10:46:11.444+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-11-18T10:46:11.446+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 14 for task extract_data_task (No objects to concatenate; 1594)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/helper_functions.py", line 98, in extract_sp500_data_to_csv
+    data_frame = pd.concat(successful_tickers, ignore_index=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/reshape/concat.py", line 380, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/reshape/concat.py", line 443, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/reshape/concat.py", line 505, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+[2024-11-18T10:46:11.580+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-11-18T10:46:11.604+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-11-18T10:46:11.610+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
