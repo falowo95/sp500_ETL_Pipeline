@@ -12,37 +12,28 @@ Functions:
 """
 
 from pathlib import Path
+
 import logging
+import requests
 
 import pandas as pd
-import pandas_datareader as pdr
-
-
 from google.cloud import bigquery
-
-
-from airflow.config.gcp_service import GCPService
-from airflow.config.logging_config import get_logger
+from config.gcp_service import GCPService
+from google.api_core import exceptions as google_exceptions
 
 
 def to_local(data_frame: pd.DataFrame, file_name: str) -> Path:
     """
     Saves a DataFrame to a local CSV file.
-
-    Args:
-        data_frame (pd.DataFrame): The DataFrame to be saved.
-        file_name (str): The name of the output file.
-
-    Returns:
-        Path: The path object representing the saved file.
     """
-    # Set the path to the file
-    path = Path(f"{file_name}.csv", index=True)
+    # Set the path to the file in the /opt/airflow/data directory
+    data_dir = Path("/opt/airflow/data")
+    data_dir.mkdir(parents=True, exist_ok=True)
+
+    path = data_dir / f"{file_name}.csv"
 
     # Save the DataFrame to the CSV file
     data_frame.to_csv(path, index=False)
-
-    # Print the path to the saved file
     print(f"File has been saved at: {path}")
 
     return path
@@ -52,16 +43,10 @@ def extract_sp500_data_to_csv(
     file_name: str, tiingo_api_key: str, start_date: str, end_date: str
 ) -> None:
     """
-    Extracts data for all S&P 500 stocks from Tiingo using pandas-datareader.
-
-    Args:
-        file_name (str): The name of the output file.
-        tiingo_api_key (str): The API key for Tiingo.
-        start_date (str): The start date for data extraction (YYYY-MM-DD).
-        end_date (str): The end date for data extraction (YYYY-MM-DD).
+    Extracts data for all S&P 500 stocks from Tiingo API.
     """
     # Add proper error handling using the logging configuration
-    logger = get_logger(__name__)
+    logger = logging.getLogger(__name__)
 
     try:
         # Get the list of S&P 500 stock tickers from Wikipedia
@@ -69,19 +54,34 @@ def extract_sp500_data_to_csv(
             "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
         )[0]["Symbol"].tolist()
 
-        # Create empty list for successful tickers
+        # Create empty lists for successful and failed tickers
         successful_tickers = []
         failed_tickers = []
 
         # Loop over all S&P 500 tickers and attempt to retrieve data for each one
         for ticker in sp500_tickers:
             try:
-                # Retrieve data for the current ticker using Tiingo
-                data_frame = pdr.get_data_tiingo(
-                    ticker, start=start_date, end=end_date, api_key=tiingo_api_key
-                )
-                data_frame.reset_index(drop=False, inplace=True)
-                successful_tickers.append(data_frame)
+                # Make direct API call to Tiingo
+                headers = {"Content-Type": "application/json"}
+                url = f"https://api.tiingo.com/tiingo/daily/{ticker}/prices"
+                params = {
+                    "startDate": start_date,
+                    "endDate": end_date,
+                    "token": tiingo_api_key,
+                }
+
+                response = requests.get(url, headers=headers, params=params)
+                response.raise_for_status()  # Raise exception for bad status codes
+
+                # Convert JSON response to DataFrame
+                df = pd.DataFrame(response.json())
+
+                # Add symbol column
+                df["symbol"] = ticker
+
+                successful_tickers.append(df)
+                logging.info(f"Successfully retrieved data for {ticker}")
+
             except Exception as specific_exception:
                 logging.error(
                     f"Error while extracting data for {ticker}: {specific_exception}"
@@ -94,16 +94,20 @@ def extract_sp500_data_to_csv(
                 f"Failed to retrieve data for the following tickers: {failed_tickers}"
             )
 
-        # Concatenate the data for all successful tickers into a single DataFrame
-        data_frame = pd.concat(successful_tickers, ignore_index=True)
+        # Concatenate all DataFrames only if we have successful extractions
+        if successful_tickers:
+            data_frame = pd.concat(successful_tickers, axis=0, ignore_index=True)
 
-        # Convert the timestamp column to datetime objects
-        data_frame["date"] = pd.to_datetime(data_frame["date"]).dt.date
+            # Convert the timestamp column to datetime objects
+            data_frame["date"] = pd.to_datetime(data_frame["date"]).dt.date
 
-        logger.info("Ingestion from API completed")
+            # Save the concatenated data to a file
+            save_to = to_local(data_frame, file_name)
+            logger.info(f"Data saved to: {save_to}")
+        else:
+            logger.error("No data was successfully retrieved for any tickers")
+            raise Exception("No data retrieved")
 
-        save_to = to_local(data_frame, file_name)
-        logger.info(save_to)
     except Exception as e:
         logger.error(f"Failed to extract SP500 data: {str(e)}")
         raise
@@ -114,19 +118,45 @@ def upload_data_to_gcs_from_local(
 ) -> None:
     """
     Uploads a file to Google Cloud Storage.
-    Uses GCPService singleton with ETLConfig configuration.
+    Falls back to local storage if GCP is unavailable.
     """
-    gcp = GCPService.get_instance()
-    gcp.upload_blob(
-        bucket_name=bucket_name,
-        source_file=source_file_path_local,
-        destination_blob=destination_blob_path,
-    )
+    try:
+        # Ensure the source file path is absolute
+        source_path = Path("/opt/airflow/data") / source_file_path_local
 
-    print(
-        f"File {source_file_path_local} uploaded to {destination_blob_path} "
-        f"in bucket {bucket_name}."
-    )
+        if not source_path.exists():
+            raise FileNotFoundError(f"Source file not found: {source_path}")
+
+        gcp = GCPService.get_instance()
+        gcp.upload_blob(
+            bucket_name=bucket_name,
+            source_file=str(source_path),
+            destination_blob=destination_blob_path,
+        )
+
+        print(
+            f"File {source_path} uploaded to {destination_blob_path} "
+            f"in bucket {bucket_name}."
+        )
+    except google_exceptions.Forbidden as e:
+        print("GCP Authentication/Billing Error. Falling back to local storage.")
+        print(f"Original error: {str(e)}")
+
+        # Create a local backup directory
+        backup_dir = Path("/opt/airflow/data/backup")
+        backup_dir.mkdir(parents=True, exist_ok=True)
+
+        # Copy file to backup location
+        from shutil import copy2
+
+        backup_path = backup_dir / source_file_path_local
+        copy2(source_path, backup_path)
+
+        print(f"File backed up locally to: {backup_path}")
+        # Don't raise the error since we handled it
+    except Exception as e:
+        print(f"Error uploading to GCS: {str(e)}")
+        raise
 
 
 def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) -> None:
@@ -138,17 +168,17 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
         table_name (str): The name of the BigQuery table.
         csv_uri (str): The URI of the CSV file in Google Cloud Storage.
     """
-    gcp = GCPService.get_instance()
+    gcp = GCPService.get_Instance()
 
     # Create the dataset if it doesn't exist
     dataset_ref = f"{gcp.project_id}.{dataset_name}"
     try:
         gcp.bq_client.get_dataset(dataset_ref)
-        logging.info(f"Using existing dataset: {dataset_ref}")
+        print(f"Using existing dataset: {dataset_ref}")
     except Exception as e:
         dataset = bigquery.Dataset(dataset_ref)
         gcp.bq_client.create_dataset(dataset)
-        logging.info(f"Created dataset: {dataset_ref}")
+        print(f"Created dataset: {dataset_ref}")
 
     # Define table schema
     schema = [
@@ -194,7 +224,7 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
             csv_uri, table_id, job_config=job_config
         )
         load_job.result()  # Wait for completion
-        logging.info(f"Loaded {load_job.output_rows} rows into {table_id}")
+        print(f"Loaded {load_job.output_rows} rows into {table_id}")
     except Exception as e:
-        logging.error(f"Error loading data into BigQuery: {str(e)}")
+        print(f"Error loading data into BigQuery: {str(e)}")
         raise

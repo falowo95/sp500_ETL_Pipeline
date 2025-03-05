@@ -61,6 +61,7 @@ x-airflow-common:
     AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: 'google-cloud-platform://?extra__google_cloud_platform__key_path=/.google/credentials/google_credentials.json'
     AIRFLOW_CONN_AWS_DEFAULT: aws://?profile=airflow-xcoms&s3_config_file=/opt/airflow/creds/s3&s3_config_format=aws
     TIINGO_API_KEY: b8048079af04b7e50218c15f24286df5b4c51164
+    AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT: 60
   
 
     
@@ -71,10 +72,12 @@ x-airflow-common:
 
 
   volumes:
+    &airflow-common-volumes
     - ./includes:/opt/airflow/includes
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
+    - ./data:/opt/airflow/data
     - ~/.google/credentials/google_credentials.json:/.google/credentials/google_credentials.json:ro
     - ./config:/opt/airflow/config
 
