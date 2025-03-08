@@ -26,13 +26,11 @@ def to_local(data_frame: pd.DataFrame, file_name: str) -> Path:
     """
     Saves a DataFrame to a local CSV file.
     """
-    # Set the path to the file in the /opt/airflow/data directory
-    data_dir = Path("/opt/airflow/data")
+    # Use a temporary directory for testing
+    data_dir = Path("/tmp/airflow_data")  # Changed from /opt/airflow/data
     data_dir.mkdir(parents=True, exist_ok=True)
 
     path = data_dir / f"{file_name}.csv"
-
-    # Save the DataFrame to the CSV file
     data_frame.to_csv(path, index=False)
     print(f"File has been saved at: {path}")
 

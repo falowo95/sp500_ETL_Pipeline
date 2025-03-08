@@ -10,11 +10,17 @@ Functions:
     function.
 """
 
+import sys
+from pathlib import Path
 import pandas as pd
 
-from airflow.dags.helper_functions import (
+# Add the dags directory to Python path
+dags_path = Path(__file__).parent.parent / "dags"
+sys.path.append(str(dags_path))
+
+from helper_functions import (
     to_local,
-)
+)  # Now we can import directly from helper_functions
 
 
 def test_to_local() -> None:
