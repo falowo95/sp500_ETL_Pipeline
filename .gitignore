@@ -1,4 +1,3 @@
-
 __pycache__
 tmp
 *.ipynb
@@ -13,5 +12,17 @@ s3
 .vscode
 /google_cred
 venv
+
+# Environment variables and secrets
 .env
+.env.*
+*.env
+
+# AWS credentials and config files
+.aws/
+aws_credentials
+*.pem
+*.ppk
+
+# Google credentials
 google_cred/google_credentials.json
