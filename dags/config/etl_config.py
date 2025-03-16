@@ -4,33 +4,20 @@ from typing import List, Optional
 from pathlib import Path
 import os
 from functools import cached_property
+from config.aws_config import AWSConfig
 from config.gcp_config import GCPUtils
 from config.gcp_service import GCPService
 
 
-@dataclass(frozen=True)
+@dataclass
 class ETLConfig:
-    """Configuration class for ETL process.
-
-    This class contains all configuration parameters needed for the ETL pipeline,
-    including Airflow settings, API credentials, and data paths.
-
-    Attributes:
-        owner: The owner of the Airflow DAG
-        start_date: The start date for the Airflow DAG
-        email: List of email addresses for notifications
-        email_on_failure: Whether to send email on task failure
-        email_on_retry: Whether to send email on task retry
-        depends_on_past: Whether tasks depend on past executions
-        retries: Number of retries for failed tasks
-        retry_delay: Delay between retries
-    """
-
+    """Configuration class for ETL operations."""
+    
     # Airflow configs
-    owner: Optional[str] = None
-    start_date: Optional[datetime] = None
-    email: List[str] = field(default_factory=list)
-    email_on_failure: bool = False
+    owner: str = "airflow"
+    start_date: datetime = field(default_factory=lambda: datetime(2024, 1, 1))
+    email: List[str] = field(default_factory=lambda: ["your-email@example.com"])
+    email_on_failure: bool = True
     email_on_retry: bool = False
     depends_on_past: bool = False
     retries: int = 1
@@ -41,10 +28,20 @@ class ETLConfig:
     data_start_date: str = "2015-01-01"
     data_end_date: str = "2021-01-01"
 
-    @cached_property
+    # AWS configs
+    aws_region: str = "eu-west-2"
+    _aws_config: Optional[AWSConfig] = None
+
+    
+    def aws_config(self) -> AWSConfig:
+        """Get AWS configuration."""
+        if self._aws_config is None:
+            self._aws_config = AWSConfig()
+        return self._aws_config
+
     def tiingo_api_key(self) -> str:
-        """Get Tiingo API key from environment variables."""
-        return self._get_required_env("TIINGO_API_KEY")
+        """Get Tiingo API key from Secrets Manager."""
+        return self.aws_config.get_secret("api/tiingo")
 
     @cached_property
     def bucket_name(self) -> str:
