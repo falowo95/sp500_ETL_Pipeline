@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Project about 
 This project is aimed at processing sp500 stock data to support decision making.
 The transformation steps taken enrich the dataset to facilitate the use of financial indicators to support business decision making by utilizing the dashboard developed in data studio.
@@ -20,7 +20,7 @@ The transformation steps taken enrich the dataset to facilitate the use of finan
 ## Cloud infrastructure
 Except the VM Instance, all project infra setups with terraform: 
 - Data Lake for all of the project data.
-- BigQuery for transformed data tablels as source for dashboard.
+- BigQuery for transformed data tables as source for dashboard.
 
 ## Data pipelines
 The data is downloaded from the tiingo api and then transformed and uploaded to cloud storage via Airflow DAGs:
@@ -29,22 +29,6 @@ The data is downloaded from the tiingo api and then transformed and uploaded to 
   - The upload to gcs task uploads the extracted data to GCS.
   - The transform data task uses stored data in GCS and transforms the data using pyspark.
   - The ingest data into bigquery task uploads the transformed data to BigQuery.
-
-
-## Prereqs
-- Anaconda
-- Docker + Docker-compose
-- GCP project
-- Terraform
-
-## Setup & Deploy
-1. Create cloud infrasctructure via Terraform. Look at instructions at [terraform dir](https://github.com/falowo95/sp500_ETL_Pipeline/tree/main/terraform).
-2. Run Airflow in docker and trigger DAGs. Look at instructions at [airflow dir](https://github.com/falowo95/sp500_ETL_Pipeline/tree/main/airflow).
-3. Connect Google Data Studio dashboard to project BigQuery as a source.
-
-
-
-=======
 # Airflow DAGs
 
 To run Airflow, you'll need to set up a Docker Compose network. The necessary files and specifications are included in this repository:
@@ -89,4 +73,19 @@ make up
 make down
 ```
 7. Once Airflow is running, you can access it on port 8080. You can forward this port and open it in your browser at localhost:8080.
->>>>>>> master
+
+
+
+## Prereqs
+- Anaconda
+- Docker + Docker-compose
+- GCP project
+- Terraform
+
+## Setup & Deploy
+1. Create cloud infrasctructure via Terraform. Look at instructions at [terraform dir](https://github.com/falowo95/sp500_ETL_Pipeline/tree/main/terraform).
+2. Run Airflow in docker and trigger DAGs. Look at instructions at [airflow dir](https://github.com/falowo95/sp500_ETL_Pipeline/tree/main/airflow).
+3. Connect Google Data Studio dashboard to project BigQuery as a source.
+
+
+
