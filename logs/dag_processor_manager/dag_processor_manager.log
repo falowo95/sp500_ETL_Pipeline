@@ -2576,3 +2576,104 @@ File Path                                        PID    Runtime      # DAGs    #
 /opt/airflow/dags/sp_500_data_processing_dag.py                           1           0  1.09s           2025-03-16T18:40:29                      34
 /opt/airflow/dags/aws_connection_test_dag.py                              0           1  0.56s           2025-03-16T18:40:14                       5
 ================================================================================
+[2025-03-16T18:41:05.552+0000] {manager.py:997} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                        PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run               Last # of DB Queries
+-----------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------  ----------------------
+/opt/airflow/dags/sp_500_data_processing_dag.py                           1           0  1.00s           2025-03-16T18:41:00                      34
+/opt/airflow/dags/aws_connection_test_dag.py                              0           1  0.59s           2025-03-16T18:40:44                       5
+================================================================================
+[2025-03-16T18:41:36.274+0000] {manager.py:997} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                        PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run               Last # of DB Queries
+-----------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------  ----------------------
+/opt/airflow/dags/sp_500_data_processing_dag.py                           1           0  1.33s           2025-03-16T18:41:32                      34
+/opt/airflow/dags/aws_connection_test_dag.py                              0           1  0.53s           2025-03-16T18:41:15                       5
+================================================================================
+[2025-03-16T18:42:06.746+0000] {manager.py:997} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                        PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run               Last # of DB Queries
+-----------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------  ----------------------
+/opt/airflow/dags/sp_500_data_processing_dag.py                           1           0  0.87s           2025-03-16T18:42:03                      34
+/opt/airflow/dags/aws_connection_test_dag.py                              0           1  0.55s           2025-03-16T18:41:46                       5
+================================================================================
+[2025-03-16T18:42:37.109+0000] {manager.py:997} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                        PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run               Last # of DB Queries
+-----------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------  ----------------------
+/opt/airflow/dags/sp_500_data_processing_dag.py                           1           0  0.93s           2025-03-16T18:42:34                      34
+/opt/airflow/dags/aws_connection_test_dag.py                              0           1  0.56s           2025-03-16T18:42:17                       5
+================================================================================
+[2025-03-16T18:43:07.452+0000] {manager.py:997} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                        PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run               Last # of DB Queries
+-----------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------  ----------------------
+/opt/airflow/dags/sp_500_data_processing_dag.py                           1           0  1.38s           2025-03-16T18:43:06                      34
+/opt/airflow/dags/aws_connection_test_dag.py                              0           1  0.63s           2025-03-16T18:42:48                       5
+================================================================================
+[2025-03-16T18:43:12.514+0000] {manager.py:821} INFO - Searching for files in /opt/airflow/dags
+[2025-03-16T18:43:12.702+0000] {manager.py:824} INFO - There are 2 files in /opt/airflow/dags
+[2025-03-16T18:43:37.659+0000] {manager.py:997} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                        PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run               Last # of DB Queries
+-----------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------  ----------------------
+/opt/airflow/dags/sp_500_data_processing_dag.py                           1           0  0.69s           2025-03-16T18:43:37                      34
+/opt/airflow/dags/aws_connection_test_dag.py                              0           1  0.57s           2025-03-16T18:43:19                       5
+================================================================================
+[2025-03-16T18:44:08.317+0000] {manager.py:997} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                          PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run               Last # of DB Queries
+-----------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------  ----------------------
+/opt/airflow/dags/sp_500_data_processing_dag.py   1867  0.01s             1           0  0.69s           2025-03-16T18:43:37                      34
+/opt/airflow/dags/aws_connection_test_dag.py                              0           1  0.56s           2025-03-16T18:43:50                       5
+================================================================================
+[2025-03-16T18:44:38.481+0000] {manager.py:997} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                        PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run               Last # of DB Queries
+-----------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------  ----------------------
+/opt/airflow/dags/sp_500_data_processing_dag.py                           1           0  0.79s           2025-03-16T18:44:09                      34
+/opt/airflow/dags/aws_connection_test_dag.py                              0           1  0.62s           2025-03-16T18:44:21                       5
+================================================================================
+[2025-03-16T18:45:08.521+0000] {manager.py:997} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                        PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run               Last # of DB Queries
+-----------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------  ----------------------
+/opt/airflow/dags/sp_500_data_processing_dag.py                           1           0  1.09s           2025-03-16T18:44:40                      34
+/opt/airflow/dags/aws_connection_test_dag.py                              0           1  0.51s           2025-03-16T18:44:52                       5
+================================================================================
+[2025-03-16T18:45:39.258+0000] {manager.py:997} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                        PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run               Last # of DB Queries
+-----------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------  ----------------------
+/opt/airflow/dags/sp_500_data_processing_dag.py                           1           0  0.89s           2025-03-16T18:45:11                      34
+/opt/airflow/dags/aws_connection_test_dag.py                              0           1  0.46s           2025-03-16T18:45:23                       5
+================================================================================
+[2025-03-16T18:46:09.435+0000] {manager.py:997} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                        PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run               Last # of DB Queries
+-----------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------  ----------------------
+/opt/airflow/dags/aws_connection_test_dag.py                              0           1  0.95s           2025-03-16T18:45:54                       5
+/opt/airflow/dags/sp_500_data_processing_dag.py                           1           0  0.95s           2025-03-16T18:45:43                      34
+================================================================================
