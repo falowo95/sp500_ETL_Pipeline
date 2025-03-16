@@ -9,7 +9,9 @@ Functions:
 - test_extract_sp500_data_to_csv()-> None: Test function for the 'extract_sp500_data_to_csv' 
     function.
 """
-
+from helper_functions import (
+    to_local,
+)
 import sys
 from pathlib import Path
 import pandas as pd
@@ -18,9 +20,7 @@ import pandas as pd
 dags_path = Path(__file__).parent.parent / "dags"
 sys.path.append(str(dags_path))
 
-from helper_functions import (
-    to_local,
-)  # Now we can import directly from helper_functions
+  # Now we can import directly from helper_functions
 
 
 def test_to_local() -> None:
