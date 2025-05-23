@@ -1,7 +1,15 @@
-
 # Project about 
 This project is aimed at processing sp500 stock data to support decision making.
 The transformation steps taken enrich the dataset to facilitate the use of financial indicators to support business decision making by utilizing the dashboard developed in data studio.
+
+## System Architecture
+![System Architecture](docs/system-architecture.png)
+
+## Pipeline Overview
+The data pipeline consists of several stages for processing SP500 stock data:
+![Pipeline Overview 1](docs/pipeline-overview-1.png)
+![Pipeline Overview 2](docs/pipeline-overview-2.png)
+![Pipeline Overview 3](docs/pipeline-overview-3.png)
 
 ## Dataset
 [The stock data used is gotten from the tiingo api](https://api.tiingo.com/)

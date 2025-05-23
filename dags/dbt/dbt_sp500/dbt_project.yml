@@ -1,28 +1,28 @@
-
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'sp500_data_manager'
+name: 'sp500_analytics'
 version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'sp500_data_manager'
+profile: 'sp500_analytics'
 
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
-model-paths: ["dbt_sp500/models"]
-analysis-paths: ["dbt_sp500/analyses"]
-test-paths: ["dbt_sp500/tests"]
-seed-paths: ["dbt_sp500/seeds"]
-macro-paths: ["dbt_sp500/macros"]
-snapshot-paths: ["dbt_sp500/snapshots"]
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
 
 target-path: "target"  # directory which will store compiled SQL files
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
+  - "logs"
 
 
 # Configuring models
@@ -32,7 +32,21 @@ clean-targets:         # directories to be removed by `dbt clean`
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
 models:
-  dbt_sp500:
-    # Config indicated by + and applies to all files under models/example/
-    example:
+  sp500_analytics:
+    marts:
       +materialized: table
+      +schema: marts
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: ephemeral
+      +schema: intermediate
+
+seeds:
+  sp500_analytics:
+    +schema: raw
+
+vars:
+  start_date: '2024-01-01'
+  'dbt_date:time_zone': 'America/New_York'

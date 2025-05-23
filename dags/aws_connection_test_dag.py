@@ -68,4 +68,4 @@ with DAG(
 
 
     # Set task dependencies
-    check_connection >> test_secrets
+    test_secrets
