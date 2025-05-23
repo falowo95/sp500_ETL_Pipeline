@@ -1,0 +1,69 @@
+version: 2
+
+sources:
+  - name: sp500
+    description: "SP500 stock data from Supabase"
+    database: postgres
+    schema: public
+    tables:
+      - name: sp500_stocks
+        description: "Raw and processed stock data"
+        columns:
+          - name: id
+            description: "Primary key"
+            tests:
+              - unique
+              - not_null
+          - name: symbol
+            description: "Stock symbol"
+            tests:
+              - not_null
+          - name: date
+            description: "Trading date"
+            tests:
+              - not_null
+      
+      - name: financial_indicators
+        description: "Calculated financial indicators"
+        columns:
+          - name: id
+            description: "Primary key"
+            tests:
+              - unique
+              - not_null
+          - name: stock_id
+            description: "Foreign key to sp500_stocks"
+            tests:
+              - not_null
+              - relationships:
+                  to: source('sp500', 'sp500_stocks')
+                  field: id
+
+models:
+  - name: stg_stocks
+    description: "Staged stock data"
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: symbol
+        tests:
+          - not_null
+      - name: date
+        tests:
+          - not_null
+
+  - name: stg_indicators
+    description: "Staged financial indicators"
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: stock_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_stocks')
+              field: id 

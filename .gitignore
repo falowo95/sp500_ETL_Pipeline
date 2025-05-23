@@ -26,3 +26,21 @@ aws_credentials
 
 # Google credentials
 google_cred/google_credentials.json
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# IDE specific files
+.idea/
+*.sublime-workspace
+*.sublime-project
+.vscode/
