@@ -31,5 +31,5 @@ variable "TABLE_NAME" {
 
 variable "credentials_file" {
     description = "Path to your credentials file"
-    default = "/Users/falowogbolahan/.google/credentials/google_credentials.json"
+    default = "/path/to/your/credentials.json" // Replace with the actual path to your Google credentials file
 }

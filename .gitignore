@@ -12,6 +12,7 @@ s3
 .vscode
 /google_cred
 venv
+/creds
 
 # Environment variables and secrets
 .env
@@ -23,7 +24,7 @@ venv
 aws_credentials
 *.pem
 *.ppk
-
+*.jar
 # Google credentials
 google_cred/google_credentials.json
 
@@ -44,3 +45,19 @@ __pycache__/
 *.sublime-workspace
 *.sublime-project
 .vscode/
+
+# --- Terraform state and caches ---
+.terraform/
+terraform.tfstate
+terraform.tfstate.*
+crash.log
+crash.*.log
+
+# --- Google Cloud credentials (service accounts) ---
+# These are redundant with *.json above but explicit for clarity
+**/google_credentials.json
+**/google-credentials.json
+**/service_account.json
+**/service-account.json
+**/*service_account*.json
+**/*credentials*.json
