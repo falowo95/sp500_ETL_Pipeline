@@ -82,6 +82,30 @@ def extract_sp500_data_to_csv(file_name: str, start_date: str, end_date: str) ->
                 # Add symbol column
                 df["symbol"] = ticker
 
+                # Reorder to match the BigQuery load schema exactly. BigQuery's CSV
+                # loader maps columns positionally, not by header name, so column
+                # order here must match ingest_from_gcs_to_bquery's schema list.
+                # Selecting explicit columns (rather than reordering "everything
+                # else") also fails loudly if Tiingo ever drops/renames a field.
+                df = df[
+                    [
+                        "symbol",
+                        "date",
+                        "close",
+                        "high",
+                        "low",
+                        "open",
+                        "volume",
+                        "adjClose",
+                        "adjHigh",
+                        "adjLow",
+                        "adjOpen",
+                        "adjVolume",
+                        "divCash",
+                        "splitFactor",
+                    ]
+                ]
+
                 successful_tickers.append(df)
                 logging.info(f"Successfully retrieved data for {ticker}")
 

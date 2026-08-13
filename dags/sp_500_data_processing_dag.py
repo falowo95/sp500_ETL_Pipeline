@@ -105,6 +105,14 @@ def define_dag() -> DAG:
                 "GCP_BQ_DATASET": config.dataset_name,
                 "GOOGLE_APPLICATION_CREDENTIALS": config.gcp_credentials_path,
                 "PATH": os.environ["PATH"],
+                # dbt looks for profiles.yml via --profiles-dir / DBT_PROFILES_DIR,
+                # then falls back to ~/.dbt/ — it does not check the project
+                # directory by default. profiles.yml lives alongside
+                # dbt_project.yml in DBT_PROJECT_DIR, so this must be set
+                # explicitly since `env=` here replaces the process environment
+                # rather than extending it.
+                "DBT_PROFILES_DIR": DBT_PROJECT_DIR,
+                "HOME": os.environ.get("HOME", "/tmp"),
             },
         )
 

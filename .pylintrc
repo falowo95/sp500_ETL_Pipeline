@@ -6,6 +6,7 @@ disable = missing-module-docstring
 
 [pylint.typecheck]
 disable = import-error
+ignored-modules = pyspark
 
 [pylint.design]
 argument-naming-style = snake_case
@@ -18,9 +19,6 @@ good-names = df
 
 [pylint.logging]
 logging-format-style = new
-
-[pylint.C0103]
-invalid-name=_
 
 [pylint]
 disable = W0718,W1203,W0621,R0902,R0914,W0104,W0622,C0103,W1201,W0212,W0221
