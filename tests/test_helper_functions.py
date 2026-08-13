@@ -1,26 +1,11 @@
 """
-airflow_dag_tests.py
+test_helper_functions.py
 
-This module contains test functions for the helper functions in the Airflow DAGs package.
-The helper functions being tested are 'to_local' and 'extract_sp500_data_to_csv'.
-
-Functions:
-- test_to_local() -> None: Test function for the 'to_local' function.
-- test_extract_sp500_data_to_csv()-> None: Test function for the 'extract_sp500_data_to_csv' 
-    function.
+Tests for the 'to_local' helper in airflow/dags/helper_functions.py.
 """
-from helper_functions import (
-    to_local,
-)
-import sys
-from pathlib import Path
 import pandas as pd
 
-# Add the dags directory to Python path
-dags_path = Path(__file__).parent.parent / "dags"
-sys.path.append(str(dags_path))
-
-  # Now we can import directly from helper_functions
+from helper_functions import to_local
 
 
 def test_to_local() -> None:
@@ -46,23 +31,3 @@ def test_to_local() -> None:
 
     # Delete the file
     path.unlink()
-
-
-# def test_extract_sp500_data_to_csv() -> None:
-#     """
-#     Test function for extract_sp500_data_to_csv.
-
-#     Raises:
-#         AssertionError: If any of the test assertions fail.
-#     """
-#     # Call the extract_sp500_data_to_csv function with a file name
-#     # Set up API key for Tiingo
-#     tiingo_api_key = os.getenv("TIINGO_API_KEY")
-#     file_name = "test_sp500_data"
-#     data_frame = extract_sp500_data_to_csv(file_name, tiingo_api_key)
-
-#     # Check that the returned object is a pandas DataFrame
-#     assert isinstance(data_frame, pd.DataFrame)
-
-#     # Check that the DataFrame has at least one row and one column
-#     assert data_frame.shape[0] > 0 and data_frame.shape[1] > 0

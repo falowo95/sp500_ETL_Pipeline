@@ -2,68 +2,48 @@ version: 2
 
 sources:
   - name: sp500
-    description: "SP500 stock data from Supabase"
-    database: postgres
-    schema: public
+    description: "SP500 stock data landed in BigQuery by the Airflow ingestion pipeline"
+    database: "{{ env_var('GCP_PROJECT_ID') }}"
+    schema: "{{ env_var('GCP_BQ_DATASET', 'SP_500_DATA') }}"
     tables:
-      - name: sp500_stocks
-        description: "Raw and processed stock data"
+      - name: SP_500_DATA_table
+        description: "Cleaned daily OHLCV stock data for all S&P 500 tickers"
         columns:
-          - name: id
-            description: "Primary key"
-            tests:
-              - unique
-              - not_null
           - name: symbol
-            description: "Stock symbol"
+            description: "Stock ticker symbol"
             tests:
               - not_null
           - name: date
             description: "Trading date"
             tests:
               - not_null
-      
-      - name: financial_indicators
-        description: "Calculated financial indicators"
-        columns:
-          - name: id
-            description: "Primary key"
-            tests:
-              - unique
-              - not_null
-          - name: stock_id
-            description: "Foreign key to sp500_stocks"
-            tests:
-              - not_null
-              - relationships:
-                  to: source('sp500', 'sp500_stocks')
-                  field: id
 
 models:
   - name: stg_stocks
-    description: "Staged stock data"
+    description: "Staged, typed daily OHLCV stock data"
     columns:
-      - name: id
-        tests:
-          - unique
-          - not_null
       - name: symbol
         tests:
           - not_null
-      - name: date
+      - name: trade_date
         tests:
           - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - symbol
+            - trade_date
 
-  - name: stg_indicators
-    description: "Staged financial indicators"
+  - name: int_stock_daily_metrics
+    description: "Daily price changes, moving averages, Bollinger bands, RSI, and MACD (SMA-approximated) per symbol"
+
+  - name: dim_stock_summary
+    description: "Per-symbol summary statistics across the full history"
     columns:
-      - name: id
+      - name: symbol
         tests:
           - unique
           - not_null
-      - name: stock_id
-        tests:
-          - not_null
-          - relationships:
-              to: ref('stg_stocks')
-              field: id 
+
+  - name: fct_stock_analysis
+    description: "Daily stock analysis with trading signals derived from technical indicators"

@@ -5,8 +5,6 @@ import os
 
 
 class GCPService:
-    _instance: Optional[GCPUtils] = None
-
     @classmethod
     @lru_cache(maxsize=1)
     def get_instance(
@@ -15,6 +13,12 @@ class GCPService:
         """
         Get or create singleton instance of GCPUtils.
 
+        Memoization is provided solely by lru_cache, keyed on the resolved
+        (credentials_path, project_id) pair. A redundant `cls._instance` check was
+        removed here: it used to short-circuit validation on every call after the
+        first success, silently returning a stale instance even when called later
+        with missing or different credentials/project_id.
+
         Args:
             credentials_path: Path to GCP credentials file
             project_id: GCP project ID
@@ -22,17 +26,12 @@ class GCPService:
         Returns:
             GCPUtils: Singleton instance of GCP utilities
         """
-        if cls._instance is None:
-            if credentials_path is None:
-                credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-            if project_id is None:
-                project_id = os.getenv("GCP_PROJECT_ID")
+        if credentials_path is None:
+            credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+        if project_id is None:
+            project_id = os.getenv("GCP_PROJECT_ID")
 
-            if not credentials_path or not project_id:
-                raise ValueError("Missing required GCP credentials or project ID")
+        if not credentials_path or not project_id:
+            raise ValueError("Missing required GCP credentials or project ID")
 
-            cls._instance = GCPUtils(
-                credentials_path=credentials_path, project_id=project_id
-            )
-
-        return cls._instance
+        return GCPUtils(credentials_path=credentials_path, project_id=project_id)

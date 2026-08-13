@@ -1,22 +1,22 @@
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from typing import List, Optional
+from typing import List
 from pathlib import Path
 import os
 from functools import cached_property
-from config.aws_config import AWSConfig
 from config.gcp_config import GCPUtils
 from config.gcp_service import GCPService
+from config.gcp_secret_manager import SecretManagerService
 
 
 @dataclass
 class ETLConfig:
     """Configuration class for ETL operations."""
-    
+
     # Airflow configs
     owner: str = "airflow"
     start_date: datetime = field(default_factory=lambda: datetime(2024, 1, 1))
-    email: List[str] = field(default_factory=lambda: ["your-email@example.com"])
+    email: List[str] = field(default_factory=list)
     email_on_failure: bool = True
     email_on_retry: bool = False
     depends_on_past: bool = False
@@ -26,22 +26,18 @@ class ETLConfig:
     # Data configs
     file_name: str = "SP_500_DATA"
     data_start_date: str = "2015-01-01"
-    data_end_date: str = "2021-01-01"
 
-    # AWS configs
-    aws_region: str = "eu-west-2"
-    _aws_config: Optional[AWSConfig] = None
+    @cached_property
+    def data_end_date(self) -> str:
+        """Get the data extraction end date, defaulting to today."""
+        return datetime.now().strftime("%Y-%m-%d")
 
-    
-    def aws_config(self) -> AWSConfig:
-        """Get AWS configuration."""
-        if self._aws_config is None:
-            self._aws_config = AWSConfig()
-        return self._aws_config
-
+    @cached_property
     def tiingo_api_key(self) -> str:
-        """Get Tiingo API key from Secrets Manager."""
-        return self.aws_config.get_secret("api/tiingo")
+        """Get Tiingo API key from GCP Secret Manager."""
+        return SecretManagerService.get_instance(
+            project_id=self.gcp_project_id
+        ).get_secret("api-tiingo")
 
     @cached_property
     def bucket_name(self) -> str:

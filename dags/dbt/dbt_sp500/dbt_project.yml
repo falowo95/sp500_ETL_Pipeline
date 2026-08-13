@@ -40,7 +40,7 @@ models:
       +materialized: view
       +schema: staging
     intermediate:
-      +materialized: ephemeral
+      +materialized: table
       +schema: intermediate
 
 seeds:

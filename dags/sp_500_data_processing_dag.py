@@ -20,7 +20,12 @@ from helper_functions import (
 from stock_data_transform import transform_stock_data
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.operators.bash import BashOperator
 from config.etl_config import ETLConfig
+
+DBT_PROJECT_DIR = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "dbt", "dbt_sp500"
+)
 
 
 def define_dag() -> DAG:
@@ -32,21 +37,21 @@ def define_dag() -> DAG:
     """
     config = ETLConfig()
 
-    default_config = ETLConfig(
-        owner="me",
-        start_date=datetime.now(),
-        email=[""],
-        email_on_failure=False,
-        email_on_retry=False,
-        depends_on_past=False,
-        retries=2,
-        retry_delay=timedelta(minutes=1),
-    )
+    default_args = {
+        "owner": "airflow",
+        "start_date": datetime.now(),
+        "email": [],
+        "email_on_failure": False,
+        "email_on_retry": False,
+        "depends_on_past": False,
+        "retries": 2,
+        "retry_delay": timedelta(minutes=1),
+    }
 
     with DAG(
         dag_id="SP_500_DATA_PIPELINE_v1",
-        schedule_interval="@daily",
-        default_args=default_config.__dict__,
+        schedule="@daily",
+        default_args=default_args,
         catchup=False,
         tags=["sp500-data"],
     ) as dag:
@@ -55,7 +60,6 @@ def define_dag() -> DAG:
             python_callable=extract_sp500_data_to_csv,
             op_kwargs={
                 "file_name": config.file_name,
-                "tiingo_api_key": config.tiingo_api_key,
                 "start_date": config.data_start_date,
                 "end_date": config.data_end_date,
             },
@@ -90,11 +94,26 @@ def define_dag() -> DAG:
             },
         )
 
+        dbt_build_task = BashOperator(
+            task_id="dbt_build",
+            bash_command=(
+                f"cd {DBT_PROJECT_DIR} && dbt deps && dbt build "
+                f"--target dev"
+            ),
+            env={
+                "GCP_PROJECT_ID": config.gcp_project_id,
+                "GCP_BQ_DATASET": config.dataset_name,
+                "GOOGLE_APPLICATION_CREDENTIALS": config.gcp_credentials_path,
+                "PATH": os.environ["PATH"],
+            },
+        )
+
         (
             extract_data_task
             >> upload_to_gcs_task
             >> transform_data_task
             >> ingest_data_into_bigquery
+            >> dbt_build_task
         )
 
     return dag

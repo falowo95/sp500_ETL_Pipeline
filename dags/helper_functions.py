@@ -19,7 +19,10 @@ import requests
 import pandas as pd
 from google.cloud import bigquery
 from config.gcp_service import GCPService
+from config.etl_config import ETLConfig
 from google.api_core import exceptions as google_exceptions
+
+logger = logging.getLogger(__name__)
 
 
 def to_local(data_frame: pd.DataFrame, file_name: str) -> Path:
@@ -32,21 +35,23 @@ def to_local(data_frame: pd.DataFrame, file_name: str) -> Path:
 
     path = data_dir / f"{file_name}.csv"
     data_frame.to_csv(path, index=False)
-    print(f"File has been saved at: {path}")
+    logger.info(f"File has been saved at: {path}")
 
     return path
 
 
-def extract_sp500_data_to_csv(
-    file_name: str, tiingo_api_key: str, start_date: str, end_date: str
-) -> None:
+def extract_sp500_data_to_csv(file_name: str, start_date: str, end_date: str) -> None:
     """
     Extracts data for all S&P 500 stocks from Tiingo API.
+
+    The Tiingo API key is resolved from GCP Secret Manager at task-execution time
+    (not DAG-parse time) so that DAG parsing never depends on live GCP credentials.
     """
-    # Add proper error handling using the logging configuration
     logger = logging.getLogger(__name__)
 
     try:
+        tiingo_api_key = ETLConfig().tiingo_api_key
+
         # Get the list of S&P 500 stock tickers from Wikipedia
         sp500_tickers = pd.read_html(
             "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
@@ -132,13 +137,14 @@ def upload_data_to_gcs_from_local(
             destination_blob=destination_blob_path,
         )
 
-        print(
+        logger.info(
             f"File {source_path} uploaded to {destination_blob_path} "
             f"in bucket {bucket_name}."
         )
     except google_exceptions.Forbidden as e:
-        print("GCP Authentication/Billing Error. Falling back to local storage.")
-        print(f"Original error: {str(e)}")
+        logger.error(
+            f"GCP Authentication/Billing Error, falling back to local storage: {e}"
+        )
 
         # Create a local backup directory
         backup_dir = Path("/opt/airflow/data/backup")
@@ -150,10 +156,10 @@ def upload_data_to_gcs_from_local(
         backup_path = backup_dir / source_file_path_local
         copy2(source_path, backup_path)
 
-        print(f"File backed up locally to: {backup_path}")
+        logger.info(f"File backed up locally to: {backup_path}")
         # Don't raise the error since we handled it
     except Exception as e:
-        print(f"Error uploading to GCS: {str(e)}")
+        logger.error(f"Error uploading to GCS: {str(e)}")
         raise
 
 
@@ -166,19 +172,21 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
         table_name (str): The name of the BigQuery table.
         csv_uri (str): The URI of the CSV file in Google Cloud Storage.
     """
-    gcp = GCPService.get_Instance()
+    gcp = GCPService.get_instance()
 
     # Create the dataset if it doesn't exist
     dataset_ref = f"{gcp.project_id}.{dataset_name}"
     try:
         gcp.bq_client.get_dataset(dataset_ref)
-        print(f"Using existing dataset: {dataset_ref}")
-    except Exception as e:
+        logger.info(f"Using existing dataset: {dataset_ref}")
+    except Exception:
         dataset = bigquery.Dataset(dataset_ref)
         gcp.bq_client.create_dataset(dataset)
-        print(f"Created dataset: {dataset_ref}")
+        logger.info(f"Created dataset: {dataset_ref}")
 
-    # Define table schema
+    # Define table schema. Only raw/cleaned OHLCV + adjusted-price fields are landed
+    # here — derived indicators (moving averages, Bollinger bands, RSI, MACD, etc.)
+    # are computed downstream by the dbt project running against this table.
     schema = [
         bigquery.SchemaField("symbol", "STRING"),
         bigquery.SchemaField("date", "DATETIME"),
@@ -194,18 +202,6 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
         bigquery.SchemaField("adjVolume", "INTEGER"),
         bigquery.SchemaField("divCash", "FLOAT"),
         bigquery.SchemaField("splitFactor", "FLOAT"),
-        bigquery.SchemaField("daily_pct_change", "FLOAT"),
-        bigquery.SchemaField("twenty_day_moving", "FLOAT"),
-        bigquery.SchemaField("two_hundred_day_moving", "FLOAT"),
-        bigquery.SchemaField("std", "FLOAT"),
-        bigquery.SchemaField("bollinger_up", "FLOAT"),
-        bigquery.SchemaField("bollinger_down", "FLOAT"),
-        bigquery.SchemaField("cum_daily_returns", "FLOAT"),
-        bigquery.SchemaField("cum_monthly_returns", "FLOAT"),
-        bigquery.SchemaField("daily_log_returns", "FLOAT"),
-        bigquery.SchemaField("volatility", "FLOAT"),
-        bigquery.SchemaField("returns", "FLOAT"),
-        bigquery.SchemaField("sharpe_ratio", "FLOAT"),
     ]
 
     # Configure the load job
@@ -222,7 +218,7 @@ def ingest_from_gcs_to_bquery(dataset_name: str, table_name: str, csv_uri: str) 
             csv_uri, table_id, job_config=job_config
         )
         load_job.result()  # Wait for completion
-        print(f"Loaded {load_job.output_rows} rows into {table_id}")
+        logger.info(f"Loaded {load_job.output_rows} rows into {table_id}")
     except Exception as e:
-        print(f"Error loading data into BigQuery: {str(e)}")
+        logger.error(f"Error loading data into BigQuery: {str(e)}")
         raise
