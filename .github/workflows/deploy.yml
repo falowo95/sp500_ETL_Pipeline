@@ -1,0 +1,79 @@
+name: Deploy
+
+# Runs on merge to main, after CI has already passed on that commit.
+# Everything here authenticates via Workload Identity Federation — no
+# service-account JSON key anywhere, including for Firebase Hosting (this
+# project has a documented past incident of a key file being leaked).
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to GCP (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.WIF_SERVICE_ACCOUNT }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker ${{ vars.GCP_REGION }}-docker.pkg.dev --quiet
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform apply
+        working-directory: terraform
+        run: |
+          terraform init -input=false
+          terraform apply -input=false -auto-approve \
+            -var="project=${{ vars.GCP_PROJECT_ID }}" \
+            -var="alert_notification_email=${{ vars.ALERT_EMAIL }}" \
+            -var="github_repo=${{ github.repository }}"
+
+      - name: Build and deploy pipeline image
+        run: |
+          IMAGE="${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/sp500-pipeline/sp500-pipeline:${{ github.sha }}"
+          docker build -f Dockerfile.pipeline -t "$IMAGE" .
+          docker push "$IMAGE"
+          # Pin the runtime identity. Omitting it can fall back to the
+          # default Compute Engine account, which is often roles/editor.
+          gcloud run jobs update sp500-pipeline \
+            --quiet \
+            --region="${{ vars.GCP_REGION }}" \
+            --image="$IMAGE" \
+            --service-account="sp500-pipeline-runner@${{ vars.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
+
+      - name: Build and deploy dashboard image
+        run: |
+          IMAGE="${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/sp500-pipeline/sp500-dashboard:${{ github.sha }}"
+          docker build -f portfolio/dashboard/Dockerfile -t "$IMAGE" portfolio/dashboard
+          docker push "$IMAGE"
+          gcloud run deploy sp500-dashboard \
+            --quiet \
+            --region="${{ vars.GCP_REGION }}" \
+            --image="$IMAGE" \
+            --service-account="sp500-dashboard@${{ vars.GCP_PROJECT_ID }}.iam.gserviceaccount.com" \
+            --min-instances=0 \
+            --max-instances=2 \
+            --ingress=all
+
+      - name: Deploy case-study site to Firebase Hosting
+        working-directory: portfolio/case-study
+        run: |
+          npm install -g firebase-tools
+          # Authenticates via the Application Default Credentials set up by
+          # the auth step above — no separate Firebase service-account key.
+          firebase deploy --only hosting --project "${{ vars.GCP_PROJECT_ID }}" --non-interactive

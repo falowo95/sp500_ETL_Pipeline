@@ -1,0 +1,104 @@
+# Runner image for the S&P 500 pipeline Cloud Run Job (see entrypoint.sh).
+# It is invoked once per job execution rather than run as a long-lived
+# webserver/scheduler, so there is no persistent Airflow metadata DB.
+#
+# What is deliberately NOT in here:
+# - JDK / Spark / GCS-connector jar: the PySpark step was removed; all
+#   cleaning happens in dbt SQL now.
+# - gcloud SDK: nothing shells out to `gcloud`. GCS/BigQuery/Secret Manager
+#   access goes through the google-cloud-* Python clients using Application
+#   Default Credentials from the Cloud Run Job's attached service account.
+# - Credentials of any kind: .dockerignore is an allowlist, so .git, tests/,
+#   terraform state, .env files, .venv, and the portfolio dashboard cannot
+#   enter the build context. dags/ and dags/dbt are re-included.
+# - pylint / pytest: local and CI only. requirements.txt still lists them;
+#   the install below filters them out. pandas_datareader stays because it
+#   pulls lxml, which pandas.read_html needs for the constituents table.
+#
+# Build for Cloud Run with `gcloud builds submit --config cloudbuild.yaml`
+# (server-side, linux/amd64). A plain local `docker build` on Apple Silicon
+# produces an arm64 image that Cloud Run cannot execute.
+
+# Keep these two in lockstep with the `apache-airflow==` pin in
+# requirements.txt: they select both the base image and the matching
+# constraints file below.
+ARG AIRFLOW_VERSION=2.10.3
+ARG PYTHON_VERSION=3.12
+
+# The "slim" variant ships Airflow core plus only a handful of providers,
+# versus the default image's ~80 providers (668MB vs 1.54GB uncompressed).
+# The DAG only uses core PythonOperator/BashOperator; GCP access is via
+# the google-cloud-* clients installed from requirements.txt, not via
+# apache-airflow-providers-google. Pinned by tag; for fully reproducible
+# builds pin the digest as well, e.g.
+#   apache/airflow:slim-2.10.3-python3.12@sha256:5e61b0ae6261...
+FROM apache/airflow:slim-${AIRFLOW_VERSION}-python${PYTHON_VERSION}
+
+# The slim image sets ENV PYTHON_VERSION=3.12.7, which overrides an ARG of
+# the same name. Airflow publishes constraints-3.12.txt, not 3.12.7.
+ARG AIRFLOW_VERSION=2.10.3
+ARG PYTHON_VERSION=3.12
+ARG CONSTRAINTS_PYTHON_VERSION=3.12
+ARG DBT_BIGQUERY_VERSION=1.8.3
+
+ENV AIRFLOW_HOME=/opt/airflow \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# The base image already runs as the `airflow` user (UID 50000), so no
+# USER switching is needed for anything below.
+COPY requirements.txt /requirements.txt
+
+# Airflow's published constraints file pins every transitive dependency to a
+# combination Airflow's CI has tested together. Without it, pip's resolver
+# has to search the overlapping version space of apache-airflow and the
+# google-cloud-* stack unaided, which hit ResolutionTooDeep during builds.
+# No apt packages are added here. Cleanup is in this same RUN so the deleted
+# test suites and bytecode are not left behind in an earlier layer.
+RUN grep -vE '^(pylint|pytest)([=<>!~].*)?$' /requirements.txt > /tmp/requirements.runtime.txt \
+ && pip install --no-cache-dir -r /tmp/requirements.runtime.txt \
+    --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${CONSTRAINTS_PYTHON_VERSION}.txt" \
+ && rm -f /tmp/requirements.runtime.txt \
+ && find /home/airflow/.local -type d -name '__pycache__' -prune -exec rm -rf '{}' + \
+ && find /home/airflow/.local/lib \
+      \( -path '*/pandas/*' -o -path '*/numpy/*' -o -path '*/pyarrow/*' \) \
+      -type d -name tests -prune -exec rm -rf '{}' + \
+ && find /home/airflow/.local -type f -name '*.pyc' -delete \
+ && rm -rf /home/airflow/.cache
+
+# dbt-bigquery lives in its own venv, isolated from Airflow's site-packages:
+# dbt-adapters requires protobuf>=5.0 while Airflow 2.10.3's constraints pin
+# protobuf==4.25.5, so the two cannot coexist in one environment.
+# dags/sp_500_data_processing_dag.py's dbt_build task prepends this venv's
+# bin/ to PATH for that task only.
+# The venv is created --without-pip and populated by the outer pip via
+# `--python`: dbt never needs pip at runtime, so this saves ~13MB.
+# dbt-bigquery depends on google-cloud-bigquery[pandas], so this venv
+# carries its own pandas/numpy/pyarrow (protobuf 5 cannot share Airflow's
+# copies). Their test directories are not imported by `dbt build`.
+RUN python -m venv --without-pip /home/airflow/dbt_venv && \
+    pip --python /home/airflow/dbt_venv/bin/python install --no-cache-dir \
+        "dbt-bigquery==${DBT_BIGQUERY_VERSION}" && \
+    find /home/airflow/dbt_venv -type d -name '__pycache__' -prune -exec rm -rf '{}' + && \
+    find /home/airflow/dbt_venv/lib \
+         \( -path '*/pandas/*' -o -path '*/numpy/*' -o -path '*/pyarrow/*' \) \
+         -type d -name tests -prune -exec rm -rf '{}' + && \
+    find /home/airflow/dbt_venv -type f -name '*.pyc' -delete && \
+    rm -rf /home/airflow/.cache
+
+COPY --chown=airflow:root dags/ ${AIRFLOW_HOME}/dags/
+
+# Bake the dbt hub packages (dbt_utils, dbt_date) into the image at build
+# time so a run does not depend on hub.getdbt.com being reachable. `dbt deps`
+# does not read profiles.yml, so no credentials are involved here.
+RUN cd ${AIRFLOW_HOME}/dags/dbt/dbt_sp500 && \
+    /home/airflow/dbt_venv/bin/dbt deps --quiet && \
+    rm -rf logs
+
+COPY --chown=airflow:root entrypoint.sh /entrypoint.sh
+# Cloud Build's docker builder does not enable BuildKit, so COPY --chmod
+# is rejected. The file is owned by airflow, who can mark it executable.
+RUN chmod 0755 /entrypoint.sh
+
+WORKDIR ${AIRFLOW_HOME}
+ENTRYPOINT ["/entrypoint.sh"]

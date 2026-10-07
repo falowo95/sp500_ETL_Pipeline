@@ -1,30 +1,19 @@
-down: 
-	docker compose down
-up:
-	docker-compose up -d
-
-build:
-	docker-compose build
-
-
 ##################################################################################################
 # Set up cloud infrastructure
+#
+# One-time bootstrap (creates the Terraform state bucket itself — run once,
+# by hand, before anything below):
+#   terraform -chdir=terraform/bootstrap init
+#   terraform -chdir=terraform/bootstrap apply -var="project=dataengineering-378316"
 
 tf-init:
-	terraform -chdir=../terraform init
+	terraform -chdir=terraform init
 
 infra-up:
-	terraform -chdir=../terraform apply
+	terraform -chdir=terraform apply
 
 infra-down:
-	terraform -chdir=../terraform destroy
+	terraform -chdir=terraform destroy
 
 infra-config:
-	terraform -chdir=../terraform output
-
-ssh-google_vm:
-	gcloud compute ssh --zone "europe-west1-b" "de-zoomcamp"  --project "dataengineering-378316"
-
-ssh-de-zoomcamp:
-	ssh de-zoomcamp
-
+	terraform -chdir=terraform output

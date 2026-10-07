@@ -1,1 +1,63 @@
-*.jar
+# Allowlist: ignore everything, then re-include only what Dockerfile.pipeline
+# COPYs. This keeps the Cloud Build / docker context small and keeps
+# secrets and local bulk data out, including anything added to the repo later.
+#
+# Left out on purpose (do not re-include):
+#   .git, .github
+#   tests/                  pytest suite — not used by the Cloud Run Job
+#   terraform/              including .terraform/ and *.tfstate
+#   portfolio/              dashboard and case-study are a separate image
+#   .venv, venv, __pycache__, *.pyc
+#   .env and other local env files, key files, logs/, data/
+#
+# dags/ and dags/dbt stay in. dbt build runs SQL tests from
+# dags/dbt/dbt_sp500/tests — do not add a blanket tests exclusion.
+*
+!Dockerfile.pipeline
+!requirements.txt
+!entrypoint.sh
+!dags/
+!dags/**
+
+# Local build/run artefacts inside dags/ that must not be baked in.
+# These come after the re-include so they win.
+dags/**/__pycache__
+dags/**/*.py[cod]
+dags/**/.ruff_cache
+dags/**/.pytest_cache
+dags/**/.venv
+dags/**/venv
+dags/**/.DS_Store
+dags/dbt/dbt_sp500/target
+dags/dbt/dbt_sp500/dbt_packages
+dags/dbt/dbt_sp500/logs
+
+# Belt and braces: never ship credentials even if one lands under dags/.
+dags/**/.env
+dags/**/.env.*
+dags/**/*.pem
+dags/**/*credentials*.json
+dags/**/*service_account*.json
+dags/**/*service-account*.json
+
+# Repeated root exclusions. `*` already drops these; a leading slash keeps
+# them anchored at the context root so `dbt build` still sees
+# dags/dbt/dbt_sp500/tests.
+/.git
+/.github
+/.venv
+/venv
+/tests
+/terraform
+/portfolio
+/logs
+/data
+/.env
+/.env.*
+/*.tfstate
+/*.tfstate.*
+/.terraform
+/__pycache__
+/*.py[cod]
+/.pytest_cache
+/.ruff_cache

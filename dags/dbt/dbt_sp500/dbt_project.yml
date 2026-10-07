@@ -31,21 +31,17 @@ clean-targets:         # directories to be removed by `dbt clean`
 # In this example config, we tell dbt to build all models in the example/
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
+# Models stay in the target dataset (GCP_BQ_DATASET). A custom schema
+# would make dbt create {target}_{schema}, a second dataset the pipeline
+# and dashboard IAM grants do not cover.
 models:
   sp500_analytics:
     marts:
       +materialized: table
-      +schema: marts
     staging:
       +materialized: view
-      +schema: staging
     intermediate:
       +materialized: table
-      +schema: intermediate
-
-seeds:
-  sp500_analytics:
-    +schema: raw
 
 vars:
   start_date: '2024-01-01'

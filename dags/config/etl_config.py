@@ -1,12 +1,13 @@
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from typing import List
+from typing import List, Optional
 from pathlib import Path
 import os
 from functools import cached_property
 from config.gcp_config import GCPUtils
 from config.gcp_service import GCPService
 from config.gcp_secret_manager import SecretManagerService
+from config.validation import BQ_NAME_PATTERN
 
 
 @dataclass
@@ -46,8 +47,17 @@ class ETLConfig:
 
     @property
     def dataset_name(self) -> str:
-        """Get dataset name."""
-        return self.file_name
+        """BigQuery dataset the pipeline reads and writes.
+
+        Cloud Run sets GCP_BQ_DATASET to the dataset Terraform created.
+        When that variable is unset (local tests), fall back to file_name.
+        The value is allow-listed because callers interpolate it into SQL
+        and into the dbt environment.
+        """
+        raw = os.getenv("GCP_BQ_DATASET") or self.file_name
+        if BQ_NAME_PATTERN.fullmatch(raw) is None:
+            raise ValueError(f"Invalid BigQuery dataset name: {raw!r}")
+        return raw
 
     @property
     def table_name(self) -> str:
@@ -75,14 +85,15 @@ class ETLConfig:
         return f"{self.base_gcs_path}/input-data/{self.file_name}.csv"
 
     @property
-    def gcs_output_data_path(self) -> str:
-        """Get GCS output data path."""
-        return f"{self.base_gcs_path}/transformed-data/"
-
-    @property
     def csv_uri(self) -> str:
-        """Get CSV URI pattern for transformed data."""
-        return f"{self.base_gcs_path}/transformed-data/*.csv"
+        """Get the GCS URI BigQuery loads from.
+
+        Points directly at the raw-landing file written by
+        upload_data_to_gcs_from_local — there is no intermediate
+        transform step (the PySpark cleaning stage was removed; dbt's
+        stg_stocks model does all cleaning in SQL instead).
+        """
+        return self.gcs_input_data_path
 
     @cached_property
     def gcp_project_id(self) -> str:
@@ -90,9 +101,13 @@ class ETLConfig:
         return self._get_required_env("GCP_PROJECT_ID")
 
     @cached_property
-    def gcp_credentials_path(self) -> str:
-        """Get GCP credentials path from environment variables."""
-        return self._get_required_env("GOOGLE_APPLICATION_CREDENTIALS")
+    def gcp_credentials_path(self) -> Optional[str]:
+        """Get GCP credentials path from environment variables, if set.
+
+        Optional, local-dev convenience only: when unset, GCP clients fall
+        back to Application Default Credentials instead of a key file.
+        """
+        return os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
     @cached_property
     def gcp_utils(self) -> GCPUtils:

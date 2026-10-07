@@ -7,16 +7,25 @@ from typing import Optional, Union, List
 class GCPUtils:
     """Utility class for common Google Cloud Platform operations"""
 
-    def __init__(self, credentials_path: str, project_id: str):
+    def __init__(self, project_id: str, credentials_path: Optional[str] = None):
         """
-        Initialize GCP utilities with credentials and project ID
+        Initialize GCP utilities for a project.
 
         Args:
-            credentials_path (str): Path to GCP service account credentials JSON
             project_id (str): GCP project ID
+            credentials_path (str, optional): Path to a GCP service account
+                credentials JSON file. Local-dev convenience only — when
+                omitted, clients resolve credentials via Application Default
+                Credentials (a logged-in gcloud identity locally, the
+                attached runtime service account on Cloud Run, or Workload
+                Identity Federation in CI). Never rely on a committed key
+                file; this project has a documented past incident of one
+                being leaked.
         """
-        self.credentials = service_account.Credentials.from_service_account_file(
-            credentials_path
+        self.credentials = (
+            service_account.Credentials.from_service_account_file(credentials_path)
+            if credentials_path
+            else None
         )
         self.project_id = project_id
         self.storage_client = storage.Client(

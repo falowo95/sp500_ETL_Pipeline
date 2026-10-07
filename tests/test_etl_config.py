@@ -7,6 +7,7 @@ attribute at the call site, silently passing a bound method object instead of th
 resolved value.
 """
 from datetime import datetime
+from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -44,6 +45,37 @@ def test_tiingo_api_key_is_cached_after_first_access():
 def test_data_end_date_defaults_to_today_not_a_stale_hardcoded_date():
     config = ETLConfig()
     assert config.data_end_date == datetime.now().strftime("%Y-%m-%d")
+
+
+def test_dataset_name_uses_gcp_bq_dataset_when_set(monkeypatch):
+    monkeypatch.setenv("GCP_BQ_DATASET", "sp_500_data")
+    config = ETLConfig()
+    assert config.dataset_name == "sp_500_data"
+    assert config.table_name == "sp_500_data_table"
+
+
+def test_dataset_name_falls_back_to_file_name(monkeypatch):
+    monkeypatch.delenv("GCP_BQ_DATASET", raising=False)
+    config = ETLConfig()
+    assert config.dataset_name == "SP_500_DATA"
+    assert config.table_name == "SP_500_DATA_table"
+
+
+def test_dataset_name_rejects_sql_injection(monkeypatch):
+    monkeypatch.setenv("GCP_BQ_DATASET", "sp_500`; drop")
+    with pytest.raises(ValueError):
+        _ = ETLConfig().dataset_name
+
+
+def test_dbt_models_stay_in_the_target_dataset():
+    """Custom +schema would build a second dataset IAM does not grant."""
+    root = Path(__file__).resolve().parents[1] / "dags" / "dbt" / "dbt_sp500"
+    project = "\n".join(
+        line.split("#", 1)[0] for line in (root / "dbt_project.yml").read_text().splitlines()
+    )
+    assert "+schema:" not in project
+    schema = (root / "models" / "staging" / "schema.yml").read_text()
+    assert "{{ env_var('GCP_BQ_DATASET', 'SP_500_DATA') }}_table" in schema
 
 
 def test_missing_required_env_var_raises_value_error(monkeypatch):

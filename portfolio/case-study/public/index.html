@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S&amp;P 500 Pipeline — GCP Case Study</title>
+<style>
+  :root { --bg:#0b0d12; --panel:#141821; --text:#e8eaed; --muted:#9aa4b2; --accent:#5fb3ff; --ok:#3ecf8e; --border:#242b38; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif; line-height:1.6; }
+  main { max-width:880px; margin:0 auto; padding:3rem 1.5rem 6rem; }
+  h1 { font-size:2rem; margin-bottom:0.3rem; }
+  h2 { font-size:1.3rem; margin-top:3rem; border-bottom:1px solid var(--border); padding-bottom:0.5rem; }
+  .subtitle { color:var(--muted); margin-top:0; }
+  .links a { color:var(--accent); text-decoration:none; margin-right:1.5rem; font-weight:600; }
+  .links a:hover { text-decoration:underline; }
+  pre.diagram { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:1.2rem; overflow-x:auto; font-size:0.8rem; line-height:1.4; }
+  table { border-collapse:collapse; width:100%; margin:1rem 0; font-size:0.92rem; }
+  th, td { text-align:left; padding:0.5rem 0.7rem; border-bottom:1px solid var(--border); }
+  th { color:var(--muted); font-weight:600; }
+  .cost-total td { font-weight:700; color:var(--ok); }
+  ul.decisions li { margin-bottom:0.9rem; }
+  .tag { display:inline-block; background:var(--panel); border:1px solid var(--border); border-radius:999px; padding:0.15rem 0.7rem; font-size:0.8rem; color:var(--muted); margin-right:0.4rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>S&amp;P 500 Data Pipeline</h1>
+  <p class="subtitle">A production-grade, GCP-only revamp of an existing ETL pipeline — scale-to-zero orchestration, incremental loads, and zero idle infrastructure cost.</p>
+  <p class="links">
+    <a href="https://github.com/falowo95/sp500_ETL_Pipeline">GitHub Repo</a>
+    <a href="/">Live Dashboard</a>
+  </p>
+  <p>
+    <span class="tag">Airflow</span>
+    <span class="tag">Cloud Run Jobs</span>
+    <span class="tag">BigQuery</span>
+    <span class="tag">dbt</span>
+    <span class="tag">Terraform</span>
+    <span class="tag">Workload Identity Federation</span>
+  </p>
+
+  <h2>Architecture</h2>
+  <pre class="diagram">
+GitHub (main) --push--&gt; GitHub Actions (WIF, no key files)
+   --&gt; build+push image, terraform apply, deploy Cloud Run Job + Service, firebase deploy
+
+Cloud Scheduler (1 daily job, OAuth) --Run Admin API--&gt; Cloud Run JOB "sp500-pipeline"
+   container runs: airflow db migrate &amp;&amp; airflow dags test SP_500_DATA_PIPELINE_v1 &lt;date&gt;
+   (ephemeral SQLite metadata inside the container only — nothing persists between runs)
+
+   DAG tasks:
+   1. extract   (Tiingo, incremental since watermark; new tickers get full backfill)
+   2. upload    raw CSV -&gt; GCS
+   3. load      GCS CSV -&gt; BigQuery staging -&gt; MERGE into partitioned/clustered table
+   4. dbt build (staging -&gt; intermediate indicators -&gt; marts)
+   5. record    pipeline_runs audit row
+
+GCS (raw landing, versioned, 30d lifecycle)
+  -&gt; BigQuery raw.sp500_data (partitioned by trade_date, clustered by symbol)
+     -&gt; dbt: stg_stocks -&gt; int_stock_daily_metrics -&gt; dim_stock_summary / fct_stock_analysis
+
+Cloud Run SERVICE "sp500-dashboard" (FastAPI, scale-to-zero, public)   Firebase Hosting
+  reads the marts + pipeline_runs                                      (this page)
+
+Cloud Monitoring: alert on job failure -&gt; email
+  </pre>
+  <p style="color:var(--muted); font-size:0.9rem;">Every box above is scale-to-zero. Nothing runs, and nothing is billed, between invocations.</p>
+
+  <h2>Before / After</h2>
+  <table>
+    <tr><th>Before</th><th>After</th></tr>
+    <tr><td>CeleryExecutor + Redis + Postgres, always on (Docker Compose)</td><td>Cloud Run Jobs, scale-to-zero, triggered daily by Cloud Scheduler</td></tr>
+    <tr><td>Local PySpark transform step</td><td>Removed — all cleaning done in dbt SQL; right-sized to the data volume</td></tr>
+    <tr><td>Full <code>WRITE_TRUNCATE</code> reload every run</td><td>Per-ticker watermark extraction + staging-table <code>MERGE</code>, idempotent</td></tr>
+    <tr><td>Service-account JSON key file auth</td><td>Application Default Credentials + Workload Identity Federation in CI</td></tr>
+    <tr><td>Terraform state tracked in git by accident</td><td>Migrated to a GCS backend, state untracked from git</td></tr>
+    <tr><td>No downstream consumer despite being documented</td><td>Live FastAPI dashboard + this case-study site</td></tr>
+  </table>
+
+  <h2>Cost (at this pipeline's actual data scale)</h2>
+  <table>
+    <tr><th>Resource</th><th>Usage</th><th>Monthly</th></tr>
+    <tr><td>Cloud Run Jobs (pipeline)</td><td>~5–10 min/day</td><td>$0 (free tier)</td></tr>
+    <tr><td>Cloud Run Service (dashboard)</td><td>low-traffic demo</td><td>$0 (free tier)</td></tr>
+    <tr><td>Cloud Scheduler</td><td>1 job</td><td>$0 (first 3 free)</td></tr>
+    <tr><td>Artifact Registry</td><td>~1–2GB images</td><td>~$0.10–0.20</td></tr>
+    <tr><td>BigQuery storage + queries</td><td>tens of MB, KB–MB/day scanned</td><td>$0 (free tier)</td></tr>
+    <tr><td>GCS storage</td><td>few MB, versioned</td><td>~$0.01</td></tr>
+    <tr><td>Secret Manager</td><td>1 secret, ~30 accesses/mo</td><td>$0</td></tr>
+    <tr><td>Firebase Hosting</td><td>static site</td><td>$0 (Spark plan)</td></tr>
+    <tr class="cost-total"><td>Total</td><td></td><td>~$0–0.50/month</td></tr>
+  </table>
+
+  <h2>Engineering decisions</h2>
+  <ul class="decisions">
+    <li><strong>Why not Cloud Composer?</strong> Composer's cheapest environment has a non-trivial always-on minimum cost — for one daily DAG, that dwarfs every other line item in the cost table above. Cloud Run Jobs running <code>airflow dags test</code> once per invocation keeps the DAG-authoring model while eliminating idle cost entirely.</li>
+    <li><strong>Why not Dataproc/Spark?</strong> The original pipeline ran a PySpark step on ~500 tickers/day of OHLCV data — a dataset small enough that BigQuery SQL (via dbt) does the same work for free, with less infrastructure. Removing Spark cut the container image by several hundred MB and two of its slowest build layers.</li>
+    <li><strong>The credential leak, and the fix.</strong> A `gitleaks` scan of this repo's history turned up a real, previously-leaked Tiingo API key on a public GitHub repo. The key was rotated immediately. The structural fix: every GCP auth path — the Terraform provider, the Python clients, and CI — now goes through Application Default Credentials or Workload Identity Federation. No service-account key file exists anywhere in this project anymore.</li>
+    <li><strong>Incremental loads.</strong> The original pipeline re-pulled full history for all tickers, every day, then overwrote the whole target table. That's the dominant cost and runtime driver, not just a BigQuery write-pattern detail. Each ticker now resumes from its own watermark, with new tickers (e.g. newly added to the index) still getting a full backfill — a single global watermark would have silently under-backfilled them.</li>
+    <li><strong>Dbt materializations: table, not incremental.</strong> <code>int_stock_daily_metrics</code> stays a full-rebuild <code>table</code>, not <code>incremental</code>, because its trailing-window functions (200-day moving average, etc.) would need a nontrivial lookback-merge to stay correct incrementally — and at this data scale, a full rebuild costs cents. Right-sizing the solution to the actual data volume, deliberately, in both directions.</li>
+  </ul>
+
+  <h2>Links</h2>
+  <p class="links">
+    <a href="https://github.com/falowo95/sp500_ETL_Pipeline">GitHub Repo</a>
+    <a href="/">Live Dashboard</a>
+  </p>
+</main>
+</body>
+</html>

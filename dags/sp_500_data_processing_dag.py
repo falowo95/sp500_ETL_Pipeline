@@ -9,19 +9,25 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from typing import List
-from datetime import datetime, timedelta
-from dataclasses import dataclass
+from datetime import timedelta
+
+import pendulum
 from helper_functions import (
     extract_sp500_data_to_csv,
     upload_data_to_gcs_from_local,
     ingest_from_gcs_to_bquery,
 )
-from stock_data_transform import transform_stock_data
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.operators.bash import BashOperator
+from airflow.utils.trigger_rule import TriggerRule
 from config.etl_config import ETLConfig
+from pipeline_audit import finalize_pipeline_run
+
+# Static and UTC-aware: a dynamic start_date (datetime.now()) changes on
+# every parse, so the logical date `airflow dags test` is given can precede
+# it. catchup=False keeps this from triggering any backfill.
+DAG_START_DATE = pendulum.datetime(2024, 1, 1, tz="UTC")
 
 DBT_PROJECT_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "dbt", "dbt_sp500"
@@ -39,7 +45,7 @@ def define_dag() -> DAG:
 
     default_args = {
         "owner": "airflow",
-        "start_date": datetime.now(),
+        "start_date": DAG_START_DATE,
         "email": [],
         "email_on_failure": False,
         "email_on_retry": False,
@@ -75,15 +81,6 @@ def define_dag() -> DAG:
             },
         )
 
-        transform_data_task = PythonOperator(
-            task_id="transform_data_task",
-            python_callable=transform_stock_data,
-            op_kwargs={
-                "gcs_input_data_path": config.gcs_input_data_path,
-                "gcs_output_data_path": config.gcs_output_data_path,
-            },
-        )
-
         ingest_data_into_bigquery = PythonOperator(
             task_id="ingest_data_into_bigquery",
             python_callable=ingest_from_gcs_to_bquery,
@@ -94,34 +91,58 @@ def define_dag() -> DAG:
             },
         )
 
+        dbt_env = {
+            "GCP_PROJECT_ID": config.gcp_project_id,
+            "GCP_BQ_DATASET": config.dataset_name,
+            # dbt-bigquery lives in its own venv, isolated from Airflow's
+            # own site-packages (protobuf version conflict — see
+            # Dockerfile.pipeline). Prepending its bin/ here is a no-op
+            # locally/in CI where that path doesn't exist; `dbt` still
+            # resolves from whatever environment installed it there.
+            "PATH": f"/home/airflow/dbt_venv/bin:{os.environ['PATH']}",
+            # dbt looks for profiles.yml via --profiles-dir / DBT_PROFILES_DIR,
+            # then falls back to ~/.dbt/ — it does not check the project
+            # directory by default. profiles.yml lives alongside
+            # dbt_project.yml in DBT_PROJECT_DIR, so this must be set
+            # explicitly since `env=` here replaces the process environment
+            # rather than extending it.
+            "DBT_PROFILES_DIR": DBT_PROJECT_DIR,
+            "HOME": os.environ.get("HOME", "/tmp"),
+        }
+        # profiles.yml uses method: oauth (Application Default Credentials),
+        # so this is only needed when a local key file is explicitly
+        # configured — omitted entirely otherwise rather than passed as
+        # None, since BashOperator.env requires string values.
+        if config.gcp_credentials_path:
+            dbt_env["GOOGLE_APPLICATION_CREDENTIALS"] = config.gcp_credentials_path
+
         dbt_build_task = BashOperator(
             task_id="dbt_build",
             bash_command=(
                 f"cd {DBT_PROJECT_DIR} && dbt deps && dbt build "
                 f"--target dev"
             ),
-            env={
-                "GCP_PROJECT_ID": config.gcp_project_id,
-                "GCP_BQ_DATASET": config.dataset_name,
-                "GOOGLE_APPLICATION_CREDENTIALS": config.gcp_credentials_path,
-                "PATH": os.environ["PATH"],
-                # dbt looks for profiles.yml via --profiles-dir / DBT_PROFILES_DIR,
-                # then falls back to ~/.dbt/ — it does not check the project
-                # directory by default. profiles.yml lives alongside
-                # dbt_project.yml in DBT_PROJECT_DIR, so this must be set
-                # explicitly since `env=` here replaces the process environment
-                # rather than extending it.
-                "DBT_PROFILES_DIR": DBT_PROJECT_DIR,
-                "HOME": os.environ.get("HOME", "/tmp"),
-            },
+            env=dbt_env,
+        )
+
+        record_run_task = PythonOperator(
+            task_id="record_pipeline_run",
+            python_callable=finalize_pipeline_run,
+            op_kwargs={"dataset_name": config.dataset_name},
+            # Always runs, so a pipeline_runs row is written even when an
+            # upstream task failed (there is no Airflow UI — see
+            # entrypoint.sh). As the DAG's only leaf it also decides the
+            # DAG run's final state: finalize_pipeline_run raises when any
+            # upstream task failed, so failures are not reported as success.
+            trigger_rule=TriggerRule.ALL_DONE,
         )
 
         (
             extract_data_task
             >> upload_to_gcs_task
-            >> transform_data_task
             >> ingest_data_into_bigquery
             >> dbt_build_task
+            >> record_run_task
         )
 
     return dag

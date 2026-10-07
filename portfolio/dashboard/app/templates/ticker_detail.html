@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ symbol }} — SP500 Pipeline Dashboard</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { text-align: left; padding: 0.4rem 0.8rem; border-bottom: 1px solid #ddd; }
+    .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.85rem; background: #eee; margin-right: 0.3rem; }
+    nav a { margin-right: 1rem; }
+  </style>
+</head>
+<body>
+  <nav><a href="/">Home</a><a href="/about">About</a></nav>
+  <h1>{{ symbol }}</h1>
+
+  {% if summary %}
+  <p>
+    Trading since {{ summary.get("first_trading_date") }} ·
+    Avg price {{ "%.2f"|format(summary.get("avg_price", 0)) }} ·
+    {{ "%.1f"|format(summary.get("up_day_percentage", 0)) }}% up days
+  </p>
+  {% endif %}
+
+  {% if rows %}
+  <p>
+    <span class="badge">{{ rows[0].trend_signal }}</span>
+    <span class="badge">{{ rows[0].rsi_signal }}</span>
+    <span class="badge">{{ rows[0].macd_trend_signal }}</span>
+    <span class="badge">{{ rows[0].bollinger_signal }}</span>
+  </p>
+  {% endif %}
+
+  <h2>Recent history</h2>
+  <table>
+    <tr>
+      <th>Date</th><th>Close</th><th>MA20</th><th>MA50</th><th>MA200</th>
+      <th>RSI14</th><th>Bollinger lower</th><th>Bollinger upper</th>
+    </tr>
+    {% for row in rows %}
+    <tr>
+      <td>{{ row.trade_date }}</td>
+      <td>{{ "%.2f"|format(row.close) }}</td>
+      <td>{{ "%.2f"|format(row.ma_20) if row.ma_20 else "" }}</td>
+      <td>{{ "%.2f"|format(row.ma_50) if row.ma_50 else "" }}</td>
+      <td>{{ "%.2f"|format(row.ma_200) if row.ma_200 else "" }}</td>
+      <td>{{ "%.1f"|format(row.rsi_14) if row.rsi_14 else "" }}</td>
+      <td>{{ "%.2f"|format(row.bollinger_lower) if row.bollinger_lower else "" }}</td>
+      <td>{{ "%.2f"|format(row.bollinger_upper) if row.bollinger_upper else "" }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

@@ -1,0 +1,44 @@
+# Build Dockerfile.pipeline in Cloud Build and push to Artifact Registry.
+# The laptop uploads the source context (kept small by .dockerignore /
+# .gitignore), not the ~2GB image. This file does not deploy Cloud Run
+# and does not read any secrets.
+#
+# Run from this directory (the git repo root), after the Artifact Registry
+# repository exists. Do not run it from the parent of airflow/.
+#
+#   gcloud builds submit . \
+#     --project=YOUR_GCP_PROJECT_ID \
+#     --config cloudbuild.yaml \
+#     --substitutions=_PROJECT=YOUR_GCP_PROJECT_ID,SHORT_SHA=$(git rev-parse --short=7 HEAD)
+#
+# _REGION, _REPO, and _IMAGE default to the Cloud Run Job layout in
+# terraform (europe-west6, repository sp500-pipeline, image sp500-pipeline).
+# SHORT_SHA is empty on a manual submit unless you pass it; a trigger-based
+# build sets it automatically. _PROJECT has no default so a project id is
+# never baked into this file.
+
+substitutions:
+  _REGION: europe-west6
+  _REPO: sp500-pipeline
+  _IMAGE: sp500-pipeline
+
+steps:
+  - id: build
+    name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --file
+      - Dockerfile.pipeline
+      - --platform
+      - linux/amd64
+      - --tag
+      - ${_REGION}-docker.pkg.dev/${_PROJECT}/${_REPO}/${_IMAGE}:${SHORT_SHA}
+      - --tag
+      - ${_REGION}-docker.pkg.dev/${_PROJECT}/${_REPO}/${_IMAGE}:latest
+      - .
+
+images:
+  - ${_REGION}-docker.pkg.dev/${_PROJECT}/${_REPO}/${_IMAGE}:${SHORT_SHA}
+  - ${_REGION}-docker.pkg.dev/${_PROJECT}/${_REPO}/${_IMAGE}:latest
+
+timeout: 3600s

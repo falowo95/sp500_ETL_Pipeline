@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SP500 Pipeline Dashboard</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; color: #1a1a1a; }
+    h1 { font-size: 1.4rem; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+    th, td { text-align: left; padding: 0.4rem 0.8rem; border-bottom: 1px solid #ddd; }
+    .up { color: #0a7d2c; } .down { color: #b00020; }
+    .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.85rem; background: #eee; }
+    .ok { background: #d8f5d8; } .fail { background: #f8d8d8; }
+    nav a { margin-right: 1rem; }
+  </style>
+</head>
+<body>
+  <nav><a href="/">Home</a><a href="/about">About</a></nav>
+  <h1>SP500 Pipeline Dashboard</h1>
+  <p>Latest trade date: <strong>{{ latest_trade_date or "no data yet" }}</strong></p>
+
+  <h2>Pipeline health</h2>
+  {% if pipeline_run %}
+    <p>
+      Last run <strong>{{ pipeline_run.get("logical_date", "?") }}</strong>:
+      <span class="badge {{ 'ok' if pipeline_run.get('status') == 'SUCCESS' else 'fail' }}">{{ pipeline_run.get("status", "UNKNOWN") }}</span>
+      — {{ pipeline_run.get("tickers_succeeded", 0) }}/{{ pipeline_run.get("tickers_attempted", 0) }} tickers,
+      {{ pipeline_run.get("rows_loaded", 0) }} rows loaded,
+      dbt: {{ pipeline_run.get("dbt_build_status", "?") }}
+    </p>
+  {% else %}
+    <p>No pipeline runs recorded yet.</p>
+  {% endif %}
+
+  <h2>Signal distribution (today)</h2>
+  <table>
+    <tr><th>RSI signal</th><th>Tickers</th></tr>
+    {% for signal, count in signal_distribution.items() %}
+    <tr><td>{{ signal }}</td><td>{{ count }}</td></tr>
+    {% endfor %}
+  </table>
+
+  <h2>Top movers (today)</h2>
+  <table>
+    <tr><th>Symbol</th><th>Close</th><th>Daily change %</th></tr>
+    {% for row in top_movers %}
+    <tr>
+      <td><a href="/tickers/{{ row.symbol }}">{{ row.symbol }}</a></td>
+      <td>{{ "%.2f"|format(row.close) }}</td>
+      <td class="{{ 'up' if row.daily_change_pct >= 0 else 'down' }}">{{ "%.2f"|format(row.daily_change_pct) }}%</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

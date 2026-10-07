@@ -7,7 +7,17 @@ sources:
     schema: "{{ env_var('GCP_BQ_DATASET', 'SP_500_DATA') }}"
     tables:
       - name: SP_500_DATA_table
+        # Physical table is "{dataset}_table", matching ETLConfig.table_name.
+        # The dbt source name stays stable when GCP_BQ_DATASET is not SP_500_DATA.
+        identifier: "{{ env_var('GCP_BQ_DATASET', 'SP_500_DATA') }}_table"
         description: "Cleaned daily OHLCV stock data for all S&P 500 tickers"
+        # Catches a silently-stalled extraction (e.g. Tiingo/Wikipedia
+        # scrape failing every day without the Cloud Run Job itself
+        # erroring) before it surfaces only as "the dashboard looks stale."
+        loaded_at_field: date
+        freshness:
+          warn_after: {count: 2, period: day}
+          error_after: {count: 4, period: day}
         columns:
           - name: symbol
             description: "Stock ticker symbol"
@@ -17,6 +27,14 @@ sources:
             description: "Trading date"
             tests:
               - not_null
+          - name: close
+            tests:
+              - dbt_utils.accepted_range:
+                  min_value: 0
+          - name: volume
+            tests:
+              - dbt_utils.accepted_range:
+                  min_value: 0
 
 models:
   - name: stg_stocks
@@ -36,6 +54,12 @@ models:
 
   - name: int_stock_daily_metrics
     description: "Daily price changes, moving averages, Bollinger bands, RSI, and MACD (SMA-approximated) per symbol"
+    columns:
+      - name: rsi_14
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 100
 
   - name: dim_stock_summary
     description: "Per-symbol summary statistics across the full history"
@@ -47,3 +71,9 @@ models:
 
   - name: fct_stock_analysis
     description: "Daily stock analysis with trading signals derived from technical indicators"
+    columns:
+      - name: symbol
+        tests:
+          - relationships:
+              to: ref('dim_stock_summary')
+              field: symbol

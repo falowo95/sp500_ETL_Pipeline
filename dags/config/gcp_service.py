@@ -19,9 +19,13 @@ class GCPService:
         first success, silently returning a stale instance even when called later
         with missing or different credentials/project_id.
 
+        credentials_path is optional: when not supplied (and not set via
+        GOOGLE_APPLICATION_CREDENTIALS), GCPUtils falls back to Application
+        Default Credentials rather than requiring a key file.
+
         Args:
-            credentials_path: Path to GCP credentials file
-            project_id: GCP project ID
+            credentials_path: Optional path to a GCP credentials file
+            project_id: GCP project ID (required)
 
         Returns:
             GCPUtils: Singleton instance of GCP utilities
@@ -31,7 +35,7 @@ class GCPService:
         if project_id is None:
             project_id = os.getenv("GCP_PROJECT_ID")
 
-        if not credentials_path or not project_id:
-            raise ValueError("Missing required GCP credentials or project ID")
+        if not project_id:
+            raise ValueError("Missing required GCP project ID")
 
-        return GCPUtils(credentials_path=credentials_path, project_id=project_id)
+        return GCPUtils(project_id=project_id, credentials_path=credentials_path)

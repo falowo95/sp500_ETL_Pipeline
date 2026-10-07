@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>About — SP500 Pipeline Dashboard</title>
+  <style>body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; } nav a { margin-right: 1rem; }</style>
+</head>
+<body>
+  <nav><a href="/">Home</a><a href="/about">About</a></nav>
+  <h1>About this dashboard</h1>
+  <p>
+    This is the live demo surface for a GCP-only S&amp;P 500 data pipeline:
+    Wikipedia + Tiingo API ingestion, incremental loads into partitioned
+    BigQuery tables, and dbt-computed technical indicators, orchestrated as
+    a daily Cloud Run Job (no always-on infrastructure).
+  </p>
+  <p>
+    Read the full engineering write-up and architecture decisions on the
+    <a href="https://github.com/falowo95/sp500_ETL_Pipeline">GitHub repo</a>
+    and the case-study site linked from there.
+  </p>
+</body>
+</html>
