@@ -62,3 +62,6 @@ crash.*.log
 **/*service_account*.json
 **/*credentials*.json
 **/creds/*
+
+# pytest-cov output
+.coverage
