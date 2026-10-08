@@ -18,7 +18,7 @@ variable-rgx = [a-z_][a-z0-9_]{2,30}$
 good-names = df
 
 [pylint.logging]
-logging-format-style = new
+logging-format-style = old
 
 [pylint]
 disable = W0718,W1203,W0621,R0902,R0914,W0104,W0622,C0103,W1201,W0212,W0221

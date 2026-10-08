@@ -65,3 +65,6 @@ crash.*.log
 
 # pytest-cov output
 .coverage
+
+# Hosting config must be deployed; the *.json rule above would drop it.
+!portfolio/case-study/firebase.json
