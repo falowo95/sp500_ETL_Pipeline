@@ -136,10 +136,25 @@ def _get_symbol_watermarks(dataset_name: str, table_name: str) -> Dict[str, date
         logger.info("%s does not exist yet — treating all symbols as cold start", table_id)
         return {}
 
-    return {
-        row.symbol: row.last_date.date() if isinstance(row.last_date, datetime) else row.last_date
-        for row in rows
-    }
+    return {row.symbol: _coerce_watermark(row.last_date) for row in rows}
+
+
+def _coerce_watermark(value: Any) -> Optional[date]:
+    """Normalize one BigQuery MAX(date) value to a date.
+
+    A DATETIME column arrives as datetime, a DATE column as date, and the
+    original table stored ISO timestamps in a STRING column. Leaving a
+    string in place makes the next-day calculation raise TypeError.
+    """
+    if value is None:
+        return None
+    if isinstance(value, datetime):
+        return value.date()
+    if isinstance(value, date):
+        return value
+    if isinstance(value, str):
+        return date.fromisoformat(value[:10])
+    raise TypeError(f"Unsupported watermark type: {type(value).__name__}")
 
 
 def _resolve_ticker_start_date(watermark: Optional[date], fallback_start_date: str) -> str:

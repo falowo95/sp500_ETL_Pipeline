@@ -57,3 +57,18 @@ def test_get_symbol_watermarks_normalizes_datetime_rows_to_date(mock_service):
     result = _get_symbol_watermarks(dataset_name="SP_500_DATA", table_name="SP_500_DATA_table")
 
     assert result == {"AAPL": date(2026, 1, 5)}
+
+
+@patch("helper_functions.GCPService")
+def test_get_symbol_watermarks_parses_legacy_string_timestamps(mock_service):
+    """The original table stores date as STRING ('2023-03-28T00:00:00.000Z').
+    That value has to become a date before the next-day calculation."""
+    mock_row = MagicMock(symbol="AAPL", last_date="2023-03-28T00:00:00.000Z")
+    mock_gcp = MagicMock()
+    mock_gcp.project_id = "test-project"
+    mock_gcp.bq_client.query.return_value.result.return_value = [mock_row]
+    mock_service.get_instance.return_value = mock_gcp
+
+    result = _get_symbol_watermarks(dataset_name="SP_500_DATA", table_name="SP_500_DATA_table")
+
+    assert result == {"AAPL": date(2023, 3, 28)}
